@@ -7,34 +7,39 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+# from .api.server_routes import server_routes
+# from .api.channel_routes import channel_routes
+# from .api.friend_routes import friend_routes
+# from .api.message_routes import message_routes
+# from .api.emoji_routes import emoji_routes
+
 from .seeds import seed_commands
 from .config import Config
-
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
-
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
-
-
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
-
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
-
 app.config.from_object(Config)
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+# app.register_blueprint(friend_routes, url_prefix='/api/friends')
+# app.register_blueprint(server_routes, url_prefix='/api/servers')
+# app.register_blueprint(channel_routes, url_prefix='/api/channels')
+# app.register_blueprint(message_routes, url_prefix='/api/messages')
+# app.register_blueprint(emoji_routes, url_prefix='/api/emojis')
+
 db.init_app(app)
 Migrate(app, db)
 
 # Application Security
 CORS(app)
-
-
 # Since we are deploying with Docker and Flask,
 # we won't be using a buildpack when we deploy to Heroku.
 # Therefore, we need to make sure that in production any
@@ -47,8 +52,6 @@ def https_redirect():
             url = request.url.replace('http://', 'https://', 1)
             code = 301
             return redirect(url, code=code)
-
-
 @app.after_request
 def inject_csrf_token(response):
     response.set_cookie(
@@ -59,8 +62,6 @@ def inject_csrf_token(response):
             'FLASK_ENV') == 'production' else None,
         httponly=True)
     return response
-
-
 @app.route("/api/docs")
 def api_help():
     """
@@ -71,8 +72,6 @@ def api_help():
                     app.view_functions[rule.endpoint].__doc__ ]
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
-
-
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -84,8 +83,6 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
-
-
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
