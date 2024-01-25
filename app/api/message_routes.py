@@ -59,9 +59,20 @@ def update_message(id):
     message = Message.query.get(id)
     res = request.get_json()
 
-    if message:
+    form = MessageForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    errors = {}
+
+    # !!!!!!!!!! for testing lower content length to 20, return to 2000 before deploying
+    # COMMENT CHANNEL ID BACK IN ONCE CHANNEL MODEL IS MADE
+    if len(res["content"]) > 2000:
+            errors["content"] = "Messages must be less than 2000 characters"
+            return jsonify({"errors": errors}), 400
+
+    if message and form.validate_on_submit():
         message.content = res["content"] or message.content
-        message.timestamp = datetime.utcnow
+        message.timestamp = datetime.utcnow()
 
         db.session.commit()
         return message.to_dict()
