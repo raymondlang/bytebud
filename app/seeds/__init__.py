@@ -1,8 +1,11 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-from .servers import seed_servers, undo_servers
-from .messages import seed_messages, undo_messages
 from .channels import seed_channels, undo_channels
+from .messages import seed_messages, undo_messages
+from .emojis import seed_emojis, undo_emojis
+from .reactions import seed_reactions, undo_reactions
+from .servers import seed_servers, undo_servers
+
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -21,12 +24,14 @@ def seed():
         undo_servers()
         undo_messages()
         undo_users()
-    seed_users()
+    demo, marnie, bobbie = seed_users()
     seed_channels()
     seed_messages()
     seed_servers()
-    # Add other seed functions here
+    seed_emojis()
+    seed_reactions()
 
+    # Add other seed functions here
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
@@ -35,4 +40,6 @@ def undo():
     undo_channels()
     undo_servers()
     undo_users()
+    undo_emojis()
+    undo_reactions()
     # Add other undo functions here
