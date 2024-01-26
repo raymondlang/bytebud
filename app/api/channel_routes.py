@@ -69,7 +69,7 @@ def get_channel(id):
 
 # route to update a specific channel by ID
 # PUT /channels/:id - update a specific channel by ID
-@channels_routes.route('/<int:id>', methods=['PUT'])
+@channel_routes.route('/<int:id>', methods=['PUT'])
 def update_channel(id):
     # get the channel from the database by ID
     channel = Channel.query.get(id)
