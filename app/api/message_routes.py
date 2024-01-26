@@ -34,7 +34,7 @@ def create_message():
     errors = {}
 
     # !!!!!!!!!! for testing, it's been lowered to 5, return to 5 before deploying
-    # COMMENT CHANNEL ID BACK IN ONCE CHANNEL MODEL IS MADE
+
     if len(res["content"]) > 5:
             errors.content = "Messages must be less than 2000 characters"
             return jsonify({"errors": errors}), 400
@@ -43,7 +43,7 @@ def create_message():
         new_message = Message(
             content=res["content"],
             user_id=res["userId"],
-            # channel_id=["channelId"],
+            channel_id=["channelId"],
             timestamp =["timestamp"]
         )
 
@@ -65,7 +65,7 @@ def update_message(id):
     errors = {}
 
     # !!!!!!!!!! for testing lower content length to 20, return to 2000 before deploying
-    # COMMENT CHANNEL ID BACK IN ONCE CHANNEL MODEL IS MADE
+
     if len(res["content"]) > 2000:
             errors["content"] = "Messages must be less than 2000 characters"
             return jsonify({"errors": errors}), 400
