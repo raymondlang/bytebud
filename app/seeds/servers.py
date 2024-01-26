@@ -8,10 +8,12 @@ def seed_servers():
         owner_id=1,
         name="App Academy",
         description="Server for App Academy students to connect and help one another",
-        # channels = db.relationship('Channel', backref='server', lazy=True)
-        members=[
-            {'id': '1', 'username': 'Demo', 'email': 'demo@aa.io'}
-        ],
+        # channels = db.relationship('Channel', backref='server', lazy=True),
+        # members = [
+        #     User(username='Demo', email='demo@aa.io', password='password'),
+        #     User(username='marnie', email='marnie@aa.io', password='password'),
+        #     User(username='bobbie', email='bobbie@aa.io', password='password')
+        # ]
         server_picture='image.url'
     )
 
