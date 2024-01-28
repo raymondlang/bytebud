@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./CreateServer.css";
+import { addServer } from "../../store/server";
 
 function ServerCreateModal() {
   const dispatch = useDispatch();
@@ -12,9 +13,28 @@ function ServerCreateModal() {
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
+  const user = useSelector((state) => state.session.user);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     window.alert("hi");
+
+    let newServer = {
+      name: name,
+      description: description,
+      owner_id: user.id,
+      server_picture: server_picture,
+    };
+
+    try {
+      let createdServer = await dispatch(addServer(newServer));
+      if (createdServer) {
+        closeModal();
+      }
+    } catch (response) {
+      const data = await response.json();
+      if (data && data.errors) setErrors(data.errors);
+    }
 
     // if (password === confirmPassword) {
     // 	const data = await dispatch(signUp(username, email, password));
