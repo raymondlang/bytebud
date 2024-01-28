@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getServers } from "../../store/server";
 import { NavLink } from "react-router-dom";
@@ -10,6 +10,7 @@ import CreateServerModal from "../ServerCreateModel";
 const ServersSidebar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const mainRef = useRef();
 
   useEffect(() => {
     dispatch(getServers());
@@ -23,29 +24,42 @@ const ServersSidebar = () => {
     <div className="server-sidebar">
       {user !== null ? (
         <>
-          <ul className="server-sidebar-ul">
-            <NavLink key="Direct Messages" to={"/channels/@me"}>
-              <img
-                className="server-sidebar-icon"
-                src="https://i.redd.it/6jupfeilyhx71.jpg"
-                alt="preview"
-              ></img>
-            </NavLink>
-            {servers.map((server) => (
-              <NavLink
-                key={server.id}
-                to={`/channels/${server.id}/${server.channels[0].id}`}
-              >
-                <ServersSidebarItem server={server} />
+          <div className="server-sidebar">
+            <ul className="server-sidebar-ul">
+              <NavLink key="Direct Messages" to={"/channels/@me"}>
+                <img
+                  className="server-sidebar-icon"
+                  src="https://i.redd.it/6jupfeilyhx71.jpg"
+                  alt="preview"
+                ></img>
               </NavLink>
-            ))}
-            <li className="server-sidebar-add-server-btn">
-              <OpenModalButton
-                buttonText="+"
-                modalComponent={<CreateServerModal />}
-              />
-            </li>
-          </ul>
+
+              <div className="server-sidebar-server-group">
+                {servers.map((server) => (
+                  <NavLink
+                    style={{ textDecoration: "none" }}
+                    key={server.id}
+                    to={`/channels/${server.id}/${server.channels[0].id}`}
+                  >
+                    <ServersSidebarItem mainRef={mainRef} server={server} />
+                  </NavLink>
+                ))}
+              </div>
+
+              <li className="server-sidebar-add-server-btn">
+                <OpenModalButton
+                  buttonText="+"
+                  modalComponent={<CreateServerModal />}
+                />
+              </li>
+            </ul>
+          </div>
+          <div ref={mainRef} id="context-menu">
+            <div className="item">Option 1</div>
+            <div className="item">Option 2</div>
+            <div className="item">Option 3</div>
+            <div className="item">Option 4</div>
+          </div>
         </>
       ) : (
         ""
