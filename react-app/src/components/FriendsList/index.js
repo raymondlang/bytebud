@@ -6,13 +6,13 @@ export default function FriendsList() {
 
   const redirect = async (e) => {
     e.preventDefault();
-    history.push("/messages");
+    history.push("/emojis/test");
   };
 
   return (
     <div>
       <h1> HELLO ! </h1>
-      <button onClick={redirect}>Messages</button>
+      <button onClick={redirect}> Emojis</button>
     </div>
   );
 }

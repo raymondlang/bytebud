@@ -8,6 +8,7 @@ import ServersSidebar from "./components/Servers/ServersSidebar";
 import Home from "./components/Home";
 import FriendsList from "./components/FriendsList";
 import MessageForm from "./components/MessageForm";
+import GetAllEmojis from "./components/EmojisModal";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
             {/* for testing messages ONLY */}
             <Route path="/messages">
               <MessageForm />
+            </Route>
+            <Route path="/emojis/test">
+              <GetAllEmojis />
             </Route>
           </Switch>
         </>
