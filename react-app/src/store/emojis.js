@@ -48,11 +48,7 @@ export const createReactionThunk = (reactionData) => async (dispatch) => {
 // reducer
 
 let initialState = {
-  currentServer: {},
-  user: {},
-  session: {},
-  emojis: {},
-  errors: {},
+  allEmojis: {},
 };
 
 export default function emojisReducer(state = initialState, action) {

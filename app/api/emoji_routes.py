@@ -7,7 +7,8 @@ from app.models.reaction import Reaction
 
 emoji_routes = Blueprint('emojis', __name__)
 
-@emoji_routes.route("/", methods=["GET"])
+#GET All Emojis /emojis
+@emoji_routes.route("", methods=["GET"])
 @login_required
 def get_all_emojis():
     ''' query for all emojis and return them in a list of dictionaries'''
@@ -17,7 +18,8 @@ def get_all_emojis():
     return jsonify({'emojis': [emoji.to_dict() for emoji in emojis]}), 200
 
 
-@emoji_routes.route("/", methods=["POST"])
+#POST reaction to a message /emojis
+@emoji_routes.route("", methods=["POST"])
 @login_required
 def create_reaction(messageId, emojiId, userId):
     ''' create new reaction to a message'''
@@ -30,7 +32,7 @@ def create_reaction(messageId, emojiId, userId):
 
     return jsonify(new_reaction.to_dict()), 201
 
-
+#GET emoji by ID /emojis/:id
 @emoji_routes.route("/<int:id>", methods=["GET"])
 @login_required
 def get_emoji(id):
@@ -38,7 +40,7 @@ def get_emoji(id):
     emoji = Emoji.query.get(int(id))
     return jsonify(emoji.to_dict()), 200
 
-
+#DELETE reaction
 @emoji_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_reaction(id):
@@ -52,3 +54,17 @@ def delete_reaction(id):
         return jsonify("Reaction succcessfully deleted"), 200
     else:
         return jsonify("You are not authorized to remove this reaction"), 401
+
+#POST emoji
+@emoji_routes.route("", methods=["POST"])
+@login_required
+def create_emoji():
+
+    data = request.get_json()
+
+    new_emoji = Emoji(name=data['name'], url=data['url'])
+
+    db.session.add(new_emoji)
+    db.session.commit()
+
+    return jsonify(new_emoji.to_dict()), 201
