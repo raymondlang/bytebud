@@ -12,6 +12,7 @@ from .api.channel_routes import channel_routes
 # from .api.friend_routes import friend_routes
 from .api.message_routes import message_routes
 from .api.emoji_routes import emoji_routes
+from .socket import socketio
 
 from .seeds import seed_commands
 from .config import Config
@@ -37,6 +38,9 @@ app.register_blueprint(message_routes, url_prefix='/api/messages')
 
 db.init_app(app)
 Migrate(app, db)
+# initialize the app with the socket instance
+# include this line right after Migrate(app, db)
+socketio.init_app(app)
 
 # Application Security
 CORS(app)
@@ -83,6 +87,11 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
+
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+# keep at the bottom of this file, use this to run the app
+if __name__ == '__main__':
+    socketio.run(app)
