@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
 import "./ServerSidebar.css";
-import OpenModalButton from "../OpenModalButton";
-import CreateServerModal from "../ServerCreateModel";
 
 const ServersSidebarItem = ({ server }) => {
   if (server.server_picture === "image.url" || server.server_picture === "") {
