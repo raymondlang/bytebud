@@ -1,11 +1,13 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User
+from random import random
+import string
 
 user_routes = Blueprint('users', __name__)
 
 
-@user_routes.route('/')
+@user_routes.route('')
 @login_required
 def users():
     """
@@ -15,33 +17,58 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
+#GET user by ID users/:id
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
-    """
-    Query for a user by id and returns that user in a dictionary
-    """
+    ''' Query for a user by id and returns that user in a dictionary '''
     user = User.query.get(id)
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
     return user.to_dict()
 
-# define a route for creating a new user
+# GET /users - get all users
+@user_routes.route('', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    return jsonify([user.to_dict() for user in users])
+
 # POST /users - create a new user
-@user_routes.route('/', methods=['POST'])
+@user_routes.route('', methods=['POST'])
 def create_user():
-    # get the JSON data from the request body
+    ''' Create a new user if username + tag doesn't already exist '''
     data = request.get_json()
+
     # generate a unique 4-digit tag for the username
     tag = ''.join(random.choices(string.digits, k=4))
     username = data['username'] + '#' + tag
+
     # check if the username already exists
     while User.query.filter_by(username=username).first() is not None:
         tag = ''.join(random.choices(string.digits, k=4))
         username = data['username'] + '#' + tag
-    # create a new User object based on the JSON data
+
+
     user = User(username=username, email=data['email'], password=data['password'])
-    # add the new user to the database session
     db.session.add(user)
-    # commit the changes to the database
     db.session.commit()
-    # return a JSON response containing the created user as a dictionary
+    return jsonify(user.to_dict())
+
+#PUT /users/:id - update user by userID
+@user_routes.route('/<int:user_id>', methods=['PUT'])
+@login_required
+def update_user(user_id):
+    ''' Update a user's info if found in the database '''
+    data = request.get_json()
+
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+
+
+    user['username'] = data.get('username', user.username)
+    user['email'] = data.get('email', user.email)
+    user['password'] = data.get('password', user.password)
+    db.session.commit()
+
     return jsonify(user.to_dict())
