@@ -25,6 +25,13 @@ const ServersSidebar = () => {
       {user !== null ? (
         <>
           <ul className="server-sidebar-ul">
+            <NavLink key="Direct Messages" to={"/channels/@me"}>
+              <img
+                className="server-sidebar-icon"
+                src="https://i.redd.it/6jupfeilyhx71.jpg"
+                alt="preview"
+              ></img>
+            </NavLink>
             {servers.map((server) => (
               <NavLink
                 key={server.id}
