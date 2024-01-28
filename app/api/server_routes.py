@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request, session
 from flask_login import login_required
 from app.models import db, Server, User
 
-
 server_routes = Blueprint('servers', __name__)
 
 # route to get all servers
@@ -16,7 +15,7 @@ def get_all_servers():
 
 # route to create a new server
 # POST /servers - create a new server
-@server_routes.route('/', methods=["POST"])
+@server_routes.route('', methods=["POST"])
 def create_server():
      # get the data from the request body
     data = request.get_json()

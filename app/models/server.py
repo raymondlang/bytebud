@@ -2,10 +2,6 @@ from .db import db, environment, SCHEMA
 from datetime import datetime
 # from .user import User
 
-server_members = db.Table('server_members',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('server_id', db.Integer, db.ForeignKey('server.id'), primary_key=True)
-)
 class Server(db.Model):
     __tablename__ = 'server'
     id = db.Column(db.Integer, primary_key=True)
