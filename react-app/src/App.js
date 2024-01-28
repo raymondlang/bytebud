@@ -6,6 +6,8 @@ import { authenticate } from "./store/session";
 import LoginPage from "./components/LoginPage";
 import ServersSidebar from "./components/Servers/ServersSidebar";
 import Home from "./components/Home";
+import FriendsList from "./components/FriendsList";
+import MessageForm from "./components/MessageForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,57 +17,31 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="homepage">
-      <LoginPage isLoaded={isLoaded} />
+    <>
+      <LoginPage />
       <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/login" component={LoginPage} />
         <Route path="/register" component={SignupFormPage} />
       </Switch>
       {isLoaded && (
-        <div className="login-page">
-          <div className="login-box">
-            <div className="login-headings">
-              <span className="login-title">Welcome back!</span>
-              <span className="login-subtitle">
-                We're so excited to see you again!
-              </span>
-            </div>
-            <form className="login-form">
-              <div className="form-group">
-                <label className="form-label" htmlFor="emailOrPhone">
-                  EMAIL OR PHONE NUMBER
-                </label>
-                <br></br>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="emailOrPhone"
-                  name="emailOrPhone"
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label" htmlFor="password">
-                  PASSWORD
-                </label>
-                <br></br>
-                <input
-                  className="form-input"
-                  type="password"
-                  id="password"
-                  name="password"
-                />
-              </div>
-              <button className="login-button" type="submit">
-                Log In
-              </button>
-              <div className="register-group">
-                <span className="label-register">Need an account?</span>
-                <span className="register">Register</span>
-              </div>
-            </form>
-          </div>
-        </div>
+        <>
+          <ServersSidebar />
+          <Switch>
+            <Route path="/channels/@me">
+              <FriendsList />
+            </Route>
+            {/* <Route path="/channels/:serverId/:channelId">
+              <TestChannels />
+            </Route> */}
+            {/* for testing messages ONLY */}
+            <Route path="/messages">
+              <MessageForm />
+            </Route>
+          </Switch>
+        </>
       )}
-    </div>
+    </>
   );
 }
 
