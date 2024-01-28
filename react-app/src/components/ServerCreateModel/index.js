@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./CreateServer.css";
 
-function CreateServerModal() {
+function ServerCreateModal() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -84,7 +84,7 @@ function CreateServerModal() {
 
             <div>
               <button className="create-server-form-button" type="submit">
-                Sign Up
+                Create Server
               </button>
             </div>
           </form>
@@ -94,4 +94,4 @@ function CreateServerModal() {
   );
 }
 
-export default CreateServerModal;
+export default ServerCreateModal;

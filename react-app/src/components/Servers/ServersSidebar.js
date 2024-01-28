@@ -6,7 +6,7 @@ import ServersSidebarItem from "./ServerSidebarItem";
 import TestChannels from "./TestChannels";
 import "./ServerSidebar.css";
 import OpenModalButton from "../OpenModalButton";
-import CreateServerModal from "../CreateServerModal";
+import CreateServerModal from "../ServerCreateModel";
 
 const ServersSidebar = () => {
   const dispatch = useDispatch();
