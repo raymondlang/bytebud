@@ -23,35 +23,54 @@ function LoginPage() {
 
   return (
     <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
+      <div className="login-page">
+        <div className="login-box">
+          <div className="login-headings">
+            <span className="login-title">Welcome back!</span>
+            <span className="login-subtitle">
+              We're so excited to see you again!
+            </span>
+          </div>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="form-label" htmlFor="emailOrPhone">
+                EMAIL OR PHONE NUMBER
+              </label>
+              <br></br>
+              <input
+                className="form-input"
+                type="text"
+                id="emailOrPhone"
+                name="emailOrPhone"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="password">
+                PASSWORD
+              </label>
+              <br></br>
+              <input
+                className="form-input"
+                type="password"
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button className="login-button" type="submit">
+              Log In
+            </button>
+            <div className="register-group">
+              <span className="label-register">Need an account?</span>
+              <Link to="/register" className="register">
+                Register
+              </Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 }
-
 export default LoginPage;

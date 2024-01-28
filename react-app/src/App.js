@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import { authenticate } from "./store/session";
 import LoginPage from "./components/LoginPage";
+import ServersSidebar from "./components/Servers/ServersSidebar";
+import Home from "./components/Home";
 
 function App() {
   const dispatch = useDispatch();
