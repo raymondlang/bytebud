@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import ServersSidebarItem from "./ServerSidebarItem";
 import TestChannels from "./TestChannels";
 import "./ServerSidebar.css";
+import OpenModalButton from "../OpenModalButton";
+import CreateServerModal from "../CreateServerModal";
 
 const ServersSidebar = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const ServersSidebar = () => {
     <div className="server-sidebar">
       {user !== null ? (
         <>
-          <ul style={{ marginLeft: "12px", paddingLeft: "0" }}>
+          <ul className="server-sidebar-ul">
             {servers.map((server) => (
               <NavLink
                 key={server.id}
@@ -31,8 +33,11 @@ const ServersSidebar = () => {
                 <ServersSidebarItem server={server} />
               </NavLink>
             ))}
-            <li>
-              <button> Add Server</button>
+            <li className="server-sidebar-add-server-btn">
+              <OpenModalButton
+                buttonText="+"
+                modalComponent={<CreateServerModal />}
+              />
             </li>
           </ul>
         </>

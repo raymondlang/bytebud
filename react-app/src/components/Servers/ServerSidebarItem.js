@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./ServerSidebar.css";
+import OpenModalButton from "../OpenModalButton";
+import CreateServerModal from "../CreateServerModal";
 
 const ServersSidebarItem = ({ server }) => {
   if (server.server_picture === "image.url" || server.server_picture === "") {
@@ -10,14 +12,8 @@ const ServersSidebarItem = ({ server }) => {
 
   return (
     // each item will redirect to channel component
-    <div>
-      <div className="server-sidebar-icon">
-        <img src={server.server_picture} alt="preview"></img>
-      </div>
-
-      <div className="popover__content">
-        <p className="popover__message">test pop up</p>
-      </div>
+    <div className="server-sidebar-icon">
+      <img src={server.server_picture} alt="preview"></img>
     </div>
   );
 };
