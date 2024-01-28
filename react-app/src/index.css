@@ -1,6 +1,6 @@
 /* TODO Add site wide styles */
 @font-face {
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   src: url("../src/static/ggsans-Normal.ttf");
   font-weight: normal;
   font-style: normal;
@@ -21,9 +21,8 @@
 }
 
 .homepage {
-  background-image: url("../src/static/pixelpal-wallpaper.png");
+  background-image: url("../src/static/bytebud-wallpaper.png");
   background-size: cover;
-  background-position: center;
   height: 100vh;
   display: flex;
 }
@@ -49,13 +48,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   margin-bottom: 20px;
 }
 
 .login-title {
-  font-size: 35px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: bolder;
+  color: whitesmoke;
+  margin-bottom: 8px;
 }
 
 .login-subtitle {
@@ -77,18 +78,19 @@
 
 .form-label {
   font-family: "Discord Bold";
-  font-weight: bolder;
   font-size: 14px;
   color: #acacac;
 }
 
 #emailOrPhone {
   height: 30px;
+  margin-top: 5px;
   padding-right: 200px;
 }
 
 #password {
   height: 30px;
+  margin-top: 5px;
   padding-right: 200px;
   margin-bottom: 30px;
 }
@@ -99,8 +101,11 @@
   background-color: #5865f2;
   border: none;
   border-radius: 3px;
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   font-size: 16px;
+  margin-bottom: 10px;
+  color: whitesmoke;
+  font-weight: bolder;
 }
 
 .register-group {
