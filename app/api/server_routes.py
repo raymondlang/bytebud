@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, session
 from flask_login import login_required
-from models.server import db, Server
+from app.models import db, Server, User
+
 
 server_routes = Blueprint('servers', __name__)
 

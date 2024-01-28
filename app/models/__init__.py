@@ -1,5 +1,7 @@
-from .db import db
+from .db import db, environment, SCHEMA
 from .user import User
 from .emoji import Emoji
+from .channel import Channel
+from .message import Message
 from .reaction import Reaction
-from .db import environment, SCHEMA
+from .server import Server
