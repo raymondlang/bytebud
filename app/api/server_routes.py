@@ -4,19 +4,18 @@ from app.models import db, Server, User
 
 server_routes = Blueprint('servers', __name__)
 
-# route to get all servers
 # GET /servers - get all servers
-@server_routes.route('/', methods=["GET"])
+@server_routes.route('', methods=["GET"])
 def get_all_servers():
     # get all servers from the database
     servers = Server.query.all()
      # convert each server to a dictionary and return as JSON
     return jsonify([server.to_dict() for server in servers]), 200
 
-# route to create a new server
 # POST /servers - create a new server
 @server_routes.route('', methods=["POST"])
 def create_server():
+    ''' create a new server and return it as a dictionary if successful'''
      # get the data from the request body
     data = request.get_json()
     name = data.get('name')
@@ -33,7 +32,35 @@ def create_server():
     # return the new server as JSON
     return jsonify(server.to_dict()), 201
 
-# route to get a specific server by ID
+# POST /servers/:id/members - add a user to a server
+@server_routes.route('/<int:id>/members', methods=['POST'])
+@login_required
+def add_member_to_server(id):
+    ''' add a user to the members of a channel and return the server as a dictionary if successful'''
+    # get the server from the database by ID
+    server = Server.query.get(id)
+    # if the server doesn't exist, return an error message
+    if server is None:
+        return jsonify({'error': 'Server not found'}), 404
+
+    # get the username from the request body
+    data = request.get_json()
+    username = data.get('username')
+    if username is None:
+        return jsonify({'error': 'User ID not provided'}), 400
+
+    # get the user from the database by username
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+
+    # add the user to the server members list
+    server.members.append(user)
+    db.session.commit()
+
+    # return the server with the updated members list as JSON
+    return jsonify(server.to_dict()), 200
+
 # GET /servers/:id - get a specific server by ID
 @server_routes.route('/<int:id>', methods=['GET'])
 def get_server(id):
@@ -46,7 +73,6 @@ def get_server(id):
     # otherwise, return the server as JSON
     return jsonify(server.to_dict()), 200
 
-# route to update a specific server by ID
 # PUT /servers/:id - update a specific server by ID
 @server_routes.route('/<int:id>', methods=["PUT"])
 def update_server(id):
@@ -75,7 +101,6 @@ def update_server(id):
     # return the updated server as JSON
     return jsonify(server.to_dict()), 200
 
-# route to delete a specific server by ID
 # DELETE /servers/:id - delete a specific server by ID
 @server_routes.route('<int:id>', methods=["DELETE"])
 def delete_server(id):
@@ -92,7 +117,35 @@ def delete_server(id):
     # return a message indicating that the server was deleted
     return jsonify({'message': 'Server deleted'}), 200
 
+# DELETE /servers/:id/members - delete a user from server
+@server_routes.route('/<int:id>/members', methods=["DELETE"])
+@login_required
+def delete_member_from_server(id):
+    ''' delete a server member and return a message upon successful deletion'''
+    # get the server from the database by ID
+    server = Server.query.get(id)
+    # if the server doesn't exist, return an error message
+    if server is None:
+        return jsonify({'error': 'Server not found'}), 404
 
+    # get the username from the request body
+    data = request.get_json()
+    username = data.get('username')
+    if username is None:
+        return jsonify({'error': 'User ID not provided'}), 400
+
+    # get the user from the database by username
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+
+
+    # delete the server member from table
+    server.members.remove(user)
+    db.session.commit()
+
+    # return a message indicating that the server was deleted
+    return jsonify({'message': 'Server member deleted'}), 200
 
 # route to get all channels for a specific server
 # GET /servers/:id/channels - get all channels for a specific server

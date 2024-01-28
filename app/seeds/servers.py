@@ -4,20 +4,30 @@ from sqlalchemy.sql import text
 
 # Adds a demo server, you can add other servers here if you want
 def seed_servers():
-    AppAcademy = Server(
-        owner_id=1,
-        name="App Academy",
-        description="Server for App Academy students to connect and help one another",
-        # channels = db.relationship('Channel', backref='server', lazy=True),
-        # members = [
-        #     User(username='Demo', email='demo@aa.io', password='password'),
-        #     User(username='marnie', email='marnie@aa.io', password='password'),
-        #     User(username='bobbie', email='bobbie@aa.io', password='password')
-        # ]
-        server_picture='image.url'
-    )
+    servers = [
+        Server(
+            owner_id=1,
+            name="App Academy",
+            description="Server for App Academy students to connect and help one another",
+            server_picture='image.url'
+        ),
+        Server(
+            owner_id=2,
+            name="Pixel Pals Rock",
+            description="Server for the cool cats that call themselves Pixel Pals",
+            server_picture='image.url'
+        )
+    ]
 
-    db.session.add(AppAcademy)
+    users = User.query.all()
+
+    first_group = list(users[0:3])
+    second_group = list(users[3:])
+
+
+    servers[0].members.extend(first_group)
+    servers[1].members.extend(second_group)
+    db.session.add(servers)
     db.session.commit()
 
 
