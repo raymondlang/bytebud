@@ -16,10 +16,10 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
-    }
+    const data = await dispatch(login(email, password)).catch(async (res) => {
+      const errData = await res.json();
+      console.log(errData);
+    });
   };
 
   return (
