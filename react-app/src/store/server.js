@@ -83,15 +83,16 @@ let initialState = {};
 export default function serverReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_SERVERS: {
-      // Use a more descriptive name than allUserServers since it's specific to the loaded servers
-      const updatedServers = {};
+      const allUserServers = {};
       action.list.forEach((server) => {
-        updatedServers[server.id] = server;
+        allUserServers[server.id] = server;
       });
+      const orderedList = Object.values(allUserServers);
 
       return {
         ...state,
-        allUserServers: updatedServers, // Update the name consistently
+        allUserServers,
+        orderedList,
       };
     }
 
@@ -107,10 +108,12 @@ export default function serverReducer(state = initialState, action) {
 
     case ADD_SERVER: {
       const newState = { ...state };
-      newState.allUserServers[action.server.id] = action.server;
-      return newState;
+      const allUserServers = { ...state.allUserServers };
+      const orderedList = [...state.orderedList];
+      allUserServers[action.server.id] = action.server;
+      orderedList.unshift(action.server);
+      return { ...newState, allUserServers, orderedList };
     }
-
     default:
       return state;
   }

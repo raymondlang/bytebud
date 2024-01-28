@@ -54,11 +54,11 @@ const ServersSidebar = () => {
               </li>
             </ul>
           </div>
-          <div ref={mainRef} id="context-menu">
-            <div className="item">Option 1</div>
-            <div className="item">Option 2</div>
-            <div className="item">Option 3</div>
-            <div className="item">Option 4</div>
+          <div ref={mainRef} id="server-sidebar-context-menu">
+            <div className="server-sidebar-context-menu-item">Option 1</div>
+            <div className="server-sidebar-context-menu-item">Option 2</div>
+            <div className="server-sidebar-context-menu-item">Option 3</div>
+            <div className="server-sidebar-context-menu-item">Option 4</div>
           </div>
         </>
       ) : (

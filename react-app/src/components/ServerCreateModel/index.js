@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
 import "./CreateServer.css";
@@ -7,6 +8,7 @@ import { addServer } from "../../store/server";
 
 function ServerCreateModal() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [server_picture, setServerPicture] = useState("");
@@ -29,6 +31,9 @@ function ServerCreateModal() {
     try {
       let createdServer = await dispatch(addServer(newServer));
       if (createdServer) {
+        history.push(
+          `/channels/${createdServer.id}/${createdServer.channels[0].id}`
+        );
         closeModal();
       }
     } catch (response) {
