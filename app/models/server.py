@@ -12,8 +12,8 @@ class Server(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(120))
-    channels = db.relationship('Channel', backref='server', lazy=True)
-    members = db.relationship('User', secondary='server_members', back_populates='servers')
+    channels = db.relationship('Channel', backref='server', lazy=True, cascade='all, delete')
+    members = db.relationship('User', secondary='server_members', back_populates='servers', cascade='all, delete')
     server_picture = db.Column(db.String(120))
     def to_dict(self):
         return {
@@ -25,3 +25,11 @@ class Server(db.Model):
             "members": [member.to_dict() for member in self.members],
             "server_picture": self.server_picture
         }
+
+server_members = db.Table('server_members',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('server_id', db.Integer, db.ForeignKey('server.id'), primary_key=True)
+)
+
+if environment == "production":
+    server_members.schema = SCHEMA

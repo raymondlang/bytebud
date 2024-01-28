@@ -5,6 +5,7 @@ from .messages import seed_messages, undo_messages
 from .emojis import seed_emojis, undo_emojis
 from .reactions import seed_reactions, undo_reactions
 from .servers import seed_servers, undo_servers
+from .friends import seed_friends, undo_friends
 
 from app.models.db import db, environment, SCHEMA
 
@@ -25,11 +26,12 @@ def seed():
         undo_messages()
         undo_users()
     demo, marnie, bobbie = seed_users()
-    seed_channels()
-    seed_messages()
+    seed_users()
+    seed_friends()
     seed_servers()
-    seed_emojis()
-    seed_reactions()
+    seed_channels()
+    undo_friends()
+    seed_messages()
 
     # Add other seed functions here
 
