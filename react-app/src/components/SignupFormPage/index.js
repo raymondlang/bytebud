@@ -77,6 +77,7 @@ function SignupPage() {
           onChange={(e) => setPassword(e.target.value)}
           className="signup-input signup-password"
         />
+        <div className="signup-dob-label">DATE OF BIRTH</div>
         <div className="signup-dob">
           <select
             id="month"

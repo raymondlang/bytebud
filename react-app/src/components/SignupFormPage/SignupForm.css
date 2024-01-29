@@ -26,7 +26,7 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 35px;
-  height: 520px;
+  height: 540px;
   border-radius: 5px;
   width: 400px;
 }
@@ -50,7 +50,8 @@
   margin-bottom: 8px;
 }
 
-.signup-input-label {
+.signup-input-label,
+.signup-dob-label {
   color: rgb(180, 180, 180);
   font-family: "Discord Bold";
 }
@@ -67,7 +68,8 @@
 
 #email-label,
 #username-label,
-#password-label {
+#password-label,
+.signup-dob-label {
   font-size: 12px;
 }
 
@@ -80,6 +82,10 @@
   margin-top: 5px;
   margin-bottom: 25px;
   height: 40px;
+}
+
+.signup-dob-label {
+  margin-bottom: 5px;
 }
 
 .signup-dob {
