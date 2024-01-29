@@ -2,6 +2,7 @@
 const LOAD_EMOJIS = "emojis/LOAD_EMOJIS";
 const LOAD_ONE_EMOJI = "emojis/LOAD_ONE_EMOJI";
 const CREATE_REACTION = "emojis/CREATE_REACTIONS";
+const DELETE_REACTION = "emojis/DELETE_REACTION";
 
 // Action Creators
 const loadEmojis = (emojis) => ({
@@ -17,6 +18,9 @@ const loadOneEmoji = (emoji) => ({
 const createReaction = (reaction) => ({
   type: CREATE_REACTION,
   reaction,
+});
+const deleteReaction = () => ({
+  type: DELETE_REACTION,
 });
 
 // Thunks
