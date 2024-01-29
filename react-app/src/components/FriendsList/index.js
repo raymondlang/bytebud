@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "../EmojisModal/OpenModalMenuItem";
 import { getAllFriendsThunk } from "../../store/friends";
+import EmojisModal from "../EmojisModal/AllEmojisModal";
 import "./FriendsList.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
@@ -44,6 +45,7 @@ export default function FriendsList() {
           </div>
         );
       })}
+      <EmojisModal />
       {/* <button onClick={handleLogout}> Logout </button> */}
     </div>
   );
