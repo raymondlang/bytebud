@@ -19,40 +19,32 @@ export default function FriendsList() {
 
   //   // const allFriends = useSelector(state => state.friends)
   //   const currentUserId = useSelector((state) => state.session.user.id);
-
+  const allFriends = useSelector((state) => state.friends);
+  const friendsArr = Object.values(allFriends);
   //   useEffect(() => {
   //     dispatch(getAllFriendsThunk(currentUserId));
   //   });
 
   return (
-    <div>
+    <div className="friendslist-container">
       <div className="friendslist-header-container">
-        <i className="fa-solid fa-user-group" />
-        <div className="friendslist-friends"> Friends </div>
-        <NavLink exact to={`/channels/@me`} className="friendslist-all-link">
-          <div className="friendslist-all"> All </div>
-        </NavLink>
-        <NavLink
-          exact
-          to={`/channels/@me/pending`}
-          className="friendslist-all-link"
-        >
-          <div className="friendslist-all"> Pending </div>
-        </NavLink>
-        <NavLink
-          exact
-          to={`/channels/@me/add`}
-          className="friendslist-add-link"
-        >
-          <div className="friendslist-all"> Add Friend </div>
-        </NavLink>
+        <span className="friendslist-friends"> Friends </span>
+        <span className="friendslist-pending"> Pending </span>
+        <span className="friendslist-addfriend-button"> Add Friend </span>
       </div>
-      <div className="emojis-modal-container"></div>
-      <OpenModalMenuItem
-        itemText="Emojis"
-        onItemClick={closeMenu}
-        className="emojis-modal-button"
-      />
+      {friendsArr.map((friend) => {
+        return (
+          <div className="friendslist-user-container" key={friend.id}>
+            <span className="friendslist-profile-image">DEFAULT IMG! </span>
+            <span className="friendslist-username">
+              {" "}
+              username: {friend.username.split("#")[0]}{" "}
+            </span>
+            {/* on hover it should show their tag */}
+          </div>
+        );
+      })}
+      {/* <button onClick={handleLogout}> Logout </button> */}
     </div>
   );
 }
