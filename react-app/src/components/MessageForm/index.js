@@ -57,7 +57,7 @@ function MessageForm() {
     <>
       <div>
         {messages.map((message, ind) => (
-          <div key={ind}>{`${message.user}: ${message.msg}`}</div>
+          <div key={ind}>{`${message.user.slice(0, -5)} ${message.msg}`}</div>
         ))}
       </div>
       <div className="message-form-container">
@@ -70,13 +70,26 @@ function MessageForm() {
             onChange={(e) => setContent(e.target.value)}
             required
           />
-          <button
-            className="message-form-button message-form-text"
-            type="submit"
-            disabled={content.length > 2000}
-          >
-            Send
-          </button>
+          <div className="message-form-right-side">
+            <div
+              className={
+                content.length >= 1800
+                  ? content.length > 2000
+                    ? "character-count-error"
+                    : "character-count-warning"
+                  : "message-hidden"
+              }
+            >
+              {2000 - content.length}
+            </div>
+            <button
+              className="message-form-button message-form-text"
+              type="submit"
+              disabled={content.length > 2000}
+            >
+              Send
+            </button>
+          </div>
         </form>
       </div>
     </>
