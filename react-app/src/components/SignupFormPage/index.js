@@ -103,7 +103,7 @@ function SignupPage() {
             className="signup-dob-select"
           >
             <option value="">Year</option>
-            {generateOptions(1900, new Date().getFullYear())}
+            {generateOptions(1940, new Date().getFullYear())}
           </select>
         </div>
         <button type="submit" className="signup-submit-btn">
