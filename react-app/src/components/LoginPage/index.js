@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -14,12 +14,17 @@ function LoginPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password)).catch(async (res) => {
-      const errData = await res.json();
-      console.log(errData);
-    });
+    try {
+      await dispatch(login(email, password));
+    } catch (err) {
+      setErrors([err.message]);
+    }
   };
 
   return (
@@ -31,6 +36,9 @@ function LoginPage() {
             <span className="login-subtitle">
               We're so excited to see you again!
             </span>
+            {errors.length > 0 && (
+              <span className="error-msgs">{`${errors}. Please try again.`}</span>
+            )}
           </div>
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="form-group">
@@ -43,6 +51,7 @@ function LoginPage() {
                 type="text"
                 id="emailOrPhone"
                 name="emailOrPhone"
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -56,6 +65,7 @@ function LoginPage() {
                 type="password"
                 id="password"
                 name="password"
+                required
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
