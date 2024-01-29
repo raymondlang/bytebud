@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import "./MessageForm.css";
+import ChannelMessages from "../ChannelMessages";
+import { createMessage } from "../../store/message";
 let socket;
 
 function MessageForm() {
@@ -38,6 +40,13 @@ function MessageForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let message = {
+      senderId: user.id,
+      content: content,
+      timestamp: Date.now(),
+      reactions: {},
+    };
 
     // add .to('channelName') before .emit when adding room functionality?
     socket.emit("chat", { user: user.username, msg: content });
