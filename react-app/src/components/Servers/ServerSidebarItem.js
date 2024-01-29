@@ -12,9 +12,10 @@ const ServersSidebarItem = ({ mainRef, server }) => {
   let className = "";
   let hasImage = false;
 
-  const closeMenu = () => {
-    mainRef.current.classList.remove("visible");
-  };
+    const closeMenu = (e) => {
+        if (!mainRef.current.contains(e.target)) {
+            mainRef.current.classList.remove('visible')
+        }
 
   useEffect(() => {
     document.body.addEventListener("click", closeMenu);
