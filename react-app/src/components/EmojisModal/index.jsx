@@ -14,7 +14,7 @@ import "./GetAllEmojis.css";
 // const [showMenu, setShowMenu] = useState(false);
 // const closeMenu = () => setShowMenu(false);
 
-export default function GetAllEmojis() {
+export default function GetAllEmojis({ messageId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
@@ -44,10 +44,13 @@ export default function GetAllEmojis() {
 
   return (
     <div className="emoji-modal-container">
-      <p>{String.fromCodePoint(0x1f354)}</p>
       {emojisArr.map((emoji) => {
         return (
-          <div className="emoji-modal-emoji" value={emoji.id}>
+          <div
+            className="emoji-modal-emoji"
+            value={emoji.id}
+            // onClick = {createReaction(emojiId=emoji.id, messageId, userId)}
+          >
             {String.fromCodePoint(emoji.url)}
           </div>
         );
