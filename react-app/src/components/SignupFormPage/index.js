@@ -111,6 +111,10 @@ function SignupPage() {
         </button>
       </form>
       <span className="signup-already-account">Already have an account?</span>
+      <span className="signup-tos">
+        By registering, you agree to ByteBud's Terms of Service and Privacy
+        Policy.
+      </span>
     </div>
   );
 }
