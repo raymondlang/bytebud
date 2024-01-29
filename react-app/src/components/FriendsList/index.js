@@ -1,14 +1,12 @@
 import { Redirect } from "react-router";
-import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "../EmojisModal/OpenModalMenuItem";
 import { getAllFriendsThunk } from "../../store/friends";
-import GetAllEmojis from "../EmojisModal";
-import "../EmojisModal/GetAllEmojis.css";
+import "./FriendsList.css";
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 export default function FriendsList() {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const redirect = async (e) => {
@@ -28,13 +26,32 @@ export default function FriendsList() {
 
   return (
     <div>
-      <h1> HELLO ! </h1>
+      <div className="friendslist-header-container">
+        <i className="fa-solid fa-user-group" />
+        <div className="friendslist-friends"> Friends </div>
+        <NavLink exact to={`/channels/@me`} className="friendslist-all-link">
+          <div className="friendslist-all"> All </div>
+        </NavLink>
+        <NavLink
+          exact
+          to={`/channels/@me/pending`}
+          className="friendslist-all-link"
+        >
+          <div className="friendslist-all"> Pending </div>
+        </NavLink>
+        <NavLink
+          exact
+          to={`/channels/@me/add`}
+          className="friendslist-add-link"
+        >
+          <div className="friendslist-all"> Add Friend </div>
+        </NavLink>
+      </div>
       <div className="emojis-modal-container"></div>
       <OpenModalMenuItem
         itemText="Emojis"
         onItemClick={closeMenu}
         className="emojis-modal-button"
-        modalComponent={<GetAllEmojis />}
       />
     </div>
   );
