@@ -12,6 +12,13 @@ function MessageForm() {
   const [messages, setMessages] = useState([]);
   const user = useSelector((state) => state.session.user);
 
+  // const channel = useSelector(state => state.channels.currentChannel)
+  let channel = {};
+  channel.name = "#sample-channel";
+  channel.id = 1; //delete once currentChannel slice of state is made
+
+  // will need room functionality tp broadcast to just users in the room (channel), not all users --> add channel to dependency array?
+
   // will need room functionality? broadcast to just users in the room (channel), not all users?
   useEffect(() => {
     // open socket connection
@@ -42,9 +49,10 @@ function MessageForm() {
     e.preventDefault();
 
     let message = {
-      senderId: user.id,
+      userId: user.id,
+      channelId: channel.id,
       content: content,
-      timestamp: Date.now(),
+      timestamp: new Date(),
       reactions: {},
     };
 
