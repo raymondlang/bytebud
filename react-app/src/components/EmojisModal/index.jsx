@@ -49,13 +49,9 @@ export default function GetAllEmojis() {
       <p>{String.fromCodePoint(0x1f354)}</p>
       {emojisArr.map((emoji) => {
         return (
-          <p
-            className="emoji-modal-emoji"
-            value={emoji.id}
-            // onClick={handleClick}
-          >
+          <div className="emoji-modal-emoji" value={emoji.id}>
             {String.fromCodePoint(emoji.url)}
-          </p>
+          </div>
         );
       })}
     </div>

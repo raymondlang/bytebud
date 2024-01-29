@@ -19,6 +19,7 @@ export default function FriendsList() {
   return (
     <div>
       <h1> HELLO ! </h1>
+      <div className="emojis-modal-container"></div>
       <OpenModalMenuItem
         itemText="Emojis"
         onItemClick={closeMenu}
