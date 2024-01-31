@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Redirect from "react-router-dom";
 import "./ServerSidebar.css";
+import ContextMenu from "../ContextMenu";
 
 const ServersSidebarItem = ({ mainRef, server }) => {
   let names = server.name.split(" ");
@@ -17,11 +18,19 @@ const ServersSidebarItem = ({ mainRef, server }) => {
             mainRef.current.classList.remove('visible')
         }
 
-  useEffect(() => {
-    document.body.addEventListener("click", closeMenu);
+     const [clicked, setClicked] = useState(false);
+    const [points, setPoints] = useState({
+        x: 0,
+        y: 0,
+    });
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, []);
+    useEffect(() => {
+        const handleClick = () => setClicked(false);
+        window.addEventListener("click", handleClick);
+        return () => {
+            window.removeEventListener("click", handleClick);
+        };
+    }, []);
 
   if (server.server_picture === "image.url" || server.server_picture === "") {
     // server.server_picture = 'https://i.redd.it/6jupfeilyhx71.jpg'
@@ -61,6 +70,7 @@ const ServersSidebarItem = ({ mainRef, server }) => {
           <p>{serverName}</p>
         )}
       </div>
+      <ContextMenu server={server} top={points.y} left={points.x} />
     </>
   );
 };
