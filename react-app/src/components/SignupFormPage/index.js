@@ -19,8 +19,11 @@ function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  };
 
+    // custom frontend validations
+
+    await dispatch(signUp(username, email, password));
+  };
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
