@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./channels.css";
 import { getServerChannels } from "../../store/channels";
 import { getChannelDetails } from "../../store/channels";
+import { getServer } from "../../store/server";
 
 // Create logic for if user
 
@@ -12,12 +13,63 @@ function Channels() {
   const dispatch = useDispatch();
   const { serverId, channelId } = useParams();
 
+  let allChannels = useSelector((state) => state.channels.currServerChannels);
+  let currChannel = useSelector((state) => state.channels.oneChannel);
+  let currServer = useSelector((state) => state.server.currentServer);
+
+  useEffect(() => {
+    dispatch(getServerChannels(serverId));
+    dispatch(getChannelDetails(channelId));
+    dispatch(getServer(serverId));
+  }, [dispatch, serverId, channelId]);
+  if (!allChannels) allChannels = [];
+  else allChannels = Object.values(allChannels);
+  if (!currServer) currServer = {};
+  else currServer = currServer[1];
+
+  if (!currChannel) currChannel = {};
+  else currChannel = currChannel;
+
   useEffect(() => {
     dispatch(getServerChannels(serverId));
     dispatch(getChannelDetails(channelId));
   }, [dispatch, serverId, channelId]);
 
-  return <div>Channels</div>;
+  return (
+    <div className="channel-sidebar">
+      {currServer && (
+        <div className="server-name-container">
+          <span className="server-name-text">{currServer.name}</span>
+        </div>
+      )}
+      <div className="text-channels-container">
+        <span className="text-channels">TEXT CHANNELS</span>
+      </div>
+      {allChannels.map((channel) => (
+        <div
+          key={channel.id}
+          className={`channel-divs${
+            channel.id === currChannel?.id ? " selected" : ""
+          }`}
+        >
+          <span
+            className={`hashtag${
+              channel.id === currChannel?.id ? " selected" : ""
+            }`}
+          >
+            #
+          </span>
+          <span
+            className={`channel-text-name${
+              channel.id === currChannel?.id ? " selected" : ""
+            }`}
+          >
+            {channel.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default Channels;
