@@ -15,6 +15,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    #Relationship Attributes
     servers = db.relationship("Server", secondary="server_members", back_populates="members")
 
     @property
@@ -31,6 +33,8 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'prof_pic': self.prof_pic,
             'username': self.username,
             'email': self.email,
+            # 'servers': [server.to_dict() for server in self.servers]
         }

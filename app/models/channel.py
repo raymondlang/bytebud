@@ -17,7 +17,6 @@ class Channel(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "description": self.description,
             "messages": [message.to_dict() for message in self.messages],
             "serverId": self.server_id
         }

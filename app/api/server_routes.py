@@ -24,7 +24,7 @@ def create_server():
     server_picture = data.get('server_picture')
 
     # create a new server object
-    server = Server(name=name, description=description, owner_id=owner_id, server_picture=server_picture)
+    server = Server(name=name, owner_id=owner_id, server_picture=server_picture)
     # add the server to the database
     db.session.add(server)
     db.session.commit()
