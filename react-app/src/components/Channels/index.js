@@ -46,8 +46,9 @@ function Channels() {
         <span className="text-channels">TEXT CHANNELS</span>
       </div>
       {allChannels.map((channel) => (
-        <div
+        <Link
           key={channel.id}
+          to={`/channels/${channel.serverId}/${channel.id}`}
           className={`channel-divs${
             channel.id === currChannel?.id ? " selected" : ""
           }`}
@@ -66,7 +67,7 @@ function Channels() {
           >
             {channel.name}
           </span>
-        </div>
+        </Link>
       ))}
     </div>
   );

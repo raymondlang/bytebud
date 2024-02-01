@@ -56,6 +56,7 @@
   font-family: "ByteBud";
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 .hashtag {
   color: #60636b;
@@ -72,7 +73,7 @@
 .channel-divs.selected {
   background-color: #404249;
   color: #fff;
-  width: fit-content;
+  width: 200px;
   border-radius: 3px;
 }
 
