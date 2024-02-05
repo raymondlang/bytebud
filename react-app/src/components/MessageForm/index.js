@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import "./MessageForm.css";
 import ChannelMessages from "../ChannelMessages";
+import UserMenu from "../UserMenu"; // DELETE ONCE PROPERLY IMPLEMENTED
 import { createMessage } from "../../store/message";
 let socket;
 
@@ -72,43 +73,49 @@ function MessageForm() {
 
   return (
     <>
-      <div>
-        {messages.map((message, ind) => (
-          <div key={ind}>{`${message.user.slice(0, -5)} ${message.msg}`}</div>
-        ))}
-      </div>
-      <div className="message-form-container">
-        <form className="message-form" onSubmit={handleSubmit}>
-          {/* at 1800 characters start a counter for characters allowed left (starts at 200), disable the send button above 2000 */}
-          {/* need to figure out dynamic sizing with css? */}
-          <textarea
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-          <div className="message-form-right-side">
-            <div
-              className={
-                content.length >= 1800
-                  ? content.length > 2000
-                    ? "character-count-error"
-                    : "character-count-warning"
-                  : "message-hidden"
-              }
-            >
-              {2000 - content.length}
+      <UserMenu />
+      <ChannelMessages formMessages={messages} />
+      <div className="message-form-background">
+        <div className="message-form-container">
+          <form className="message-form" onSubmit={handleSubmit}>
+            {/* at 1800 characters start a counter for characters allowed left (starts at 200), disable the send button above 2000  */}
+            {/* need to figure out dynamic sizing with css? */}
+            <textarea
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder={`Message ${channel.name}`}
+              required
+            />
+            <div className="message-form-right-side">
+              <div
+                className={
+                  content.length >= 1800
+                    ? content.length > 2000
+                      ? "character-count-error"
+                      : "character-count-warning"
+                    : "message-hidden"
+                }
+              >
+                {2000 - content.length}
+              </div>
+              <button
+                className={
+                  content.length > 2000
+                    ? "message-form-button message-form-text message-form-disabled"
+                    : "message-form-button message-form-text"
+                }
+                type="submit"
+                disabled={content.length > 2000}
+              >
+                Send
+              </button>
             </div>
-            <button
-              className="message-form-button message-form-text"
-              type="submit"
-              disabled={content.length > 2000}
-            >
-              Send
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );
 }
+
+export default MessageForm;
