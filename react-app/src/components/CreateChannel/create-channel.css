@@ -52,4 +52,67 @@
   font-family: "Discord Bold";
   color: #adb2ba;
   font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.text-radio {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  color: #adb2ba;
+  font-size: 16px;
+}
+
+.text-radio-option {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #42444c;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.radio-button-na {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #2b2d31;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+}
+
+.radio-button-na:hover {
+  background-color: #42444c;
+}
+
+.radio-button .fa-hashtag,
+.radio-button-na .fa-volume-high {
+  margin-right: 10px;
+  font-size: 25px;
+  color: #adb2ba;
+  margin-right: 15px;
+  padding-left: 15px;
+}
+
+.text-radio-desc {
+  font-size: 14px;
+  color: #adb2ba;
+  font-family: "PixelPal";
+}
+
+input[type="radio"] {
+  width: 20px;
+  height: 20px;
 }
