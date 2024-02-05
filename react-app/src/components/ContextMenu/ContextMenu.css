@@ -8,7 +8,7 @@
 }
 
 .server-sidebar-context-menu-item {
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   padding: 8px 10px;
   font-size: 15px;
   color: #b0b5bc;
@@ -27,7 +27,7 @@
 .server-sidebar-context-menu-item > button {
   background: none;
   border: none;
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   font-size: 15px;
   color: #b0b5bc;
   cursor: pointer;
