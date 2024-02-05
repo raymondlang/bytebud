@@ -64,6 +64,7 @@ export const createChannel =
       return ["An error occurred. Please try again."];
     }
   };
+
 // DELETE A CHANNEL
 export const removeChannel = (channelId) => async (dispatch) => {
   const response = await fetch(`/api/channels/${channelId}`, {
@@ -85,31 +86,30 @@ export const removeChannel = (channelId) => async (dispatch) => {
   }
 };
 // EDIT A CHANNEL
-export const updateChannel =
-  (channelId, name, description) => async (dispatch) => {
-    const response = await fetch(`/api/channels/${channelId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        description,
-      }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(editChannel(data));
-      return null;
-    } else if (response.status < 500) {
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
-      }
-    } else {
-      return ["An error occurred. Please try again."];
+export const updateChannel = (channelId, name) => async (dispatch) => {
+  const response = await fetch(`/api/channels/${channelId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+    }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(editChannel(data));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
     }
-  };
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
 // --------------------- CHANNEL REDUCER ----------------------------------------
 const initialState = {};
 const channelReducer = (state = initialState, action) => {

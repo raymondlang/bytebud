@@ -9,6 +9,7 @@ function NewChannel({ serverId }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
+  const [channelType, setChannelType] = useState("text");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
 
@@ -39,16 +40,35 @@ function NewChannel({ serverId }) {
               ))}
             </ul>
           )}
-          <label className="modal-label">
-            Name:
-            <input
-              className="modal-input"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
+          <span className="channel-type">CHANNEL TYPE</span>
+          <div className="radio-buttons-container">
+            <div className="radio-button">
+              <input
+                type="radio"
+                id="text"
+                name="channel-type"
+                value="text"
+                checked={channelType === "text"}
+                onChange={() => setChannelType("text")}
+              />
+              <label htmlFor="text">
+                <span>Text</span>
+              </label>
+            </div>
+            <div className="radio-button">
+              <input
+                type="radio"
+                id="voice"
+                name="channel-type"
+                value="voice"
+                checked={channelType === "voice"}
+                onChange={() => setChannelType("voice")}
+              />
+              <label htmlFor="voice">
+                <span>Voice</span>
+              </label>
+            </div>
+          </div>
           <label className="modal-label">
             Description:
             <textarea

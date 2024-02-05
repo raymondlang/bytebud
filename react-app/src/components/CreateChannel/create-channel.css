@@ -47,3 +47,9 @@
   font-size: 12px;
   margin-bottom: 20px;
 }
+
+.channel-type {
+  font-family: "Discord Bold";
+  color: #adb2ba;
+  font-size: 13px;
+}
