@@ -3,7 +3,7 @@ import Redirect from "react-router-dom";
 import "./ServerSidebar.css";
 import ContextMenu from "../ContextMenu";
 
-const ServersSidebarItem = ({ mainRef, server }) => {
+const ServersSidebarItem = ({ test, mainRef, server }) => {
   let names = server.name.split(" ");
   let serverName = [];
   for (let name of names) {
@@ -12,25 +12,6 @@ const ServersSidebarItem = ({ mainRef, server }) => {
   serverName = serverName.join("");
   let className = "";
   let hasImage = false;
-
-    const closeMenu = (e) => {
-        if (!mainRef.current.contains(e.target)) {
-            mainRef.current.classList.remove('visible')
-        }
-
-     const [clicked, setClicked] = useState(false);
-    const [points, setPoints] = useState({
-        x: 0,
-        y: 0,
-    });
-
-    useEffect(() => {
-        const handleClick = () => setClicked(false);
-        window.addEventListener("click", handleClick);
-        return () => {
-            window.removeEventListener("click", handleClick);
-        };
-    }, []);
 
   if (server.server_picture === "image.url" || server.server_picture === "") {
     // server.server_picture = 'https://i.redd.it/6jupfeilyhx71.jpg'
@@ -58,20 +39,14 @@ const ServersSidebarItem = ({ mainRef, server }) => {
 
   return (
     // each item will redirect to channel component
-    <>
-      <div
-        className={className}
-        onClick={handleClick}
-        onContextMenu={handleClick}
-      >
-        {hasImage ? (
-          <img src={server.server_picture} alt="preview"></img>
-        ) : (
-          <p>{serverName}</p>
-        )}
-      </div>
-      <ContextMenu server={server} top={points.y} left={points.x} />
-    </>
+    <div className={className}>
+      {hasImage ? (
+        <img src={server.server_picture} alt="preview"></img>
+      ) : (
+        <p>{serverName}</p>
+      )}
+    </div>
   );
 };
+
 export default ServersSidebarItem;
