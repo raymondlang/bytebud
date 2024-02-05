@@ -71,18 +71,6 @@ function ServerCreateModal() {
               ))}
             </ul>
             <div className="create-server-form-group">
-              <label className="create-server-form-label">Server Name</label>
-              <br></br>
-              <input
-                className="create-server-form-input"
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="create-server-form-group">
               <label className="create-server-form-label">Description</label>
               <br></br>
               <textarea
