@@ -25,6 +25,9 @@ function MessageItem({ message }) {
     .toISOString()
     .slice(11, 16);
   let messageTimestamp = `${messageTimestampDate} ${messageTimestampTime}`;
+
+  let reactionsArr = message.reactions;
+
   return (
     <div className="message-item">
       <div className="message-left-side">
@@ -42,6 +45,15 @@ function MessageItem({ message }) {
         <div className="message-content">
           {/* <div key={ind}>{`${} ${message.msg}`}</div> */}
           <p>{message.content}</p>
+        </div>
+        <div className="reactions-container">
+          {reactionsArr.map((reaction) => {
+            return (
+              <div key={`reaction${reaction.id}`} className="placeholder">
+                <p>Reaction Component here</p>
+              </div>
+            );
+          })}
         </div>
       </div>
       <div className="message-right-side">
