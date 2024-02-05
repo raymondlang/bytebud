@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useState } from "react";
 import { createChannel } from "../../store/channels";
+import "./creat-channel.css";
 
 function NewChannel({ serverId }) {
   const dispatch = useDispatch();
@@ -24,10 +25,11 @@ function NewChannel({ serverId }) {
   };
 
   return (
-    <div className="modal">
+    <div className="create-channel-modal">
       <div className="modal-content">
-        <form onSubmit={handleSubmit}>
-          <h2 className="modal-header">Create a Channel</h2>
+        <form className="create-channel-form" onSubmit={handleSubmit}>
+          <span className="modal-header">Create Channel</span>
+          <span className="subheading-modal">in Text Channels</span>
           {errors.length > 0 && (
             <ul className="modal-errors">
               {errors.map((error, idx) => (
