@@ -35,7 +35,10 @@ function Channels() {
   if (!allChannels) allChannels = [];
   else allChannels = Object.values(allChannels);
   if (!currServer) currServer = {};
-  else currServer = currServer[1];
+  else {
+    currServer = Object.values(currServer);
+    currServer = currServer[0];
+  }
 
   if (!currChannel) currChannel = {};
   else currChannel = currChannel;

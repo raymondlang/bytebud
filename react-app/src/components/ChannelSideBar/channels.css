@@ -38,11 +38,13 @@
   font-size: 18px;
   color: #dedfe1;
 }
+
 .text-channels-container {
   display: flex;
   align-items: center;
   margin-top: 20px;
-  justify-content: space-between;
+  align-items: center;
+  border: 2px green solid;
 }
 
 .modal-new-channel button {
