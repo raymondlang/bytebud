@@ -5,8 +5,8 @@ import os
 # configure cors_allowed_origins
 if os.environ.get('FLASK_ENV') == 'production':
     origins = [
-        'http://pixelpal.onrender.com',
-        'https://pixelpal.onrender.com/'
+        'http://bytebud.onrender.com',
+        'https://bytebud.onrender.com/'
     ]
 else:
     origins = "*"
@@ -23,11 +23,12 @@ def handle_connect():
 def handle_disconnect():
     print('Client disconnected')
 
-    # join a room (channel)
+# join a room (channel)
 @socketio.on('join')
 def on_join(data):
     room = data['room']
     join_room(room)
+
 
 # leave a room (channel)
 @socketio.on('leave')
