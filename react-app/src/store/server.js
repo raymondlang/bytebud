@@ -97,13 +97,9 @@ export default function serverReducer(state = initialState, action) {
     }
 
     case LOAD_SERVER: {
-      const updatedCurrentServer = {
-        [action.server.id]: action.server,
-      };
-      return {
-        ...state,
-        currentServer: updatedCurrentServer,
-      };
+      const currentServer = {};
+      currentServer[action.server.id] = action.server;
+      return { ...state, currentServer: { ...currentServer } };
     }
 
     case ADD_SERVER: {
