@@ -24,10 +24,10 @@
   height: 400px;
   display: flex;
   flex-direction: column;
-  border: rgb(0, 0, 0) 2px solid;
+  border: rgb(0, 0, 0) 1px solid;
+  border-radius: 20px;
   outline: none;
 }
-
 .create-channel-form {
   display: flex;
   flex-direction: column;
