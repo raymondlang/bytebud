@@ -17,6 +17,32 @@ function ServerCreateModal() {
 
   const user = useSelector((state) => state.session.user);
 
+  const validateForm = (newServer) => {
+    let err = {};
+
+    if (newServer.name === "") {
+      err.name = "Server Name is required";
+    }
+
+    if (newServer.server_picture === null) {
+      newServer.server_picture = "";
+    }
+
+    if (
+      newServer.server_picture !== "" &&
+      !(
+        newServer.server_picture.endsWith(".jpg") ||
+        newServer.server_picture.endsWith(".jpeg") ||
+        newServer.server_picture.endsWith(".png")
+      )
+    ) {
+      err.serverImage = "Server Image must end in .jpg, .jpeg, or .png";
+    }
+
+    setFormErrors({ ...err });
+    return Object.keys(err).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     window.alert("hi");

@@ -2,6 +2,7 @@
 const LOAD_SERVERS = "servers/load";
 const LOAD_SERVER = "servers/server";
 const ADD_SERVER = "servers/create";
+const EDIT_SERVER = "servers/edit";
 
 // Action Creators
 const loadServers = (list) => ({
@@ -20,6 +21,11 @@ const createServer = (server) => ({
 });
 
 // Selectors
+
+const updateServer = (server) => ({
+  type: EDIT_SERVER,
+  server,
+});
 
 // Thunks
 export const getServers = () => async (dispatch) => {
