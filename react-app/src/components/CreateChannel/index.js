@@ -78,14 +78,16 @@ function NewChannel({ serverId }) {
               />
             </div>
           </div>
-          <label className="modal-label">
-            Description:
-            <textarea
-              className="modal-textarea"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
-          </label>
+          <span className="channel-name-text">CHANNEL NAME</span>
+          <span className="hashtag-channel-name">#</span>
+          <input
+            className="modal-input"
+            type="text"
+            value={name}
+            placeholder="new-channel"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <button className="modal-submit" type="submit">
             Create
           </button>
@@ -97,5 +99,4 @@ function NewChannel({ serverId }) {
     </div>
   );
 }
-
 export default NewChannel;
