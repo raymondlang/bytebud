@@ -92,7 +92,7 @@ function NewChannel({ serverId }) {
             <span className="modal-cancel" onClick={closeModal}>
               Cancel
             </span>
-            <button className="modal-submit" type="submit">
+            <button className="modal-submit" type="submit" disabled={!name}>
               Create Channel
             </button>
           </div>
