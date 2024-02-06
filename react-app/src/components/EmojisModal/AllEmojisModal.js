@@ -33,31 +33,20 @@ export default function EmojisModal({ messageId }) {
   const ulClassName = "emojismodal-openmodalmenu" + (showMenu ? "" : " hidden");
 
   return (
-    <div className={"emojis-modal-openmodalmenuitem"}>
-      <button onClick={openMenu} className="open-emojis-modal-button">
-        <i className="fas fa-use  r-circle" />
-      </button>
-      <div className="tooltip-content">Add Reaction</div>
+    <div className="emojis-modal-openmodalmenuitem">
+      <div className="tooltip-wrap">
+        <button onClick={openMenu} className="open-emojis-modal-button">
+          {" "}
+          Reactions{" "}
+        </button>
+        <div className="tooltip-content"> Add Reaction </div>
+      </div>
+
       <ul className={ulClassName} ref={ulRef}>
-        <div>
-          <GetAllEmojis />
+        <div className="emojismodal-menu-allemojis">
+          <GetAllEmojis messageId={messageId} userId={userId} />
         </div>
       </ul>
-      {/*
-      <div class="tooltip-wrap">
-      <div className='emojis-list-item-container'>
-        <li className='emojismodalitem' onClick={onClick}>{itemText}</li>
-      </div>
-      <div class="tooltip-content">
-          Add Reaction
-      </div>
-    </div> */}
-      <OpenModalMenuItem
-        itemText="Reactions"
-        onItemClick={closeMenu}
-        className="emojis-modal-button"
-        modalComponent={<GetAllEmojis messageId />}
-      />
     </div>
   );
 }

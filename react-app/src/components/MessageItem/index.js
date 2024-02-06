@@ -1,6 +1,7 @@
 import React from "react";
 import "./MessageItem.css";
 import { useSelector } from "react-redux";
+import EmojisModal from "../EmojisModal/AllEmojisModal";
 
 function MessageItem({ message }) {
   let allServers = useSelector((state) => state.server.allUserServers);
@@ -58,7 +59,7 @@ function MessageItem({ message }) {
         </div>
       </div>
       <div className="message-right-side">
-        <button>Add Emoji</button>
+        <EmojisModal messageId={message.id} userId={user.id} />
       </div>
     </div>
   );
