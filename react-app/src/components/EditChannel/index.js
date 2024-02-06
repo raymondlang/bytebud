@@ -84,8 +84,11 @@ function UpdateChannel({ channelId }) {
           </button>
           <button
             type="submit"
-            className="channel-update-form-submit"
+            className={`channel-update-form-submit${
+              name.length === 0 ? " cursor-not-allowed" : ""
+            }`}
             onClick={handleUpdate}
+            disabled={name.length === 0}
           >
             Update Channel
           </button>

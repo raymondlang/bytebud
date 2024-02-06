@@ -118,3 +118,7 @@
   padding-right: 10px;
   cursor: pointer;
 }
+
+.channel-update-form-submit.cursor-not-allowed {
+  cursor: not-allowed;
+}
