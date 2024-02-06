@@ -50,9 +50,7 @@ function UpdateChannel({ channelId }) {
           </ul>
         )}
         <div className="channel-update-form-field">
-          <label htmlFor="name" className="channel-update-form-label">
-            Name:
-          </label>
+          <span className="channel-update-form-label">Name</span>
           <input
             type="text"
             id="name"
@@ -62,20 +60,25 @@ function UpdateChannel({ channelId }) {
             className="channel-update-form-input"
           />
         </div>
-        <button
-          type="submit"
-          className="channel-update-form-submit"
-          onClick={handleUpdate}
-        >
-          Update Channel
-        </button>
-        <button
-          type="button"
-          onClick={closeModal}
-          className="channel-update-form-cancel"
-        >
-          Cancel
-        </button>
+        <div className="btn-option-div">
+          <span onClick={closeModal} className="channel-update-form-cancel">
+            Cancel
+          </span>
+          <button
+            type="button"
+            onClick={closeModal}
+            className="channel-update-form-delete"
+          >
+            Delete Channel
+          </button>
+          <button
+            type="submit"
+            className="channel-update-form-submit"
+            onClick={handleUpdate}
+          >
+            Update Channel
+          </button>
+        </div>
       </form>
     </div>
   );
