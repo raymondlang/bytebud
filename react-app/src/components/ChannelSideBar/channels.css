@@ -79,6 +79,12 @@
   align-items: center;
   text-decoration: none;
 }
+
+.channel-divs:hover {
+  background-color: #42444c;
+  width: 200px;
+  border-radius: 3px;
+}
 .hashtag {
   color: #60636b;
   font-size: 25px;
@@ -110,7 +116,6 @@
   position: fixed;
   color: #60636b;
   left: 258px;
-  margin-top: 6px;
   background-color: transparent;
   border: none;
 }
