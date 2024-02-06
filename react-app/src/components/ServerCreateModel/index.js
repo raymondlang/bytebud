@@ -55,7 +55,7 @@ function ServerCreateModal() {
     };
 
     try {
-      let createdServer = await dispatch(addServer(newServer));
+      let createdServer = await dispatch(addServer(newServer, user.username));
       if (createdServer) {
         history.push(
           `/channels/${createdServer.id}/${createdServer.channels[0].id}`

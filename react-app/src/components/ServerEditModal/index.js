@@ -20,12 +20,6 @@ function ServerEditModal({ server }) {
 
   const allServers = useSelector((state) => state.session.allUserServers);
 
-  useEffect(() => {
-    if (user) {
-      dispatch(getServers());
-    }
-  }, [allServers, dispatch]);
-
   const handleUpdate = async (e) => {
     setNewServer({ ...newServer, [e.target.name]: e.target.value });
   };
@@ -54,12 +48,14 @@ function ServerEditModal({ server }) {
 
     setFormErrors({ ...err });
 
-    return true;
+    return Object.keys(err).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    validateForm();
+    if (!validateForm(newServer)) {
+      return;
+    }
 
     try {
       let edittedServer = await dispatch(editServer(server.id, newServer));

@@ -48,16 +48,14 @@ export const getServer = (id) => async (dispatch) => {
   }
 };
 
-export const addServer = (server) => async (dispatch) => {
+export const addServer = (server, username) => async (dispatch) => {
   const response = await fetch("/api/servers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(server),
   });
-
   if (response.ok) {
     const data = await response.json();
-
     const responseChannels = await fetch("/api/channels", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -67,14 +65,21 @@ export const addServer = (server) => async (dispatch) => {
         server_id: data.id,
       }),
     });
-
     if (responseChannels.ok) {
       const data = await responseChannels.json();
+      const responseMembers = await fetch(
+        `/api/servers/${data.serverId}/members`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username,
+          }),
+        }
+      );
 
-      const responseNewServer = await fetch(`/api/servers/${data.serverId}`);
-
-      if (responseNewServer.ok) {
-        const data = await responseNewServer.json();
+      if (responseMembers.ok) {
+        const data = await responseMembers.json();
         dispatch(createServer(data));
         return data;
       }
@@ -82,8 +87,24 @@ export const addServer = (server) => async (dispatch) => {
   }
 };
 
-// reducer
+// EDIT A SERVER //
+export const editServer = (serverId, server) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(server),
+  });
 
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updateServer(data));
+    return data;
+  }
+};
+
+// DELETE A SERVER //
+
+// ----------------------------------- reducer ----------------------------------------
 let initialState = {};
 
 export default function serverReducer(state = initialState, action) {
@@ -93,7 +114,7 @@ export default function serverReducer(state = initialState, action) {
       action.list.forEach((server) => {
         allUserServers[server.id] = server;
       });
-      const orderedList = Object.values(allUserServers);
+      const orderedList = Object.values(allUserServers).reverse();
 
       return {
         ...state,
