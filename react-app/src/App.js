@@ -9,7 +9,8 @@ import Home from "./components/Home";
 import FriendsList from "./components/FriendsList";
 import MessageForm from "./components/MessageForm";
 import GetAllEmojis from "./components/EmojisModal";
-import Channels from "./components/Channels";
+
+import ChannelSideBar from "./components/ChannelSideBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function App() {
               <FriendsList />
             </Route>
             <Route path="/channels/:serverId/:channelId">
-              <Channels />
+              <ChannelSideBar />
             </Route>
             {/* for testing messages ONLY */}
             <Route path="/messages">

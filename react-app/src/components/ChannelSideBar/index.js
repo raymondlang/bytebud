@@ -15,7 +15,7 @@ import "./channels.css";
 
 // Create logic for if user
 
-function Channels() {
+function ChannelSideBar() {
   const dispatch = useDispatch();
   const { serverId, channelId } = useParams();
 
@@ -92,4 +92,4 @@ function Channels() {
   );
 }
 
-export default Channels;
+export default ChannelSideBar;
