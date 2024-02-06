@@ -138,4 +138,6 @@
 
 .channel-mapping button:hover {
   color: #808490;
+  transform: scale(1.2);
+  transition: transform 0.2s ease-in-out;
 }
