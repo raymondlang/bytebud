@@ -3,6 +3,7 @@ const LOAD_SERVERS = "servers/load";
 const LOAD_SERVER = "servers/server";
 const ADD_SERVER = "servers/create";
 const EDIT_SERVER = "servers/edit";
+const DELETE_SERVER = "servers/delete";
 
 // Action Creators
 const loadServers = (list) => ({
@@ -18,6 +19,11 @@ const loadServer = (server) => ({
 const createServer = (server) => ({
   type: ADD_SERVER,
   server,
+});
+
+const removeServer = (serverId) => ({
+  type: DELETE_SERVER,
+  serverId: serverId,
 });
 
 // Selectors
@@ -87,6 +93,18 @@ export const addServer = (server, username) => async (dispatch) => {
   }
 };
 
+//DELETE A SERVER//
+export const deleteServer = (serverId) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    dispatch(removeServer(serverId));
+  }
+};
+
 // EDIT A SERVER //
 export const editServer = (serverId, server) => async (dispatch) => {
   const response = await fetch(`/api/servers/${serverId}`, {
@@ -136,6 +154,12 @@ export default function serverReducer(state = initialState, action) {
       allUserServers[action.server.id] = action.server;
       orderedList.unshift(action.server);
       return { ...newState, allUserServers, orderedList };
+    }
+
+    case DELETE_SERVER: {
+      const currentServer = { ...state.currentServer };
+      delete currentServer[action.serverId];
+      return { ...state, currentServer };
     }
     default:
       return state;
