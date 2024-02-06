@@ -128,6 +128,11 @@
   justify-content: space-between;
 }
 
+.channel-starter {
+  display: flex;
+  align-items: center;
+}
+
 .channel-mapping button {
   font-size: 14px;
   color: #60636b;
