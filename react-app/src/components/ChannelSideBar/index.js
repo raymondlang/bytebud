@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link, Redirect, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./channels.css";
 import {
@@ -15,7 +15,6 @@ import "./channels.css";
 // Create logic for if user
 
 function Channels() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { serverId, channelId } = useParams();
 
@@ -42,13 +41,6 @@ function Channels() {
 
   if (!currChannel) currChannel = {};
   else currChannel = currChannel;
-
-  const handleCreateChannel = (e) => {
-    e.preventDefault();
-    dispatch(createChannel(serverId, channelName));
-    setShowModal(false);
-    setChannelName("");
-  };
 
   return (
     <div className="channel-sidebar">

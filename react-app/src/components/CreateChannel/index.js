@@ -1,8 +1,11 @@
-import React from "react";
+import useState from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { useState } from "react";
-import { createChannel } from "../../store/channels";
+import {
+  getServerChannels,
+  getChannelDetails,
+  createChannel,
+} from "../../store/channels";
 import "./creat-channel.css";
 
 function NewChannel({ serverId }) {
@@ -22,6 +25,7 @@ function NewChannel({ serverId }) {
       setErrors(data);
     } else {
       closeModal();
+      dispatch(getServerChannels(serverId));
     }
   };
 
