@@ -10,6 +10,7 @@ import {
 import { getServer } from "../../store/server";
 import OpenModalButton from "../OpenModalButton";
 import NewChannel from "../CreateChannel";
+import UpdateChannel from "../EditChannel";
 import "./channels.css";
 
 // Create logic for if user
@@ -83,7 +84,7 @@ function Channels() {
           </Link>
           <OpenModalButton
             buttonText={<i class="fa-solid fa-gear"></i>}
-            modalComponent={<NewChannel serverId={serverId} />}
+            modalComponent={<UpdateChannel channelId={channel.id} />}
           />
         </div>
       ))}
