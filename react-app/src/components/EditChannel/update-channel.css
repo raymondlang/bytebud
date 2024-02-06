@@ -45,7 +45,7 @@
 }
 
 .channel-update-form-label {
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   color: #adb2ba;
   font-size: 15px;
   margin-bottom: 5px;
@@ -77,10 +77,12 @@
   color: whitesmoke;
   font-family: "ByteBud";
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .channel-update-form-cancel:hover {
   text-decoration: underline;
+  color: white;
 }
 
 .channel-update-form-delete {
@@ -93,6 +95,15 @@
   font-weight: bolder;
   padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
+}
+
+.channel-update-form-delete:hover {
+  background-color: #c73030;
+}
+
+.channel-update-form-submit:hover {
+  background-color: #4550cc;
 }
 
 .channel-update-form-submit {
@@ -105,4 +116,5 @@
   font-weight: bolder;
   padding-left: 10px;
   padding-right: 10px;
+  cursor: pointer;
 }

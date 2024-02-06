@@ -36,6 +36,17 @@ function UpdateChannel({ channelId }) {
     }
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(removeChannel(channelId));
+    if (data) {
+      setErrors(data);
+    } else {
+      closeModal();
+      dispatch(getServerChannels(updatedChannel.serverId));
+    }
+  };
+
   return (
     <div className="channel-update-form-container">
       <form className="channel-update-form">
@@ -66,7 +77,7 @@ function UpdateChannel({ channelId }) {
           </span>
           <button
             type="button"
-            onClick={closeModal}
+            onClick={handleDelete}
             className="channel-update-form-delete"
           >
             Delete Channel
