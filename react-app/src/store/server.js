@@ -6,9 +6,10 @@ const EDIT_SERVER = "servers/edit";
 const DELETE_SERVER = "servers/delete";
 
 // Action Creators
-const loadServers = (list) => ({
+const loadServers = (list, user) => ({
   type: LOAD_SERVERS,
-  list,
+  list: list,
+  user: user,
 });
 
 const loadServer = (server) => ({
@@ -34,12 +35,12 @@ const updateServer = (server) => ({
 });
 
 // Thunks
-export const getServers = () => async (dispatch) => {
+export const getServers = (user) => async (dispatch) => {
   const response = await fetch("/api/servers");
 
   if (response.ok) {
     const list = await response.json();
-    dispatch(loadServers(list));
+    dispatch(loadServers(list, user));
   }
 };
 
@@ -137,7 +138,21 @@ export default function serverReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_SERVERS: {
       const allUserServers = {};
-      action.list.forEach((server) => {
+      let myServers = [];
+
+      for (let server of action.list) {
+        if (server.owner_id == action.user.id) {
+          myServers.push(server);
+        }
+
+        for (let member of server.members) {
+          if (member.username === action.user.username) {
+            myServers.push(server);
+          }
+        }
+      }
+
+      myServers.forEach((server) => {
         allUserServers[server.id] = server;
       });
       const orderedList = Object.values(allUserServers).reverse();
@@ -164,13 +179,6 @@ export default function serverReducer(state = initialState, action) {
       return { ...newState, allUserServers, orderedList };
     }
     case EDIT_SERVER: {
-      // const allUserServers = { ...state.allUserServers };
-      // const currentServer = { ...state.currentServer };
-      // delete allUserServers[action.serverId];
-      // const orderedList = Object.values(allUserServers).reverse();
-      // delete currentServer[action.serverId];
-      // return { ...state, allUserServers, orderedList, currentServer };
-
       return {
         ...state,
         currentServer: {
@@ -180,12 +188,6 @@ export default function serverReducer(state = initialState, action) {
       };
     }
     case DELETE_SERVER: {
-      // const allUserServers = { ...state.allUserServers };
-      // const orderedList = [...state.orderedList];
-      // const currentServer = { ...state.currentServer };
-      // delete allUserServers[action.serverId];
-      // orderedList.shift();
-      // delete currentServer[action.serverId];
       const newState = { ...state };
       return newState;
     }

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { deleteServer } from "../../store/server";
+import { deleteServer, getServers } from "../../store/server";
 import "./ServerDelete.css";
 
 function ServerDeleteModal({ server }) {
   console.log(server);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,7 +22,7 @@ function ServerDeleteModal({ server }) {
 
     try {
       await dispatch(deleteServer(server.id));
-      await dispatch(getServers());
+      await dispatch(getServers(user));
       closeModal();
       history.push(`/channels/@me`);
     } catch (response) {

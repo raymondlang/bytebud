@@ -13,7 +13,7 @@ const ServersSidebar = () => {
   const mainRef = useRef();
 
   useEffect(() => {
-    dispatch(getServers());
+    dispatch(getServers(user));
   }, [user, dispatch]);
 
   let servers = useSelector((state) => state.server.allUserServers);

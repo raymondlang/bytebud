@@ -6,17 +6,13 @@ import { editServer, getServers } from "../../store/server";
 import "./ServerEdit.css";
 
 function ServerEditModal({ server }) {
-  console.log(server);
-
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const user = useSelector((state) => state.session.user);
   const [newServer, setNewServer] = useState({ ...server });
   const [errors, setErrors] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const { closeModal } = useModal();
-
-  const user = useSelector((state) => state.session.user);
 
   const allServers = useSelector((state) => state.session.allUserServers);
 
@@ -60,7 +56,7 @@ function ServerEditModal({ server }) {
     try {
       let edittedServer = await dispatch(editServer(server.id, newServer));
       if (edittedServer) {
-        await dispatch(getServers());
+        await dispatch(getServers(user));
         // history.push(`/channels/${createdServer.id}/${createdServer.channels[0].id}`)
         closeModal();
       }
