@@ -8,7 +8,9 @@ import ServersSidebar from "./components/Servers/ServersSidebar";
 import Home from "./components/Home";
 import FriendsList from "./components/FriendsList";
 import MessageForm from "./components/MessageForm";
-import GetAllEmojis from "./components/EmojisModal";
+// import GetAllEmojis from "./components/EmojisModal";
+import ChannelTopBar from "./components/ChannelTopBar";
+import UserMenu from "./components/UserMenu";
 
 import ChannelSideBar from "./components/ChannelSideBar";
 
@@ -42,14 +44,15 @@ function App() {
             </Route>
             <Route path="/channels/:serverId/:channelId">
               <ChannelSideBar />
+              <ChannelTopBar />
+              <MessageForm />
+              <UserMenu />
             </Route>
             {/* for testing messages ONLY */}
             <Route path="/messages">
               <MessageForm />
             </Route>
-            <Route path="/emojis/test">
-              <GetAllEmojis />
-            </Route>
+            <Route path="/emojis/test">{/* <GetAllEmojis /> */}</Route>
           </Switch>
         </>
       )}

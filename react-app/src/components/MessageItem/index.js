@@ -4,16 +4,18 @@ import "./Reaction.css";
 import { useSelector, useDispatch } from "react-redux";
 import { createReactionThunk, deleteReactionThunk } from "../../store/message";
 import EmojisModal from "../EmojisModal/AllEmojisModal";
+import { useParams } from "react-router-dom";
 
 function MessageItem({ message }) {
   const dispatch = useDispatch();
 
-  let allServers = useSelector((state) => state.server.allUserServers);
+  let currentServer = useSelector((state) => state.server.currentServer);
+  // let allServers = useSelector(state => state.server.allUserServers);
+  let { serverId, channelId } = useParams();
 
   let serverMembersArr;
-  if (!allServers) return null;
-  if (!allServers) return null;
-  serverMembersArr = allServers[1]["members"]; //hard coded to use a specific server until currentServer slice merged in from dev
+  if (!currentServer) return null;
+  serverMembersArr = currentServer[serverId]["members"];
   // normalize serverMembers to allow for keying to get sending user
   let serverMembers = {};
   serverMembersArr.forEach((member) => {

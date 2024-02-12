@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useParams } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { io } from "socket.io-client";
 import "./MessageForm.css";
 import ChannelMessages from "../ChannelMessages";
-import UserMenu from "../UserMenu"; // DELETE ONCE PROPERLY IMPLEMENTED
+import { getChannelDetails } from "../../store/channels";
 import { createMessage } from "../../store/message";
+import UserMenu from "../UserMenu";
 let socket;
 
 function MessageForm() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState([]);
   const user = useSelector((state) => state.session.user);
+  const channel = useSelector((state) => state.channels.oneChannel);
+  const { serverId, channelId } = useParams();
 
-  // const channel = useSelector(state => state.channels.currentChannel)
-  let channel = {};
-  channel.name = "#sample-channel";
-  channel.id = 1; //delete once currentChannel slice of state is made
+  useEffect(() => {
+    dispatch(getChannelDetails(channelId));
+  }, [dispatch, serverId, channelId]);
 
-  // will need room functionality tp broadcast to just users in the room (channel), not all users --> add channel to dependency array?
+  // // will need room functionality tp broadcast to just users in the room (channel), not all users --> add channel to dependency array?
 
   // will need room functionality? broadcast to just users in the room (channel), not all users?
   useEffect(() => {
