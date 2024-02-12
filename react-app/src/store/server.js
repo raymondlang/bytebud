@@ -157,10 +157,14 @@ export default function serverReducer(state = initialState, action) {
     }
 
     case DELETE_SERVER: {
+      const newState = { ...state };
+      const allUserServers = { ...state.allUserServers };
       const currentServer = { ...state.currentServer };
+      delete allUserServers[action.serverId];
       delete currentServer[action.serverId];
-      return { ...state, currentServer };
+      return { ...newState, currentServer };
     }
+
     default:
       return state;
   }
