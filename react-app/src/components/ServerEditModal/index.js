@@ -60,6 +60,7 @@ function ServerEditModal({ server }) {
     try {
       let edittedServer = await dispatch(editServer(server.id, newServer));
       if (edittedServer) {
+        await dispatch(getServers());
         // history.push(`/channels/${createdServer.id}/${createdServer.channels[0].id}`)
         closeModal();
       }

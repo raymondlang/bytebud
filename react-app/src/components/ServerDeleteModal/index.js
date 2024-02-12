@@ -11,16 +11,23 @@ function ServerDeleteModal({ server }) {
   const history = useHistory();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  o;
   const [server_picture, setServerPicture] = useState("");
   const [errors, setErrors] = useState([]);
 
   const { closeModal } = useModal();
 
-  const handleDelete = () => {
-    dispatch(deleteServer(server.id))
-      .then(closeModal)
-      .then(history.push("/channels/@me"));
+  const handleDelete = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(deleteServer(server.id));
+      await dispatch(getServers());
+      closeModal();
+      history.push(`/channels/@me`);
+    } catch (response) {
+      const data = await response.json();
+      if (data && data.errors) setErrors(data.errors);
+    }
   };
 
   const handleNo = () => {
