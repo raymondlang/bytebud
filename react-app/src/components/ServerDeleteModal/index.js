@@ -18,7 +18,9 @@ function ServerDeleteModal({ server }) {
   const { closeModal } = useModal();
 
   const handleDelete = () => {
-    dispatch(deleteServer(server.id)).then(closeModal);
+    dispatch(deleteServer(server.id))
+      .then(closeModal)
+      .then(history.push("/channels/@me"));
   };
 
   const handleNo = () => {
@@ -28,10 +30,13 @@ function ServerDeleteModal({ server }) {
   return (
     <div>
       <div>
-        <h1>Confirm Delete</h1>
+        <h1>Delete '{server.name}'</h1>
       </div>
       <div>
-        <p>Are you sure you want to remove this spot from the listings?</p>
+        <p>
+          Are you sure you want to delete {server.name}? This action cannot be
+          undone.
+        </p>
       </div>
       <div>
         <span>

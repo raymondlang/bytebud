@@ -21,9 +21,9 @@ const createServer = (server) => ({
   server,
 });
 
-const removeServer = (serverId) => ({
+const removeServer = (id) => ({
   type: DELETE_SERVER,
-  serverId: serverId,
+  serverId: id,
 });
 
 // Selectors
@@ -102,6 +102,14 @@ export const deleteServer = (serverId) => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeServer(serverId));
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
   }
 };
 
@@ -156,13 +164,23 @@ export default function serverReducer(state = initialState, action) {
       return { ...newState, allUserServers, orderedList };
     }
 
-    case DELETE_SERVER: {
-      const newState = { ...state };
+    case EDIT_SERVER: {
       const allUserServers = { ...state.allUserServers };
       const currentServer = { ...state.currentServer };
       delete allUserServers[action.serverId];
+      const orderedList = Object.values(allUserServers).reverse();
       delete currentServer[action.serverId];
-      return { ...newState, currentServer };
+      return { ...state, allUserServers, orderedList, currentServer };
+    }
+
+    case DELETE_SERVER: {
+      const allUserServers = { ...state.allUserServers };
+      const orderedList = [...state.orderedList];
+      const currentServer = { ...state.currentServer };
+      delete allUserServers[action.serverId];
+      orderedList.shift();
+      delete currentServer[action.serverId];
+      return { ...state, orderedList, currentServer };
     }
 
     default:
