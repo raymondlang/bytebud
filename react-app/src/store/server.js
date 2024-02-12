@@ -163,16 +163,22 @@ export default function serverReducer(state = initialState, action) {
       orderedList.unshift(action.server);
       return { ...newState, allUserServers, orderedList };
     }
-
     case EDIT_SERVER: {
-      const allUserServers = { ...state.allUserServers };
-      const currentServer = { ...state.currentServer };
-      delete allUserServers[action.serverId];
-      const orderedList = Object.values(allUserServers).reverse();
-      delete currentServer[action.serverId];
-      return { ...state, allUserServers, orderedList, currentServer };
-    }
+      // const allUserServers = { ...state.allUserServers };
+      // const currentServer = { ...state.currentServer };
+      // delete allUserServers[action.serverId];
+      // const orderedList = Object.values(allUserServers).reverse();
+      // delete currentServer[action.serverId];
+      // return { ...state, allUserServers, orderedList, currentServer };
 
+      return {
+        ...state,
+        currentServer: {
+          ...state.currentServer,
+          [action.server.id]: action.server,
+        },
+      };
+    }
     case DELETE_SERVER: {
       const allUserServers = { ...state.allUserServers };
       const orderedList = [...state.orderedList];
