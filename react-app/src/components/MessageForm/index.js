@@ -48,6 +48,8 @@ function MessageForm() {
     };
   }, []);
 
+  if (!channel) return null;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 

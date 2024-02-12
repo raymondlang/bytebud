@@ -34,11 +34,11 @@ export default function EmojisModal({ props }) {
       <div className="tooltip-wrap">
         <div className="addreaction-container">
           <i
-            class="fa-solid fa-face-smile-beam open-emojis-modal-button"
+            className="fa-solid fa-face-smile-beam open-emojis-modal-button"
             onClick={openMenu}
           />
           <i
-            class="fa-solid fa-plus open-emojis-modal-button"
+            className="fa-solid fa-plus open-emojis-modal-button"
             onClick={openMenu}
           />
         </div>
