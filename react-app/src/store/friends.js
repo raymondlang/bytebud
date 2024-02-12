@@ -1,19 +1,19 @@
 // constants
 const GET_ALL_FRIENDS = "friends/GET_ALL_FRIENDS";
-const ADD_FRIEND = "friends/ADD_FRIEND";
-const DELETE_FRIEND = "friends/DELETE_FRIEND";
+// const ADD_FRIEND = "friends/ADD_FRIEND";
+// const DELETE_FRIEND = "friends/DELETE_FRIEND";
 // Action Creators
 const getAllFriends = (friends) => ({
   type: GET_ALL_FRIENDS,
   friends,
 });
-const addFriend = (friend) => ({
-  type: ADD_FRIEND,
-  friend,
-});
-const deleteFriend = () => ({
-  type: DELETE_FRIEND,
-});
+// const addFriend = (friend) => ({
+//   type: ADD_FRIEND,
+//   friend,
+// });
+// const deleteFriend = () => ({
+//   type: DELETE_FRIEND,
+// });
 // Thunks
 
 export const getAllFriendsThunk = (userId) => async (dispatch) => {

@@ -150,8 +150,8 @@ const messageReducer = (state = initialState, action) => {
     //     }
     case CREATE_REACTION:
       newState = { ...state };
-      let messageId = action.reaction.messageId;
-      newState[messageId].reactions[action.reaction.id] = action.reaction;
+      newState[action.reaction.messageId].reactions[action.reaction.id] =
+        action.reaction;
       return newState;
     case DELETE_REACTION:
       newState = { ...state };

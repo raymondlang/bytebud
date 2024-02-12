@@ -35,6 +35,7 @@ function MessageItem({ message }) {
 
   let [messageId, userId] = [message.id, user.id];
   let props = { messageId, userId };
+  let emojiId;
 
   // if a reaction is not yours you can click on a reaction to add one
   const addReaction = async (userId, messageId, emojiId) => {
@@ -53,8 +54,21 @@ function MessageItem({ message }) {
     return deleted_reaction;
   };
 
-  let emojiId;
+  // if the reaction with that emoji already exists, and it's not yours, only increase the count and highlight
+  let emojisCount = {};
 
+  reactionsArr.map((reaction) => {
+    if (emojisCount[reaction.emojiURL] === undefined) {
+      emojisCount[reaction.emojiURL] = 1;
+    } else {
+      emojisCount[reaction.emojiURL] += 1;
+      // emojisCount[reaction.emojiURL]['users'].push(reaction.userId)
+    }
+  });
+
+  // console.log('emojiscount arr', Object.values(emojisCount)
+
+  // reactionsArr.map((reaction) => console.log(userId === reaction.userId))
   return (
     <div className="message-item">
       <div className="message-left-and-center">
@@ -77,7 +91,7 @@ function MessageItem({ message }) {
             {reactionsArr.map((reaction) => {
               return (
                 <div>
-                  {user.id === reaction.userId ? (
+                  {reaction.userId === user.id ? (
                     <div
                       className="user-emoji-reaction"
                       key={`${reaction.id}`}
@@ -96,18 +110,17 @@ function MessageItem({ message }) {
                       className="other-user-reaction"
                       key={`${reaction.id}`}
                       onClick={() => {
-                        addReaction(
-                          userId,
-                          (emojiId = reaction.emojiId),
-                          messageId
-                        );
+                        addReaction(reaction.emojiId, messageId, userId);
                       }}
                     >
                       <p className="emojis-emojichar">
                         {" "}
                         {String.fromCodePoint(reaction.emojiURL)}
                       </p>
-                      <p className="emojis-count"> 1 </p>
+                      <p className="emojis-count">
+                        {" "}
+                        {emojisCount[reaction.emojiURL]}{" "}
+                      </p>
                     </div>
                   )}
                 </div>
