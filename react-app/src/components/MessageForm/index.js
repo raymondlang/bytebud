@@ -44,7 +44,9 @@ function MessageForm() {
     });
     // when component unmounts, disconnect
     return () => {
-      socket.disconnect();
+      if (socket.readyState === 1) {
+        socket.disconnect();
+      }
     };
   }, []);
 
