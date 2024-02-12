@@ -25,10 +25,11 @@ const createReaction = (reaction) => ({
   reaction,
 });
 
-const deleteReaction = () => ({
+const deleteReaction = (reactionId, messageId) => ({
   type: DELETE_REACTION,
+  reactionId,
+  messageId,
 });
-
 // const editMessage = message => ({
 
 //     type: EDIT_MESSAGE,
@@ -54,13 +55,10 @@ export const getChannelMessages = (channelId) => async (dispatch) => {
       for (let x = 0; x < reactionsArr.length; x++) {
         let reaction = reactionsArr[x];
 
-        if (typeof reaction.emojiId === "number") {
-          const emoji = await fetch(`/api/emojis/${reaction.emojiId}`);
-
-          if (emoji.ok) {
-            let emojijson = await emoji.json();
-            channelMessages[i].reactions[x].emojiId = emojijson.url;
-          }
+        const emoji = await fetch(`/api/emojis/${reaction.emojiId}`);
+        if (emoji.ok) {
+          let emojijson = await emoji.json();
+          channelMessages[i].reactions[x]["emojiURL"] = emojijson.url;
         }
       }
     }
@@ -105,26 +103,28 @@ export const createReactionThunk =
       const emoji = await fetch(`/api/emojis/${newReaction.emojiId}`);
       if (emoji.ok) {
         const emojiJSON = await emoji.json();
-        // console.log('emoji json after creating new reaction', emojiJSON)
-        newReaction["emojiId"] = emojiJSON.url;
+        newReaction["emojiURL"] = emojiJSON.url;
       }
 
       //   console.log('newreaction, did switching the URL work?', newReaction)
 
       dispatch(createReaction(newReaction));
-      return newReaction; // will return the emoji once we get there
+      return newReaction;
     }
   };
 
-export const deleteReactionThunk = (reactionId) => async (dispatch) => {
-  const response = await fetch(`/api/emojis/${reactionId}`);
+export const deleteReactionThunk =
+  (reactionId, messageId) => async (dispatch) => {
+    const response = await fetch(`/api/emojis/${reactionId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
 
-  if (response.ok) {
-    // let del_reaction = await response.json()
-    dispatch(deleteReaction());
-    return "successfully deleted!";
-  }
-};
+    if (response.ok) {
+      dispatch(deleteReaction(reactionId, messageId));
+      return "successfully deleted!";
+    }
+  };
 // initial state for reducer:
 
 const initialState = { messages: null };
@@ -144,18 +144,18 @@ const messageReducer = (state = initialState, action) => {
       newState = { ...state };
       newState[action.message.id] = action.message;
       return newState;
-
     // case EDIT_MESSAGE:
     //     return {
+
     //     }
     case CREATE_REACTION:
       newState = { ...state };
       let messageId = action.reaction.messageId;
       newState[messageId].reactions[action.reaction.id] = action.reaction;
-      console.log(
-        "am i keying into the new state correctly?",
-        newState[messageId].reactions
-      );
+      return newState;
+    case DELETE_REACTION:
+      newState = { ...state };
+      delete newState[action.messageId].reactions[action.reactionId];
       return newState;
     default:
       return state;

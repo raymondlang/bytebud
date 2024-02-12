@@ -27,7 +27,7 @@
   display: flex;
 }
 .message-item:hover {
-  background-color: #5e6066;
+  background-color: rgb(45, 48, 53);
 }
 
 .message-left-side {

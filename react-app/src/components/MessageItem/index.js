@@ -1,12 +1,17 @@
 import React from "react";
 import "./MessageItem.css";
 import "./Reaction.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createReactionThunk, deleteReactionThunk } from "../../store/message";
 import EmojisModal from "../EmojisModal/AllEmojisModal";
 
 function MessageItem({ message }) {
+  const dispatch = useDispatch();
+
   let allServers = useSelector((state) => state.server.allUserServers);
+
   let serverMembersArr;
+  if (!allServers) return null;
   if (!allServers) return null;
   serverMembersArr = allServers[1]["members"]; //hard coded to use a specific server until currentServer slice merged in from dev
   // normalize serverMembers to allow for keying to get sending user
@@ -31,6 +36,25 @@ function MessageItem({ message }) {
   let [messageId, userId] = [message.id, user.id];
   let props = { messageId, userId };
 
+  // if a reaction is not yours you can click on a reaction to add one
+  const addReaction = async (userId, messageId, emojiId) => {
+    let addedReaction = await dispatch(
+      createReactionThunk(userId, messageId, emojiId)
+    );
+    return addedReaction;
+  };
+
+  // if a reaction is yours, you can click on a reaction and delete it
+
+  const deleteReaction = async (reactionId, messageId) => {
+    let deleted_reaction = await dispatch(
+      deleteReactionThunk(reactionId, messageId)
+    );
+    return deleted_reaction;
+  };
+
+  let emojiId;
+
   return (
     <div className="message-item">
       <div className="message-left-and-center">
@@ -52,13 +76,40 @@ function MessageItem({ message }) {
           <div className="reactions-container">
             {reactionsArr.map((reaction) => {
               return (
-                <div key={`${reaction.id}`} className="messageitem-reactiondiv">
-                  <p className="emojis-emojichar">
-                    {" "}
-                    {String.fromCodePoint(reaction.emojiId)}
-                  </p>
-                  {/* need to make this dynamically count */}
-                  <p className="emojis-count"> 1 </p>
+                <div>
+                  {user.id === reaction.userId ? (
+                    <div
+                      className="user-emoji-reaction"
+                      key={`${reaction.id}`}
+                      onClick={() => {
+                        deleteReaction(reaction.id, messageId);
+                      }}
+                    >
+                      <p className="emojis-emojichar">
+                        {" "}
+                        {String.fromCodePoint(reaction.emojiURL)}
+                      </p>
+                      <p className="emojis-count"> 1 </p>
+                    </div>
+                  ) : (
+                    <div
+                      className="other-user-reaction"
+                      key={`${reaction.id}`}
+                      onClick={() => {
+                        addReaction(
+                          userId,
+                          (emojiId = reaction.emojiId),
+                          messageId
+                        );
+                      }}
+                    >
+                      <p className="emojis-emojichar">
+                        {" "}
+                        {String.fromCodePoint(reaction.emojiURL)}
+                      </p>
+                      <p className="emojis-count"> 1 </p>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -66,7 +117,7 @@ function MessageItem({ message }) {
         </div>
       </div>
       <div className="message-right-side">
-        <EmojisModal messageId={message.id} userId={user.id} />
+        <EmojisModal props={props} />
       </div>
     </div>
   );
