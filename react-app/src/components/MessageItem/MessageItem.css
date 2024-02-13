@@ -82,5 +82,8 @@
 }
 
 .reactions-container {
+  width: auto;
   display: flex;
+  overflow-block: scroll;
+  height: auto;
 }

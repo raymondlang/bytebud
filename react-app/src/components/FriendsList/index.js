@@ -21,6 +21,16 @@ export default function FriendsList() {
     dispatch(getAllFriendsThunk(currentUserId));
   }, [dispatch, currentUserId]);
 
+  const handleDM = (e) => {
+    e.preventDefault();
+    window.alert("Private Messages Feature Coming Soon!");
+  };
+
+  const handleOptions = (e) => {
+    e.preventDefault();
+    window.alert("More Options Feature Coming Soon!");
+  };
+
   return (
     <div>
       <div className="friendslist-channel-container">
@@ -37,7 +47,7 @@ export default function FriendsList() {
 
         <div className="friendslist-channel-dm-container">
           <div className="friendslist-channel-dm"> Direct Messages </div>
-          <i className="fa-solid fa-plus" />
+          <i className="fa-solid fa-plus" onClick={handleDM} />
         </div>
       </div>
 
@@ -74,9 +84,21 @@ export default function FriendsList() {
                   {" "}
                   {friend.username.split("#")[0]}{" "}
                 </div>
+                <div className="friendslist-tag">
+                  {" "}
+                  #{friend.username.split("#")[1]}{" "}
+                </div>
               </div>
 
               <div className="friendslist-chat-icon">
+                <div className="icon-hover" onClick={handleDM}>
+                  {" "}
+                  <i class="fa-solid fa-message" />{" "}
+                </div>
+                <div className="icon-hover" onClick={handleOptions}>
+                  {" "}
+                  <i class="fa-solid fa-ellipsis-vertical" />
+                </div>
                 <div className="icon-hover">
                   {" "}
                   <i class="fa-solid fa-message" />{" "}
