@@ -15,8 +15,6 @@ import "./channels.css";
 import ServerEditModal from "../ServerEditModal";
 import ServerDeleteModal from "../ServerDeleteModal";
 
-// Create logic for if user
-
 function ChannelSideBar() {
   const dispatch = useDispatch();
   const { serverId, channelId } = useParams();
