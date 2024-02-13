@@ -9,13 +9,17 @@ import { useParams } from "react-router-dom";
 function MessageItem({ message }) {
   const dispatch = useDispatch();
 
-  let currentServer = useSelector((state) => state.server.currentServer);
-  // let allServers = useSelector(state => state.server.allUserServers);
-  let { serverId, channelId } = useParams();
+  let allServers = useSelector((state) => state.server.allUserServers);
+  let sessionUser = useSelector((state) => state.session.user);
+  let sessionUserId;
+
+  let { serverId } = useParams();
 
   let serverMembersArr;
-  if (!currentServer) return null;
-  serverMembersArr = currentServer[serverId]["members"];
+
+  if (!allServers) return null;
+  serverMembersArr = allServers[serverId]["members"];
+
   // normalize serverMembers to allow for keying to get sending user
   let serverMembers = {};
   serverMembersArr.forEach((member) => {
@@ -24,13 +28,6 @@ function MessageItem({ message }) {
 
   // get the sending user from normalized serverMembers
   let user = serverMembers[message.userId];
-
-  // get the session user
-  let sessionUser = useSelector((state) => state.session.user);
-  let sessionUserId;
-  if (sessionUser) {
-    sessionUserId = sessionUser.id;
-  }
 
   let messageTimestampDate = new Date(message.timestamp)
     .toISOString()
@@ -42,6 +39,8 @@ function MessageItem({ message }) {
 
   let reactionsArr = Object.values(message.reactions);
 
+  if (!sessionUser) return null;
+  else sessionUserId = sessionUser.id;
   let messageId = message.id;
   let props = { messageId, sessionUserId };
   let emojiId;
@@ -102,38 +101,33 @@ function MessageItem({ message }) {
             {reactionsArr.map((reaction) => {
               return (
                 <div>
-                  {reaction.userId === user.id ? (
-                    <div
-                      className="user-emoji-reaction"
-                      key={`${reaction.id}`}
-                      onClick={() => {
-                        deleteReaction(reaction.id, messageId);
-                      }}
-                    >
-                      <p className="emojis-emojichar">
-                        {" "}
-                        {String.fromCodePoint(reaction.emojiURL)}
-                      </p>
-                      <p className="emojis-count"> 1 </p>
-                    </div>
-                  ) : (
-                    <div
-                      className="other-user-reaction"
-                      key={`${reaction.id}`}
-                      onClick={() => {
-                        addReaction(reaction.emojiId, messageId, userId);
-                      }}
-                    >
-                      <p className="emojis-emojichar">
-                        {" "}
-                        {String.fromCodePoint(reaction.emojiURL)}
-                      </p>
-                      <p className="emojis-count">
-                        {" "}
-                        {emojisCount[reaction.emojiURL]}{" "}
-                      </p>
-                    </div>
-                  )}
+                  <div
+                    className={
+                      +reaction.userId === +sessionUserId
+                        ? "user-emoji-reaction"
+                        : "other-user-reaction"
+                    }
+                    key={`reaction${reaction.id}`}
+                    onClick={
+                      +reaction.userId === +sessionUserId
+                        ? () => {
+                            deleteReaction(reaction.id, messageId);
+                          }
+                        : () => {
+                            addReaction(
+                              reaction.emojiId,
+                              messageId,
+                              sessionUserId
+                            );
+                          }
+                    }
+                  >
+                    <p className="emojis-emojichar">
+                      {" "}
+                      {String.fromCodePoint(reaction.emojiURL)}
+                    </p>
+                    <p className="emojis-count"> 1 </p>
+                  </div>
                 </div>
               );
             })}
