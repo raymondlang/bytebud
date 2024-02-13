@@ -28,9 +28,8 @@
   flex-wrap: wrap;
   justify-content: center;
   border-radius: 9px; /* why is the rounded corners white? */
-  position: relative;
   right: 100px;
-  position: relative;
+  position: fixed;
   right: 100px;
   /* transform: translateX(40%); */
   transform: translateY(-55%);
@@ -89,13 +88,12 @@
   text-align: center;
   position: relative;
   height: auto;
-  bottom: 60px;
+  /* bottom: 60px; */
 }
 
 .hidden {
   display: none;
 }
-
 .emojismodal-menu-allemojis {
   display: absolute;
 }
@@ -118,21 +116,35 @@
   font-size: 10px;
 }
 
-.addreaction-container:hover {
+.addreaction-container {
+  cursor: pointer;
+  right: 50px;
+  position: absolute;
+  width: 50px;
+}
+
+.addreaction-container:hover,
+.addreaction-container:active,
+.addreaction-container:focus,
+.addreaction-container:visited {
   background-color: rgb(43, 45, 49);
+  right: 50px;
+  position: absolute;
+  /* margin-top: 10px;
+  padding-left: 5px;
+  padding-top: 5px;
+  width: 50px; */
+  margin-top: 15px;
+  border-radius: 10px;
+  /* margin-bottom: 10px; */
+  /* padding-left: 5px;
+  padding-top: 5px; */
 }
 
 .emojis-modal-container-container {
   display: block;
-  position: absolute;
-  right: -50px;
-}
-
-.emojis-modal-container {
-  position: absolute;
-  right: 50px;
-  border-radius: 10px;
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
+  position: static;
+  right: 0px;
+  top: 20px;
+  /* top: 200px; */
 }
