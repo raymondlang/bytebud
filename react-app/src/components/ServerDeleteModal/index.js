@@ -41,8 +41,9 @@ function ServerDeleteModal({ server }) {
         <form>
           <h1 className="delete-server-header">Delete '{server.name}'</h1>
           <p className="delete-server-para">
-            Are you sure you want to delete {server.name}? This action cannot be
-            undone.
+            Are you sure you want to delete{" "}
+            <span style={{ fontWeight: "bolder" }}>'{server.name}'</span>? This
+            action cannot be undone.
           </p>
           <div>
             <span>
@@ -51,7 +52,7 @@ function ServerDeleteModal({ server }) {
                 onClick={handleDelete}
                 className="delete-server-form-button"
               >
-                Delete Channel
+                Delete Server
               </button>
             </span>
             <span onClick={closeModal} className="delete-form-cancel">

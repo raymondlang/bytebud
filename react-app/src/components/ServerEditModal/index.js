@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { editServer, getServers } from "../../store/server";
+import { editServer, getServer, getServers } from "../../store/server";
 import "./ServerEdit.css";
 
-function ServerEditModal({ server }) {
+function ServerEditModal({ server, serverId }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -58,6 +58,7 @@ function ServerEditModal({ server }) {
       if (edittedServer) {
         await dispatch(getServers(user));
         // history.push(`/channels/${createdServer.id}/${createdServer.channels[0].id}`)
+        await dispatch(getServer(serverId));
         closeModal();
       }
     } catch (response) {

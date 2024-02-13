@@ -85,14 +85,14 @@ function ChannelSideBar() {
         <>
           <div className="server-name-container">
             <span className="server-name-text">{currServer.name}</span>
-            <span type="button" className="server-setting-btn">
-              <i
-                ref={serverSetting}
-                onClick={() => setShowMenu(!showMenu)}
-                class="fa-solid fa-gear server-btn"
-              ></i>
-            </span>
-            <>
+            <div>
+              <span type="button" className="server-setting-btn">
+                <i
+                  ref={serverSetting}
+                  onClick={() => setShowMenu(!showMenu)}
+                  class="fa-solid fa-gear server-btn"
+                ></i>
+              </span>
               <div className="server-setting-dropdown">
                 <div id="server-dropdown" className={serverSettingClassName}>
                   <div>
@@ -114,7 +114,7 @@ function ChannelSideBar() {
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           </div>
         </>
       )}
@@ -130,7 +130,7 @@ function ChannelSideBar() {
       {allChannels.map((channel) => (
         <div className="channel-mapping">
           <Link
-            key={`channel${channel.id}`}
+            key={`channel-${channel.id}`}
             to={`/channels/${channel.serverId}/${channel.id}`}
             className={`channel-divs${
               channel.id === currChannel?.id ? " selected" : ""
