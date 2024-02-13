@@ -43,27 +43,41 @@ const deleteReaction = (reactionId, messageId) => ({
 export const getChannelMessages = (channelId) => async (dispatch) => {
   const resMessages = await fetch(`/api/channels/${channelId}/messages`);
 
-  // might need to query emojis based on url, only have ids on resMessages
-
   if (resMessages.ok) {
+    // Parse the JSON response to get all messages with their reactions
     const channelMessages = await resMessages.json();
 
-    for (let i = 0; i < channelMessages.length; i++) {
-      let reactionsArr = channelMessages[i].reactions;
+    // Extract all the emoji IDs from the reactions in the messages
+    const reactions = channelMessages.flatMap((message) =>
+      message.reactions.map((reaction) => reaction.emojiId)
+    );
 
-      // need to find better way to do this - changing emojiId to URL
-      for (let x = 0; x < reactionsArr.length; x++) {
-        let reaction = reactionsArr[x];
+    // Fetch all the distinct emojis in parallel using Promise.all()
+    const emojiUrls = await Promise.all(
+      [...new Set(reactions)].map((emojiId) =>
+        fetch(`/api/emojis/${emojiId}`).then((res) =>
+          res.ok ? res.json() : null
+        )
+      )
+    );
 
-        const emoji = await fetch(`/api/emojis/${reaction.emojiId}`);
-        if (emoji.ok) {
-          let emojijson = await emoji.json();
-          channelMessages[i].reactions[x]["emojiURL"] = emojijson.url;
-        }
-      }
-    }
+    // Create a map of emoji IDs to their URLs for faster lookup
+    const emojiMap = emojiUrls.reduce(
+      (map, emoji) => (emoji ? { ...map, [emoji.id]: emoji.url } : map),
+      {}
+    );
 
-    dispatch(loadMessages(channelMessages));
+    // Map over the channel messages and replace each reaction's emojiId with its corresponding emojiURL
+    const messagesWithEmojis = channelMessages.map((message) => ({
+      ...message,
+      reactions: message.reactions.map((reaction) => ({
+        ...reaction,
+        emojiURL: emojiMap[reaction.emojiId] || "",
+      })),
+    }));
+
+    // Dispatch the updated messages with emoji URLs to the store
+    dispatch(loadMessages(messagesWithEmojis));
   }
 };
 
