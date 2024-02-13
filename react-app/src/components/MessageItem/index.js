@@ -25,6 +25,13 @@ function MessageItem({ message }) {
   // get the sending user from normalized serverMembers
   let user = serverMembers[message.userId];
 
+  // get the session user
+  let sessionUser = useSelector((state) => state.session.user);
+  let sessionUserId;
+  if (sessionUser) {
+    sessionUserId = sessionUser.id;
+  }
+
   let messageTimestampDate = new Date(message.timestamp)
     .toISOString()
     .slice(0, 10);
@@ -35,15 +42,17 @@ function MessageItem({ message }) {
 
   let reactionsArr = Object.values(message.reactions);
 
-  let [messageId, userId] = [message.id, user.id];
-  let props = { messageId, userId };
+  let messageId = message.id;
+  let props = { messageId, sessionUserId };
   let emojiId;
 
   // if a reaction is not yours you can click on a reaction to add one
-  const addReaction = async (userId, messageId, emojiId) => {
+  const addReaction = async (sessionUserId, messageId, emojiId) => {
+    // console.log('#TRACKADD add reaction running')
     let addedReaction = await dispatch(
-      createReactionThunk(userId, messageId, emojiId)
+      createReactionThunk(sessionUserId, messageId, emojiId)
     );
+    // console.log('#TRACKADDuserId from add reaction function in messageItem', userId)
     return addedReaction;
   };
 
