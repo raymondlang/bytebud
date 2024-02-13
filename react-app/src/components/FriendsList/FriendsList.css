@@ -280,6 +280,21 @@
   text-align: left;
 }
 
-#friendslist-search:active {
-  border: none;
+.friendslist-channel-dm,
+.friendslist-channel-plus {
+  font-family: "ByteBud";
+  font-size: 15px;
+  margin-left: 15px;
+  color: rgb(146, 153, 162);
+}
+
+.friendslist-channel-dm-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fa-plus {
+  color: rgb(181, 186, 193);
+  margin-right: 15px;
 }
