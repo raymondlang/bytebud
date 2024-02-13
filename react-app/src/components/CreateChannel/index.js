@@ -48,7 +48,7 @@ function NewChannel({ serverId }) {
           <div className="radio-buttons-container">
             <div className="radio-button">
               <i class="fa-regular fa-hashtag"></i>
-              <div className="text-radio-option">
+              <div className="text-radio-option voice">
                 <span className="text-radio">Text</span>
                 <span className="text-radio-desc">
                   Send messages, images, GIFs, emojis, opinions, and puns
