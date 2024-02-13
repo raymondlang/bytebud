@@ -26,9 +26,10 @@ def handle_disconnect():
 # join a room (channel)
 @socketio.on('join')
 def on_join(data):
-    room = data['room']
+    username = data['username']
+    room = data['channel_id']
     join_room(room)
-
+    emit("welcome", f"{username}", room=room)
 
 # leave a room (channel)
 @socketio.on('leave')
