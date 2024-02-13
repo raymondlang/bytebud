@@ -10,7 +10,6 @@ export default function ServerMembers() {
   let { serverId } = useParams();
 
   let currentServer = useSelector((state) => state.server.currentServer);
-  console.log(currentServer);
 
   useEffect(() => {
     dispatch(getServer(serverId));

@@ -75,8 +75,6 @@ function ChannelSideBar() {
   }
 
   window.onclick = function (event) {
-    console.log(event);
-
     if (!event.target.matches(".server-btn")) {
       var dropdown = document.getElementById("server-dropdown");
 

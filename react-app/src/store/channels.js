@@ -29,7 +29,6 @@ export const getServerChannels = (id) => async (dispatch) => {
 
   if (res.ok) {
     const serverChannels = await res.json();
-    console.log(serverChannels);
     dispatch(loadServerChannels(serverChannels));
   }
 };

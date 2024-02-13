@@ -20,7 +20,5 @@ export default function Home() {
     }
   }, [history, user]);
 
-  console.log(user);
-
   return null;
 }

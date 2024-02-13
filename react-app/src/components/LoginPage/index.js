@@ -14,9 +14,7 @@ function LoginPage() {
 
   if (sessionUser) return <Redirect to="/" />;
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
+  useEffect(() => {}, [errors]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

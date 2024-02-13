@@ -51,7 +51,6 @@ export default function GetAllEmojis({ props: { messageId, sessionUserId } }) {
     let new_reaction = await dispatch(
       createReactionThunk(emojiId, messageId, sessionUserId)
     );
-    console.log("#TRACKTHIS create reaction running");
     // socket.emit("chat", new_reaction);
     return new_reaction;
   };

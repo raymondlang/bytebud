@@ -6,7 +6,6 @@ import { deleteServer, getServers } from "../../store/server";
 import "./ServerDelete.css";
 
 function ServerDeleteModal({ server }) {
-  console.log(server);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
