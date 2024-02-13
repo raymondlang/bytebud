@@ -13,6 +13,14 @@ export default function Home() {
   // (user === null ? history.push(`/channels/@me`) : history.push("/login"))
 
   useEffect(() => {
-    user === null ? history.push("/login") : history.push(`/channels/@me`);
-  }, []);
+    if (user === null) {
+      history.push("/login");
+    } else {
+      history.push("/channels/@me");
+    }
+  }, [history, user]);
+
+  console.log(user);
+
+  return null;
 }
