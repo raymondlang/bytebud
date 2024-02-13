@@ -82,7 +82,12 @@ function ChannelSideBar() {
                   <div>
                     <OpenModalButton
                       buttonText="Edit Server"
-                      modalComponent={<ServerEditModal server={currServer} />}
+                      modalComponent={
+                        <ServerEditModal
+                          server={currServer}
+                          serverId={serverId}
+                        />
+                      }
                     />
                   </div>
                   <div>
