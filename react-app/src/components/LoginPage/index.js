@@ -6,16 +6,12 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./LoginForm.css";
 
 function LoginPage() {
-  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Redirect to="/" />;
-
+  const dispatch = useDispatch();
   useEffect(() => {}, [errors]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +20,22 @@ function LoginPage() {
       setErrors([err.message]);
     }
   };
+  const handleDemoLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login("demo@aa.io", "password")).catch(async (res) => {
+      const errData = await res.json();
+      console.log(errData);
+    });
+  };
+  const handleDemoLogin2 = async (e) => {
+    e.preventDefault();
+    await dispatch(login("marnie@aa.io", "password")).catch(async (res) => {
+      const errData = await res.json();
+      console.log(errData);
+    });
+  };
+
+  if (sessionUser) return <Redirect to="/channels/@me" />;
 
   return (
     <>
@@ -69,6 +81,12 @@ function LoginPage() {
             </div>
             <button className="login-button" type="submit">
               Log In
+            </button>
+            <button className="demo-button" onClick={handleDemoLogin}>
+              Demo User 1
+            </button>
+            <button className="demo-button" onClick={handleDemoLogin2}>
+              Demo User 2
             </button>
             <div className="register-group">
               <span className="label-register">Need an account?</span>
