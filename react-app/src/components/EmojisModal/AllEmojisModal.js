@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import GetAllEmojis from "./index";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import "../EmojisModal/GetAllEmojis.css";
 
