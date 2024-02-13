@@ -11,6 +11,7 @@ import MessageForm from "./components/MessageForm";
 // import GetAllEmojis from "./components/EmojisModal";
 import ChannelTopBar from "./components/ChannelTopBar";
 import UserMenu from "./components/UserMenu";
+import ServerMembers from "./components/ServerMembers";
 
 import ChannelSideBar from "./components/ChannelSideBar";
 
@@ -47,6 +48,7 @@ function App() {
               <ChannelTopBar />
               <MessageForm />
               <UserMenu />
+              <ServerMembers />
             </Route>
             {/* for testing messages ONLY */}
             <Route path="/messages">
