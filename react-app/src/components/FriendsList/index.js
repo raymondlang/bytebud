@@ -54,7 +54,10 @@ export default function FriendsList() {
         </div>
         {friendsArr.map((friend) => {
           return (
-            <div className="friendslist-user-container" key={friend.id}>
+            <div
+              className="friendslist-user-container"
+              key={`friend${friend.id}`}
+            >
               <div className="friendslist-pic-username">
                 <div>
                   {" "}
