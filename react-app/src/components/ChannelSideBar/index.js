@@ -12,6 +12,8 @@ import OpenModalButton from "../OpenModalButton";
 import NewChannel from "../CreateChannel";
 import UpdateChannel from "../EditChannel";
 import "./channels.css";
+import ServerEditModal from "../ServerEditModal";
+import ServerDeleteModal from "../ServerDeleteModal";
 
 // Create logic for if user
 
@@ -39,15 +41,61 @@ function ChannelSideBar() {
     currServer = currServer[0];
   }
 
-  if (!currChannel) currChannel = {};
-  else currChannel = currChannel;
+  if (!allChannels) allChannels = [];
+  else allChannels = Object.values(allChannels);
+
+  if (!currChannel) return null;
+  if (!currServer) return null;
+
+  const handleClick = () => {
+    document.getElementById("server-dropdown").classList.add("visible");
+  };
+
+  window.onclick = function (event) {
+    console.log(event);
+
+    if (!event.target.matches(".server-btn")) {
+      var dropdown = document.getElementById("server-dropdown");
+
+      if (dropdown.classList.contains("visible")) {
+        dropdown.classList.remove("visible");
+      }
+    }
+  };
 
   return (
     <div className="channel-sidebar">
       {currServer && (
-        <div className="server-name-container">
-          <span className="server-name-text">{currServer.name}</span>
-        </div>
+        <>
+          <div className="server-name-container">
+            <span className="server-name-text">{currServer.name}</span>
+            <span
+              type="button"
+              className="server-setting-btn"
+              onClick={handleClick}
+            >
+              <i class="fa-solid fa-gear server-btn"></i>
+            </span>
+            <>
+              <div className="server-setting-dropdown">
+                <div id="server-dropdown" class="server-dropdown-content">
+                  <div>
+                    <OpenModalButton
+                      buttonText="Edit Server"
+                      modalComponent={<ServerEditModal server={currServer} />}
+                    />
+                  </div>
+                  <div>
+                    <OpenModalButton
+                      buttonText="Delete Server"
+                      modalComponent={<ServerDeleteModal server={currServer} />}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          </div>
+        </>
       )}
       <div className="text-channels-container">
         <span className="text-channels">TEXT CHANNELS</span>
