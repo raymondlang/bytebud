@@ -9,7 +9,12 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 export default function FriendsList() {
   const dispatch = useDispatch();
-  const currentUserId = useSelector((state) => state.session.user.id);
+  const currentUser = useSelector((state) => state.session.user);
+
+  let currentUserId;
+  if (currentUser) {
+    currentUserId = currentUser.id;
+  }
 
   const allFriends = useSelector((state) => state.friends);
   const friendsArr = Object.values(allFriends);
