@@ -62,7 +62,9 @@ function MessageForm() {
     };
 
     // add .to('channelName') before .emit when adding room functionality?
-    socket.emit("chat", { user: user.username, msg: content });
+    if (socket) {
+      socket.emit("chat", { user: user.username, msg: content });
+    }
 
     // await dispatch("insert create message thunk here")
     //   .catch(
