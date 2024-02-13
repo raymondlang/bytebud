@@ -9,22 +9,14 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom";
 
 export default function FriendsList() {
   const dispatch = useDispatch();
+  const currentUserId = useSelector((state) => state.session.user.id);
 
-  //   const redirect = async (e) => {
-  //     e.preventDefault();
-  //     history.push("/emojis/test");
-  //   };
-
-  const [showMenu, setShowMenu] = useState(false);
-  const closeMenu = () => setShowMenu(false);
-
-  //   // const allFriends = useSelector(state => state.friends)
-  //   const currentUserId = useSelector((state) => state.session.user.id);
   const allFriends = useSelector((state) => state.friends);
   const friendsArr = Object.values(allFriends);
-  //   useEffect(() => {
-  //     dispatch(getAllFriendsThunk(currentUserId));
-  //   });
+
+  useEffect(() => {
+    dispatch(getAllFriendsThunk(currentUserId));
+  }, [dispatch]);
 
   return (
     <div>
