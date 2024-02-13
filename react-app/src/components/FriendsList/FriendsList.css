@@ -199,8 +199,9 @@
   font-size: 20px;
 }
 
-.fa-plus {
-  font-size: 10px;
+.friendslist-channel-dm-container > .fa-plus {
+  color: rgb(181, 186, 193);
+  margin-right: 15px;
 }
 
 .addreaction-container {
