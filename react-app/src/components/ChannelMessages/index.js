@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { useSelector, useDispatch } from "react-redux";
 import MessageItem from "../MessageItem";
@@ -6,41 +6,32 @@ import { getChannelMessages } from "../../store/message";
 import "./ChannelMessages.css";
 
 function ChannelMessages({ formMessages }) {
+  // select data from the Redux store
   const currUser = useSelector((state) => state.session.user);
   const channel = useSelector((state) => state.channels.oneChannel);
-
-  const allMessages = useSelector((state) => state.messages.messages);
-  // allMessages starts as null, use conditional to avoid putting undefined in Object.values
-  const { serverId, channelId } = useParams();
-
+  const allMessages = useSelector((state) => state.messages);
+  const { channelId } = useParams();
   const dispatch = useDispatch();
-
-  //populate store with channelMessages on render and when channel.id/allMessages changes
+  //populate store with channelMessages on render and when channel.id changes
+  //trying to remove allMessages from dependency array (ADD BACK IN IF NEEDED)
   useEffect(() => {
-    if (channel) {
-      dispatch(getChannelMessages(channelId));
-    } else {
-      return null;
-    }
+    dispatch(getChannelMessages(channelId));
   }, [dispatch, channelId, allMessages]);
 
-  // return null if can't get channel until next render
-  if (!channel) return null;
+  // memoize the array of all messages to prevent unnecessary re-renders
+  const allMessagesArr = useMemo(() => {
+    if (allMessages) return Object.values(allMessages);
 
-  // allMessages starts as null, use conditional to avoid putting undefined in Object.values
-  let allMessagesArr;
-  if (allMessages !== null) {
-    allMessagesArr = Object.values(allMessages);
-  }
-  if (!allMessagesArr) {
-    return null;
-  }
+    return [];
+  }, [allMessages]);
 
-  formMessages = formMessages.filter(
-    (message) => message.userId !== currUser.id
-  );
+  // memoize the array of form messages to prevent unnecessary re-renders
+  const formMessagesArr = useMemo(() => {
+    if (formMessages)
+      return formMessages.filter((message) => message.userId !== currUser.id);
 
-  console.log("allMessagesArr", allMessagesArr);
+    return [];
+  }, [formMessages, currUser]);
 
   return (
     <div className="channel-messages-container">
