@@ -15,7 +15,7 @@ function ChannelMessages({ formMessages }) {
 
   const dispatch = useDispatch();
 
-  //populate store with channelMessages on render and when channel.id changes
+  //populate store with channelMessages on render and when channel.id/allMessages changes
   useEffect(() => {
     if (channel) {
       dispatch(getChannelMessages(channelId));

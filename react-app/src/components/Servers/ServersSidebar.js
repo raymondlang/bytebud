@@ -38,7 +38,7 @@ const ServersSidebar = () => {
                 {servers.map((server) => (
                   <NavLink
                     style={{ textDecoration: "none" }}
-                    key={server.id}
+                    key={`server-${server.id}`}
                     to={`/channels/${server.id}/${server.channels[0].id}`}
                   >
                     <ServersSidebarItem mainRef={mainRef} server={server} />

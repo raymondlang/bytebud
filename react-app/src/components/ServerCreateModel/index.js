@@ -13,6 +13,7 @@ function ServerCreateModal() {
   const [description, setDescription] = useState("");
   const [server_picture, setServerPicture] = useState("");
   const [errors, setErrors] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
   const { closeModal } = useModal();
 
   const user = useSelector((state) => state.session.user);
@@ -91,6 +92,16 @@ function ServerCreateModal() {
             start talking.{" "}
           </p>
           <form className="create-server-form" onSubmit={handleSubmit}>
+            <h1 className="create-server-header">Create A Server </h1>
+            <p className="create-server-para">
+              Your server is where your and your friends hang out. Make yours
+              and start talking.{" "}
+            </p>
+            <ul>
+              {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+              ))}
+            </ul>
             <ul>
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
@@ -109,7 +120,7 @@ function ServerCreateModal() {
               />
             </div>
             <div className="create-server-form-group">
-              <label className="create-server-form-label">Server Image</label>
+              <span className="create-server-form-label">Server Image</span>
               <br></br>
               <input
                 className="create-server-form-input"
@@ -125,6 +136,9 @@ function ServerCreateModal() {
               <button className="create-server-form-button" type="submit">
                 Create Server
               </button>
+              <span onClick={closeModal} className="channel-update-form-cancel">
+                Cancel
+              </span>
             </div>
           </form>
         </div>

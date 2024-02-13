@@ -20,25 +20,38 @@
 }
 
 .edit-server-page {
-  max-width: 300px;
-  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: #25262b;
+  max-width: 400px;
+  max-height: 250px;
+  border: 1px black solid;
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 40px;
   padding-bottom: 90px;
-  height: 300px;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .edit-server-modal {
   display: flex;
   flex-direction: column;
+  background-color: #25262b;
+  max-width: 400px;
+  max-height: 300px;
+  border: 1px black solid;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 40px;
+  padding-bottom: 90px;
+  border-radius: 10px;
 }
 
 .edit-server-header {
   font-family: "ByteBud";
   font-size: 20px;
   font-weight: 900;
+  color: whitesmoke;
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -67,9 +80,10 @@
 }
 
 .edit-server-form-label {
-  font-family: "Discord Bold";
-  font-size: 14px;
-  color: #313338;
+  font-family: "ByteBud";
+  color: #adb2ba;
+  font-size: 15px;
+  margin-bottom: 5px;
 }
 
 .edit-server-form-button {
