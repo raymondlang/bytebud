@@ -47,7 +47,7 @@
   font-size: 18px;
 }
 
-.message-form textarea {
+.message-form input {
   font-family: "ByteBud";
   font-size: 18px;
   color: white;
@@ -65,11 +65,11 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.message-form textarea::-webkit-scrollbar {
+.message-form input::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-.message-form textarea:focus {
+.message-form input:focus {
   border: none;
   outline: none;
 }

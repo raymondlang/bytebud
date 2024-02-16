@@ -11,7 +11,7 @@ let socket;
 function MessageForm() {
   const dispatch = useDispatch();
   const [content, setContent] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
   const user = useSelector((state) => state.session.user);
   const channel = useSelector((state) => state.channels.oneChannel);
   const { serverId, channelId } = useParams();
@@ -29,10 +29,10 @@ function MessageForm() {
     const socket = io();
 
     socket.emit("join", { channel_id: channelId, username: user.username });
-
-    socket.on("chat", (chat) => {
-      setMessages((messages) => [...messages, chat]);
-    });
+    socket.on("chat", (chat) => setMessages(chat));
+    // socket.on("chat", (chat) => {
+    //   setMessages((messages) => [...messages, chat]);
+    // });
     // when component unmounts, disconnect
     return () => {
       socket.disconnect();
@@ -41,29 +41,21 @@ function MessageForm() {
 
   if (!channel) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let message = {
-      userId: user.id,
+      userId: user?.id,
       channelId: channel.id,
       content: content,
       timestamp: new Date(),
-      reactions: {},
+      reactions: [],
     };
 
-    // add .to('channelName') before .emit when adding room functionality?
+    let createdMsg = await dispatch(createMessage(message));
     if (socket) {
-      socket.emit("chat", { user: user.username, msg: content });
+      socket.emit("chat", createdMsg);
     }
-
-    // await dispatch("insert create message thunk here")
-    //   .catch(
-    //     async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     }
-    //   );
     setContent("");
     return "thunk in progress..."; // will be deleted once thunk is created
   };

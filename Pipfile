@@ -35,6 +35,9 @@ python-socketio = "*"
 zipp = "*"
 werkzeug = "*"
 psycopg2 = "*"
+gevent = "*"
+"zope.event" = "*"
+"zope.interface" = "*"
 
 [dev-packages]
 pylint = "*"

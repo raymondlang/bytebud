@@ -5,7 +5,7 @@ import MessageItem from "../MessageItem";
 import { getChannelMessages } from "../../store/message";
 import "./ChannelMessages.css";
 
-function ChannelMessages({ formMessages }) {
+function ChannelMessages({ msg }) {
   // select data from the Redux store
   const currUser = useSelector((state) => state.session.user);
   const channel = useSelector((state) => state.channels.oneChannel);
@@ -16,9 +16,10 @@ function ChannelMessages({ formMessages }) {
   //trying to remove allMessages from dependency array (ADD BACK IN IF NEEDED)
   useEffect(() => {
     dispatch(getChannelMessages(channelId));
-  }, [dispatch, channelId, allMessages]);
+  }, [dispatch, channelId]); //allMessages
 
   // memoize the array of all messages to prevent unnecessary re-renders
+  if (msg?.channelId) allMessages[msg.id] = msg;
   const allMessagesArr = useMemo(() => {
     if (allMessages) return Object.values(allMessages);
 
@@ -26,12 +27,12 @@ function ChannelMessages({ formMessages }) {
   }, [allMessages]);
 
   // memoize the array of form messages to prevent unnecessary re-renders
-  const formMessagesArr = useMemo(() => {
-    if (formMessages)
-      return formMessages.filter((message) => message.userId !== currUser.id);
+  //   const formMessagesArr = useMemo(() => {
+  //     if (formMessages)
+  //       return formMessages.filter((message) => message.userId !== currUser.id);
 
-    return [];
-  }, [formMessages, currUser]);
+  //     return [];
+  //   }, [formMessages, currUser]);
 
   return (
     <div className="channel-messages-container">
@@ -44,7 +45,7 @@ function ChannelMessages({ formMessages }) {
           </div>
         );
       })}
-      {formMessages.map((message, ind) => {
+      {/* {formMessages.map((message, ind) => {
         return (
           <div key={ind} className="message-item-container">
             <div className="message-item">
@@ -52,7 +53,7 @@ function ChannelMessages({ formMessages }) {
             </div>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 }
