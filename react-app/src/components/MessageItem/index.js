@@ -52,11 +52,15 @@ function MessageItem({ message }) {
   }, [message.timestamp]);
 
   // memoize the reactions array to prevent unnecessary recomputations
-  const reactionsArr = useMemo(
-    () => Object.values(message.reactions),
-    [message.reactions]
-  );
-
+  const reactionsArr = Object.values(message.reactions);
+  let reactionsObj = {};
+  reactionsArr.forEach((emoji) => {
+    if (reactionsObj[emoji.emoji.name]) {
+      reactionsObj[emoji.emoji.name] += 1;
+    } else {
+      reactionsObj[emoji.emoji.name] = 1;
+    }
+  });
   // memoize the session user ID to prevent unnecessary recomputations
   const sessionUserId = sessionUser?.id;
 
@@ -65,19 +69,12 @@ function MessageItem({ message }) {
 
   // memoize the addReaction and deleteReaction functions to prevent unnecessary re-renders of child components
   const addReaction = async (sessionUserId, messageId, emojiId) => {
-    let addedReaction = await dispatch(
-      createReactionThunk(sessionUserId, messageId, emojiId)
-    );
-    dispatch(getChannelMessages(message.channelId));
-    return addedReaction;
+    dispatch(createReactionThunk(sessionUserId, messageId, emojiId));
   };
 
   const deleteReaction = async (reactionId, messageId) => {
-    let deleted_reaction = await dispatch(
-      deleteReactionThunk(reactionId, messageId)
-    );
+    dispatch(deleteReactionThunk(reactionId, messageId));
     dispatch(getChannelMessages(message.channelId));
-    return deleted_reaction;
   };
 
   // if the reaction with that emoji already exists, and it's not yours, only increase the count and highlight
@@ -114,39 +111,43 @@ function MessageItem({ message }) {
             <p>{message.content}</p>
           </div>
           <div className="reactions-container">
-            {reactionsArr.map((reaction) => {
-              return (
-                <div>
-                  <div
-                    className={
-                      +reaction.userId === +sessionUserId
-                        ? "user-emoji-reaction"
-                        : "other-user-reaction"
-                    }
-                    key={`reaction${reaction.id}`}
-                    onClick={
-                      +reaction.userId === +sessionUserId
-                        ? () => {
-                            deleteReaction(reaction.id, messageId);
-                          }
-                        : () => {
-                            addReaction(
-                              reaction.emojiId,
-                              messageId,
-                              sessionUserId
-                            );
-                          }
-                    }
-                  >
-                    <p className="emojis-emojichar">
-                      {" "}
-                      {String.fromCodePoint(reaction.emoji.url)}
-                    </p>
-                    <p className="emojis-count"> 1 </p>
-                  </div>
-                </div>
-              );
-            })}
+            {reactionsArr.length ? (
+              <>
+                {reactionsArr.map((reaction) => {
+                  return (
+                    <div>
+                      <div
+                        className={
+                          +reaction.userId === +sessionUserId
+                            ? "user-emoji-reaction"
+                            : "other-user-reaction"
+                        }
+                        key={`reaction${reaction.id}`}
+                        onClick={
+                          +reaction.userId === +sessionUserId
+                            ? () => {
+                                deleteReaction(reaction.id, messageId);
+                              }
+                            : () => {
+                                addReaction(
+                                  reaction.emojiId,
+                                  messageId,
+                                  sessionUserId
+                                );
+                              }
+                        }
+                      >
+                        <p className="emojis-emojichar">
+                          {" "}
+                          {String.fromCodePoint(reaction.emoji.url)}
+                        </p>
+                        <p className="emojis-count"> 1 </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            ) : null}
           </div>
         </div>
       </div>
