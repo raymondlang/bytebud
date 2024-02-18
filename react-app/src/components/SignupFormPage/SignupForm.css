@@ -19,6 +19,15 @@
   font-style: normal;
 }
 
+.signup-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
 .signup-container {
   display: flex;
   flex-direction: column;
