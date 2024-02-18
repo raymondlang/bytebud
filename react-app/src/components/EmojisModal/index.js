@@ -15,10 +15,6 @@ export default function GetAllEmojis({ props: { messageId, sessionUserId } }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  useEffect(() => {
-    dispatch(getAllEmojisThunk());
-  }, [dispatch]);
-
   const emojis = useSelector((state) => state.emoji.allEmojis);
   const channel = useSelector((state) => state.channels.oneChannel);
   const allEmojisArr = Object.values(emojis);
