@@ -2,7 +2,11 @@ import React, { useMemo, useCallback } from "react";
 import "./MessageItem.css";
 import "./Reaction.css";
 import { useSelector, useDispatch } from "react-redux";
-import { createReactionThunk, deleteReactionThunk } from "../../store/message";
+import {
+  createReactionThunk,
+  deleteReactionThunk,
+  getChannelMessages,
+} from "../../store/message";
 import EmojisModal from "../EmojisModal/AllEmojisModal";
 import { useParams } from "react-router-dom";
 
@@ -60,25 +64,21 @@ function MessageItem({ message }) {
   let props = { messageId, sessionUserId };
 
   // memoize the addReaction and deleteReaction functions to prevent unnecessary re-renders of child components
-  const addReaction = useCallback(
-    async (emojiId) => {
-      const addedReaction = await dispatch(
-        createReactionThunk(sessionUserId, message.id, emojiId)
-      );
-      return addedReaction;
-    },
-    [dispatch, sessionUserId, message.id]
-  );
+  const addReaction = async (sessionUserId, messageId, emojiId) => {
+    let addedReaction = await dispatch(
+      createReactionThunk(sessionUserId, messageId, emojiId)
+    );
+    dispatch(getChannelMessages(message.channelId));
+    return addedReaction;
+  };
 
-  const deleteReaction = useCallback(
-    async (reactionId) => {
-      const deleted_reaction = await dispatch(
-        deleteReactionThunk(reactionId, message.id)
-      );
-      return deleted_reaction;
-    },
-    [dispatch, message.id]
-  );
+  const deleteReaction = async (reactionId, messageId) => {
+    let deleted_reaction = await dispatch(
+      deleteReactionThunk(reactionId, messageId)
+    );
+    dispatch(getChannelMessages(message.channelId));
+    return deleted_reaction;
+  };
 
   // if the reaction with that emoji already exists, and it's not yours, only increase the count and highlight
   let emojisCount = {};
