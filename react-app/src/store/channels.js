@@ -15,8 +15,9 @@ const addChannel = (channel) => ({
   type: "ADD_CHANNEL",
   channel,
 });
-const deleteChannel = () => ({
+const deleteChannel = (channelId) => ({
   type: "DELETE_CHANNEL",
+  channelId,
 });
 const editChannel = (channel) => ({
   type: "EDIT_CHANNEL",
@@ -87,7 +88,7 @@ export const removeChannel = (channelId) => async (dispatch) => {
     },
   });
   if (response.ok) {
-    dispatch(deleteChannel());
+    dispatch(deleteChannel(channelId));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -157,8 +158,13 @@ const channelReducer = (state = initialState, action) => {
         },
       };
     case "DELETE_CHANNEL":
-      const newState = { ...state };
-      return newState;
+      const { channelId } = action;
+      const currServerChannels = { ...state.currServerChannels };
+      delete currServerChannels[channelId];
+      return {
+        ...state,
+        currServerChannels: currServerChannels,
+      };
     case "EDIT_CHANNEL":
       return {
         ...state,

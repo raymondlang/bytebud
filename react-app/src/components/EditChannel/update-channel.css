@@ -21,6 +21,7 @@
 
 .channel-update-form-container {
   background-color: #25262b;
+  min-height: 230px;
   height: 230px;
   width: 400px;
   border-radius: 10px;
@@ -121,4 +122,13 @@
 
 .channel-update-form-submit.cursor-not-allowed {
   cursor: not-allowed;
+}
+
+.err-msg {
+  font-family: "ByteBud";
+  color: red;
+}
+
+.update-ch-err-div {
+  margin-top: 10px;
 }
