@@ -20,5 +20,6 @@ class Reaction(db.Model):
             'id': self.id,
             'userId': self.userId,
             'emojiId': self.emojiId,
-            'messageId': self.messageId
+            'messageId': self.messageId,
+            'emoji': self.emoji.to_dict()
         }

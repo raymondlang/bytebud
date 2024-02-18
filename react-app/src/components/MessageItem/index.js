@@ -140,7 +140,7 @@ function MessageItem({ message }) {
                   >
                     <p className="emojis-emojichar">
                       {" "}
-                      {String.fromCodePoint(reaction.emojiURL)}
+                      {String.fromCodePoint(reaction.emoji.url)}
                     </p>
                     <p className="emojis-count"> 1 </p>
                   </div>

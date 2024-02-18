@@ -91,12 +91,6 @@ export const createReactionThunk =
       const newReaction = await response.json();
       //   console.log('new reaction created if response.ok', newReaction)
 
-      const emoji = await fetch(`/api/emojis/${newReaction.emojiId}`);
-      if (emoji.ok) {
-        const emojiJSON = await emoji.json();
-        newReaction["emojiURL"] = emojiJSON.url;
-      }
-
       //   console.log('newreaction, did switching the URL work?', newReaction)
 
       dispatch(createReaction(newReaction));
