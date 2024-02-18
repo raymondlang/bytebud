@@ -3,6 +3,7 @@ const LOAD_MESSAGES = "messages/LOAD_MESSAGES";
 const ADD_MESSAGE = "messages/ADD_MESSAGE";
 const CREATE_REACTION = "emojis/CREATE_REACTION";
 const DELETE_REACTION = "emojis/DELETE_REACTION";
+const CLEAR_MESSAGES = "messages/CLEAR_MESSAGES";
 
 // const EDIT_MESSAGE = 'messages/EDIT_MESSAGE';
 
@@ -18,6 +19,10 @@ const addMessage = (message) => ({
   type: ADD_MESSAGE,
 
   message,
+});
+
+export const clearMessages = () => ({
+  type: CLEAR_MESSAGES,
 });
 
 const createReaction = (reaction) => ({
@@ -142,6 +147,9 @@ const messageReducer = (state = initialState, action) => {
     case DELETE_REACTION:
       newState = { ...state };
       delete newState[action.messageId].reactions[action.reactionId];
+      return newState;
+    case CLEAR_MESSAGES:
+      newState = {};
       return newState;
     default:
       return state;
