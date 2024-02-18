@@ -19,7 +19,7 @@ function ChannelMessages({ messages }) {
     dispatch(getChannelMessages(channelId));
     // clear state every time channel Id changes
     return () => dispatch(clearMessages());
-  }, [dispatch, channelId]);
+  }, [dispatch, channelId, allMessages]);
 
   if (!allMessages) return null;
   const allMessagesArr = Object.values(allMessages);
