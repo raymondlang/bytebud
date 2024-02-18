@@ -4,7 +4,7 @@ import "./NotFoundPageLoggedIn.css";
 import notFoundGif from "../../static/NotFoundPage/discord-404.gif";
 import byteBudLogoBlack from "../../static/NotFoundPage/byte-bud-logo-black.png";
 
-function NotFoundPageLoggedIn({ sessionUser }) {
+function NotFound({ sessionUser }) {
   const history = useHistory();
 
   const returnHome = async (e) => {
@@ -47,4 +47,4 @@ function NotFoundPageLoggedIn({ sessionUser }) {
   }
 }
 
-export default NotFoundPageLoggedIn;
+export default NotFound;

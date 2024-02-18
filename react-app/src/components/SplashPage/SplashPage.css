@@ -1,12 +1,5 @@
-/* .splash-container {
-    position:fixed;
-    top: 0;
-    bottom:0;
-    width: 100;
-    overflow-y:scroll;
-} */
-
 .splash-top {
+  border: 2px solid poink;
   position: fixed;
   top: 0;
   left: 0;
