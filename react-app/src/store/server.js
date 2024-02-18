@@ -4,6 +4,8 @@ const LOAD_SERVER = "servers/server";
 const ADD_SERVER = "servers/create";
 const EDIT_SERVER = "servers/edit";
 const DELETE_SERVER = "servers/delete";
+const ADD_SERVER_MEMBER = "servers/members/add";
+const DELETE_SERVER_MEMBER = "servers/members/add";
 
 // Action Creators
 const loadServers = (list, user) => ({
@@ -25,6 +27,14 @@ const createServer = (server) => ({
 const removeServer = (id) => ({
   type: DELETE_SERVER,
   serverId: id,
+});
+
+const createServerMember = () => ({
+  type: ADD_SERVER_MEMBER,
+});
+
+const removeServerMember = () => ({
+  type: DELETE_SERVER_MEMBER,
 });
 
 // Selectors
@@ -94,6 +104,21 @@ export const addServer = (server, username) => async (dispatch) => {
   }
 };
 
+// EDIT A SERVER //
+export const editServer = (serverId, server) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(server),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(updateServer(data));
+    return data;
+  }
+};
+
 //DELETE A SERVER//
 export const deleteServer = (serverId) => async (dispatch) => {
   const response = await fetch(`/api/servers/${serverId}`, {
@@ -114,22 +139,49 @@ export const deleteServer = (serverId) => async (dispatch) => {
   }
 };
 
-// EDIT A SERVER //
-export const editServer = (serverId, server) => async (dispatch) => {
-  const response = await fetch(`/api/servers/${serverId}`, {
-    method: "PUT",
+// ADD SERVER MEMEBER //
+
+export const addServerMember = (serverId, user) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/members`, {
+    method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(server),
+    body: JSON.stringify(user),
   });
 
   if (response.ok) {
+    dispatch(createServerMember());
+    return null;
+  } else if (response.status < 500) {
     const data = await response.json();
-    dispatch(updateServer(data));
-    return data;
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
   }
 };
 
-// DELETE A SERVER //
+// REMOVE SERVER MEMEBER //
+
+export const deleteServerMember = (serverId, user) => async (dispatch) => {
+  const response = await fetch(`/api/servers/${serverId}/members`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+
+  if (response.ok) {
+    dispatch(removeServerMember());
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
 
 // ----------------------------------- reducer ----------------------------------------
 let initialState = {};
@@ -190,6 +242,14 @@ export default function serverReducer(state = initialState, action) {
     case DELETE_SERVER: {
       const newState = { ...state };
       return newState;
+    }
+
+    case ADD_SERVER_MEMBER: {
+      return { ...state };
+    }
+
+    case DELETE_SERVER_MEMBER: {
+      return { ...state };
     }
     default:
       return state;
