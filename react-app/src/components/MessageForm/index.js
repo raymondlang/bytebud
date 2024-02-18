@@ -5,16 +5,17 @@ import "./MessageForm.css";
 import ChannelMessages from "../ChannelMessages";
 import { getChannelDetails } from "../../store/channels";
 import { createMessage } from "../../store/message";
+import ChannelMessages from "../ChannelMessages";
 import UserMenu from "../UserMenu";
 let socket;
 
 function MessageForm() {
   const dispatch = useDispatch();
+  const { serverId, channelId } = useParams();
   const [content, setContent] = useState("");
   const [messages, setMessages] = useState({});
   const user = useSelector((state) => state.session.user);
   const channel = useSelector((state) => state.channels.oneChannel);
-  const { serverId, channelId } = useParams();
 
   useEffect(() => {
     dispatch(getChannelDetails(channelId));
@@ -34,9 +35,7 @@ function MessageForm() {
     //   setMessages((messages) => [...messages, chat]);
     // });
     // when component unmounts, disconnect
-    return () => {
-      socket.disconnect();
-    };
+    return () => socket.disconnect();
   }, []);
 
   if (!channel) return null;
@@ -53,9 +52,8 @@ function MessageForm() {
     };
 
     let createdMsg = await dispatch(createMessage(message));
-    if (socket) {
-      socket.emit("chat", createdMsg);
-    }
+    if (socket) socket.emit("chat", createdMsg);
+
     setContent("");
     return "thunk in progress..."; // will be deleted once thunk is created
   };
@@ -63,13 +61,13 @@ function MessageForm() {
   return (
     <>
       <UserMenu />
-      <ChannelMessages formMessages={messages} />
+      <ChannelMessages messages={messages} />
       <div className="message-form-background">
         <div className="message-form-container">
           <form className="message-form" onSubmit={handleSubmit}>
             {/* at 1800 characters start a counter for characters allowed left (starts at 200), disable the send button above 2000  */}
             {/* need to figure out dynamic sizing with css? */}
-            <textarea
+            <input
               type="text"
               value={content}
               onChange={(e) => setContent(e.target.value)}

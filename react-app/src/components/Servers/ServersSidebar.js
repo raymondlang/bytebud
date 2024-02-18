@@ -14,7 +14,7 @@ const ServersSidebar = () => {
 
   useEffect(() => {
     dispatch(getServers(user));
-  }, [dispatch]); //user
+  }, [user, dispatch]);
 
   let servers = useSelector((state) => state.server.allUserServers);
   if (!servers) return null;

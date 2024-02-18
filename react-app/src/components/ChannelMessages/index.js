@@ -5,11 +5,12 @@ import MessageItem from "../MessageItem";
 import { getChannelMessages, clearMessages } from "../../store/message";
 import "./ChannelMessages.css";
 
-function ChannelMessages({ msg }) {
+function ChannelMessages({ messages }) {
   // select data from the Redux store
   const currUser = useSelector((state) => state.session.user);
   const channel = useSelector((state) => state.channels.oneChannel);
   const allMessages = useSelector((state) => state.messages);
+  if (messages?.channelId) allMessages[messages.id] = messages;
   const { channelId } = useParams();
   const dispatch = useDispatch();
   //populate store with channelMessages on render and when channel.id changes
@@ -20,21 +21,8 @@ function ChannelMessages({ msg }) {
     return () => dispatch(clearMessages());
   }, [dispatch, channelId]); //allMessages
 
-  // memoize the array of all messages to prevent unnecessary re-renders
-  if (msg?.channelId) allMessages[msg.id] = msg;
-  const allMessagesArr = useMemo(() => {
-    if (allMessages) return Object.values(allMessages);
-
-    return [];
-  }, [allMessages]);
-
-  // memoize the array of form messages to prevent unnecessary re-renders
-  //   const formMessagesArr = useMemo(() => {
-  //     if (formMessages)
-  //       return formMessages.filter((message) => message.userId !== currUser.id);
-
-  //     return [];
-  //   }, [formMessages, currUser]);
+  if (!allMessages) return null;
+  const allMessagesArr = Object.values(allMessages);
 
   return (
     <div className="channel-messages-container">
