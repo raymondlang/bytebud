@@ -13,7 +13,7 @@ def seed_servers():
         ),
         Server(
             owner_id=2,
-            name="Pixel Pals Rock",
+            name="Byte Buds Rock",
             description="Server for the cool cats that call themselves Pixel Pals",
             server_picture='image.url'
         )

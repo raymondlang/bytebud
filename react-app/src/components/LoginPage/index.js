@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./LoginForm.css";
+import wallpaper from "../../static/bytebud-wallpaper.png";
 
 function LoginPage() {
   const sessionUser = useSelector((state) => state.session.user);
@@ -39,6 +40,7 @@ function LoginPage() {
 
   return (
     <>
+      <img className="wallpaper" src={wallpaper} alt="wallpaper" />
       <div className="login-page">
         <div className="login-box">
           <div className="login-headings">

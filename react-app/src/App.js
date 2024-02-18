@@ -5,7 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import { authenticate } from "./store/session";
 import LoginPage from "./components/LoginPage";
 import ServersSidebar from "./components/Servers/ServersSidebar";
-import Home from "./components/Home";
+import SplashPage from "./components/SplashPage";
+// import Home from "./components/Home/"
 import FriendsList from "./components/FriendsList";
 import MessageForm from "./components/MessageForm";
 // import GetAllEmojis from "./components/EmojisModal";
@@ -27,7 +28,7 @@ function App() {
       <LoginPage />
       <Switch>
         <Route exact path="/">
-          <Home />
+          <SplashPage />
         </Route>
         <Route exact path="/login">
           <LoginPage />
