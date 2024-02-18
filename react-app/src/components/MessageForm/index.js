@@ -27,7 +27,7 @@ function MessageForm() {
   useEffect(() => {
     // open socket connection
     // create websocket
-    const socket = io();
+    socket = io();
 
     socket.emit("join", { channel_id: channelId, username: user.username });
     socket.on("chat", (chat) => setMessages(chat));
