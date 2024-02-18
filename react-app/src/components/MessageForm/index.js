@@ -58,7 +58,10 @@ function MessageForm() {
     return "thunk in progress..."; // will be deleted once thunk is created
   };
   const enterKey = (e) => {
-    if (e.key === "Enter") handleSubmit();
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
   };
 
   return (
