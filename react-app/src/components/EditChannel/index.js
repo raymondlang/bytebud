@@ -14,7 +14,6 @@ function UpdateChannel({ channelId, serverId }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [errors, setErrors] = useState("");
-  import { useHistory } from "react-router-dom";
 
   const { closeModal } = useModal();
   const updatedChannel = useSelector((state) => state.channels.updatedChannel);
@@ -47,17 +46,20 @@ function UpdateChannel({ channelId, serverId }) {
       setErrors("There must be at least one channel in a server.");
       return;
     }
-
     await dispatch(removeChannel(channelId)).then(() => {
       dispatch(getServerChannels(serverId));
     });
 
+    let index;
+
     for (let i = 0; i < channelArr.length; i++) {
-      if (channelArr[i].id === channelId) {
-        channelArr.splice(i, 1);
+      if (channelArr[i].id !== channelId) {
+        index = i;
+        break;
       }
     }
-    history.push(`/channels/${serverId}/${channelArr[0].id}`);
+
+    history.push(`/channels/${serverId}/${channelArr[index].id}`);
     closeModal();
   };
 
