@@ -57,6 +57,9 @@ function MessageForm() {
     setContent("");
     return "thunk in progress..."; // will be deleted once thunk is created
   };
+  const enterKey = (e) => {
+    if (e.key === "Enter") handleSubmit();
+  };
 
   return (
     <>
@@ -67,11 +70,12 @@ function MessageForm() {
           <form className="message-form" onSubmit={handleSubmit}>
             {/* at 1800 characters start a counter for characters allowed left (starts at 200), disable the send button above 2000  */}
             {/* need to figure out dynamic sizing with css? */}
-            <input
+            <textarea
               type="text"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder={`Message ${channel.name}`}
+              onKeyPress={enterKey}
               required
             />
             <div className="message-form-right-side">

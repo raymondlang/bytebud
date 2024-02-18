@@ -47,15 +47,15 @@
   font-size: 18px;
 }
 
-.message-form input {
+.message-form textarea {
   font-family: "ByteBud";
   font-size: 18px;
   color: white;
 
   width: 100%;
   height: 25px;
-  padding-top: 5px;
-  margin-top: 5px;
+  /* padding-top: 5px;
+  margin-top: 5px; */
   background: none;
   border: none;
   padding: 10px 0px 10px;
@@ -65,11 +65,11 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.message-form input::-webkit-scrollbar {
+.message-form textarea::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-.message-form input:focus {
+.message-form textarea:focus {
   border: none;
   outline: none;
 }
