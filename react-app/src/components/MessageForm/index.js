@@ -5,7 +5,6 @@ import "./MessageForm.css";
 import ChannelMessages from "../ChannelMessages";
 import { getChannelDetails } from "../../store/channels";
 import { createMessage } from "../../store/message";
-import ChannelMessages from "../ChannelMessages";
 import UserMenu from "../UserMenu";
 let socket;
 

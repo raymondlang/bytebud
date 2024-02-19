@@ -1,34 +1,13 @@
-import React from "react";
+import { useRef } from "react";
 import ServerMembersSidebar from "../Servers/ServersSidebar";
 import { useSelector, useState, useEffect } from "react-redux";
+import { useModal } from "../../context/Modal";
 import "./ChannelTopBar.css";
 
 function ChannelTopBar() {
   let currChannel = useSelector((state) => state.channels.oneChannel);
 
-  const [sidebarVisible, setSidebarVisible] = useState(false);
-  const sidebarRef = useRef();
-
-  const toggleSidebar = () => {
-    setSidebarVisible(!sidebarVisible);
-  };
-
-  const handleClickOutside = (event) => {
-    if (
-      sidebarRef.current &&
-      !sidebarRef.current.contains(event.target) &&
-      event.target.id !== "toggle-sidebar-button"
-    ) {
-      setSidebarVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
+  const { setModalContent } = useModal();
 
   if (!currChannel) return null;
 
