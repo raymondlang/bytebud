@@ -186,6 +186,10 @@
   width: 40px;
 }
 
+.friendslist-chat-icon div:hover {
+  cursor: pointer;
+}
+
 .fa-solid:hover {
   color: rgb(238, 239, 242);
 }

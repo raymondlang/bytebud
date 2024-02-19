@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import wallpaper from "../../static/bytebud-wallpaper.png";
 import "./SignupForm.css";
@@ -15,16 +15,15 @@ function SignupPage() {
   const [day, setDay] = useState("");
   const [year, setYear] = useState("");
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Redirect to="/channels/@me" />;
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // custom frontend validations
-
-    await dispatch(signUp(username, email, password));
+    await dispatch(signUp(username, email, password)).then(() => {
+      history.push(`/channels/@me`);
+    });
   };
+
   const generateOptions = (start, end) => {
     const options = [];
     for (let i = start; i <= end; i++) {
@@ -131,7 +130,7 @@ function SignupPage() {
           Already have an account?
         </Link>
         <span className="signup-tos">
-          By registering, you agree to PixelPal's Terms of Service and Privacy
+          By registering, you agree to ByteBud's Terms of Service and Privacy
           Policy.
         </span>
       </div>
