@@ -17,6 +17,11 @@ function SplashPage() {
     history.push("/login");
   };
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    history.push(`/register`);
+  };
+
   const handleDemoLogin1 = async (e) => {
     e.preventDefault();
     await dispatch(login("demo@aa.io", "password")).catch(async (res) => {
@@ -64,6 +69,12 @@ function SplashPage() {
             </div>
             <div className="splash-top-nav-right">
               <button
+                className="splash-login-button signup"
+                onClick={handleSignup}
+              >
+                Sign Up
+              </button>
+              <button
                 className="splash-login-button"
                 onClick={handleLoginClick}
               >
@@ -80,7 +91,7 @@ function SplashPage() {
               day and hang out more often.
             </p>
             <button className="splash-open-button" onClick={handleLoginClick}>
-              Open ByteBud in your browser
+              Launch ByteBud 👾
             </button>
           </div>
         </div>

@@ -12,7 +12,7 @@ function UserMenu() {
   const handleLogout = async (e) => {
     e.preventDefault();
     await dispatch(logout()).then(() => {
-      history.push("/");
+      history.push("/login");
     });
   };
 
