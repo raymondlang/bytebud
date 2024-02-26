@@ -293,6 +293,12 @@
 .github-button {
   background: none;
   border: none;
+  transition: transform 0.1s ease;
+}
+
+.linkedin-button:hover,
+.github-button:hover {
+  transform: scale(1.2);
 }
 
 .linkedin-button:hover,
