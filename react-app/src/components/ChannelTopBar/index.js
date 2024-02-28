@@ -26,9 +26,9 @@ function ChannelTopBar() {
     window.alert("Pinned Messages Feature Coming Soon...");
   };
 
-  const handleMemberToggle = (e) => {
-    e.preventDefault();
-    window.alert("Member List Toggle Feature Coming Soon...");
+  //opens the server members sidebar component
+  const openServerMemberSideBar = () => {
+    setModalContent(<ServerMembersSidebar />);
   };
 
   return (
@@ -53,19 +53,12 @@ function ChannelTopBar() {
           <button
             className="threads-button"
             id="toggle-sidebar-button"
-            onClick={toggleSidebar}
+            onClick={() => openServerMemberSideBar()}
           >
             <i className="fa-solid fa-users"></i>
           </button>
         </div>
       </div>
-      {sidebarVisible && (
-        <div className="overlay">
-          <div ref={sidebarRef}>
-            <ServerMembersSidebar />
-          </div>
-        </div>
-      )}
     </>
   );
 }
