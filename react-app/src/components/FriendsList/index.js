@@ -18,6 +18,10 @@ export default function FriendsList() {
   const allFriends = useSelector((state) => state.friends);
   const friendsArr = Object.values(allFriends);
 
+  const DMs = useSelector((state) => state.private.allDMs);
+  const dmsArr = Object.values(DMs);
+  console.log("what is dmsArr!!!!", dmsArr);
+
   useEffect(() => {
     dispatch(getAllFriendsThunk(currentUserId));
   }, [dispatch, currentUserId]);
@@ -53,7 +57,18 @@ export default function FriendsList() {
 
         <div className="friendslist-channel-dm-container">
           <div className="friendslist-channel-dm"> Direct Messages </div>
-          <i className="fa-solid fa-plus" onClick={handleDM} />
+          {dmsArr.map((dm) => {
+            return (
+              <>
+                <div>
+                  {" "}
+                  {dm.user.id == currentUserId
+                    ? dm.userTwo.username
+                    : dm.user.username}
+                </div>
+              </>
+            );
+          })}
         </div>
       </div>
 

@@ -9,7 +9,7 @@ const loadAllDMs = (directMessages) => ({
 
 // Thunks
 export const loadAllDmsThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/private/user/${userId}`);
+  const res = await fetch(`/api/dms/user/${userId}`);
   if (res.ok) {
     let data = await res.json();
     dispatch(loadAllDMs(data));
