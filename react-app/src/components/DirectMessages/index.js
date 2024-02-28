@@ -24,8 +24,7 @@ export default function DirectMessage() {
   const messagesArr = Object.values(messages);
 
   const allDMs = useSelector((state) => state.private.allDMs);
-  const dmsArr = Object.values(allDMs);
-  const currentDM = dmsArr.filter((dm) => dm.id === +dmId);
+  const currentDM = allDMs[+dmId];
 
   const user = useSelector((state) => state.session.user);
 
@@ -39,27 +38,30 @@ export default function DirectMessage() {
     socket = io();
 
     if (socket && user) {
-      socket.emit("join", { private_id: +dmId, username: user.username });
-      socket.on("chat", async (chat) => dispatch(createDMMessageThunk(chat))); // io.emit?
+      socket.emit("join_dm", { private_id: +dmId, username: user.username });
+
+      // receive a message from the server
+      socket.on("dm_chat", async (chat) => {
+        messages[chat.id] = chat;
+        dispatch(loadDMMessagesThunk(+dmId));
+      }); // io.emit?
     }
     // when component unmounts, disconnect
     return () => socket.disconnect();
   }, [+dmId, user]);
-
   if (!allDMs) return null;
-
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
-
     let message = {
       userId: user?.id,
-      privateId: dmId,
+      privateId: +dmId,
       content: content,
       timestamp: new Date(),
+      channelId: "",
     };
-    console.log("message within handlesubmit for direct message", message);
-
-    if (socket) socket.emit("chat", message);
+    const createdMsg = dispatch(createDMMessageThunk(message));
+    // send a message to the server
+    if (socket) socket.emit("dm_chat", createdMsg);
     setContent("");
   };
 
@@ -75,53 +77,52 @@ export default function DirectMessage() {
       <div className="dm-upper-container">
         <div className="dm-upper-user-container">
           <div className="dm-upper-at"> @ </div>
-          {currentDM[0]?.user.id === user?.id ? (
+          {currentDM?.user.id === user?.id ? (
             <div className="dm-upper-username">
               {" "}
-              {currentDM[0]?.userTwo.username.split("#")[0]}{" "}
+              {currentDM?.userTwo.username.split("#")[0]}{" "}
             </div>
           ) : (
-            <div> {currentDM[0]?.user.username.split("#")[0]} </div>
+            <div> {currentDM?.user.username.split("#")[0]} </div>
           )}
         </div>
       </div>
       <div className="dm-outer-container">
         <div className="dm-chat-history-container">
-          {currentDM[0]?.user.id === user?.id ? (
+          {currentDM?.user.id === user?.id ? (
             <>
               <img
-                src={currentDM[0]?.userTwo.prof_pic}
+                src={currentDM?.userTwo.prof_pic}
                 className="dm-chat-history-pic"
               />
               <div className="dm-chat-history-user">
                 {" "}
-                {currentDM[0]?.userTwo.username.split("#")[0]}{" "}
+                {currentDM?.userTwo.username.split("#")[0]}{" "}
               </div>
               <div className="dm-chat-history-text">
                 {" "}
                 This is the beginning of your direct message history with{" "}
-                {currentDM[0]?.userTwo.username.split("#")[0]}
+                {currentDM?.userTwo.username.split("#")[0]}
               </div>
             </>
           ) : (
             <>
               <img
-                src={currentDM[0]?.user.prof_pic}
+                src={currentDM?.user.prof_pic}
                 className="dm-chat-history-pic"
               />
               <div className="dm-chat-history-user">
                 {" "}
-                {currentDM[0]?.user.username.split("#")[0]}{" "}
+                {currentDM?.user.username.split("#")[0]}{" "}
               </div>
               <div>
                 {" "}
                 This is the beginning of your direct message history with{" "}
-                {currentDM[0]?.user.username.split("#")[0]}{" "}
+                {currentDM?.user.username.split("#")[0]}{" "}
               </div>
             </>
           )}
         </div>
-
         <div className="dm-msg-item-overall" id="scroller">
           {messagesArr.map((msg) => {
             return (
@@ -129,6 +130,7 @@ export default function DirectMessage() {
                 <div className="dm-msg-left">
                   <img src={msg?.user?.prof_pic} className="dm-msg-profpic" />
                 </div>
+
                 <div className="dm-msg-center">
                   <div className="dm-msg-user">
                     <div className="dm-msg-username">
@@ -144,12 +146,14 @@ export default function DirectMessage() {
                     ) : null}
                   </div>
                 </div>
+
                 <div className="dm-msg-right">
                   <EmojisModal props={msg.id} />
                 </div>
               </div>
             );
           })}
+
           <div id="anchor"></div>
         </div>
         <div className="dm-msg-form-background">
@@ -161,9 +165,9 @@ export default function DirectMessage() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder={
-                  currentDM[0]?.user.id === user?.id
-                    ? `Message ${currentDM[0]?.userTwo.username.split("#")[0]}`
-                    : `Message ${currentDM[0]?.user.username.split("#")[0]}`
+                  currentDM?.user.id === user?.id
+                    ? `Message ${currentDM?.userTwo.username.split("#")[0]}`
+                    : `Message ${currentDM?.user.username.split("#")[0]}`
                 }
                 onKeyPress={enterKey}
                 required
