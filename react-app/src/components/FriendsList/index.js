@@ -43,7 +43,7 @@ export default function FriendsList() {
 
   return (
     <div>
-      <div className="friendslist-channel-container">
+      {/* <div className="friendslist-channel-container"> */}
         <div className="friendslist-search-div">
           <input
             placeholder="Find or start a conversation"

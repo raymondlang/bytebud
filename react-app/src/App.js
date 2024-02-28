@@ -13,6 +13,8 @@ import MessageForm from "./components/MessageForm";
 import ChannelTopBar from "./components/ChannelTopBar";
 import UserMenu from "./components/UserMenu";
 import NotFound from "./components/NotFound";
+import DirectMessage from "./components/DirectMessages";
+import FriendsListSideBar from "./componets/Friendsliset/FriendsListSideBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,42 +26,59 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      <Switch>
-        <Route exact path="/">
-          <SplashPage />
-        </Route>
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
-        <Route exact path="/register">
-          <SignupFormPage />
-        </Route>
-        <Route>
-          <NotFound sessionUser={sessionUser} />
-        </Route>
-      </Switch>
       {isLoaded && (
         <>
-          <ServersSidebar />
-          <Switch>
-            <Route exact path="/channels/@me">
-              <FriendsList />
-              <UserMenu />
-            </Route>
-            <Route exact path="/channels/:serverId/:channelId">
-              <ChannelSideBar />
-              <ChannelTopBar />
-              <MessageForm />
-              <UserMenu />
-            </Route>
-            <Route>
-              <NotFound sessionUser={sessionUser} />
-            </Route>
-          </Switch>
+          {sessionUser ? (
+            <>
+              <Switch>
+                <Route exact path="/">
+                  <FriendsList />
+                  <UserMenu />
+                  <ServersSidebar />
+                </Route>
+                <Route exact path="/channels/@me/:dmId">
+                  <ServersSidebar />
+                  <FriendsListSideBar />
+                  <DirectMessage />
+                </Route>
+                <Route exact path="/channels/@me">
+                  <FriendsList />
+                  <FriendsListSideBar />
+                  <UserMenu />
+                  <ServersSidebar />
+                </Route>
+                <Route exact path="/channels/:serverId/:channelId">
+                  <ChannelSideBar />
+                  <ChannelTopBar />
+                  <MessageForm />
+                  <UserMenu />
+                  <ServersSidebar />
+                </Route>
+
+                <Route>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </>
+          ) : (
+            <Switch>
+              <Route exact path="/">
+                <SplashPage />
+              </Route>
+              <Route exact path="/login">
+                <LoginPage />
+              </Route>
+              <Route exact path="/register">
+                <SignupFormPage />
+              </Route>
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          )}
         </>
       )}
     </>
   );
 }
-
 export default App;
