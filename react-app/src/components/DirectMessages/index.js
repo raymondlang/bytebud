@@ -40,7 +40,7 @@ export default function DirectMessage() {
 
     if (socket && user) {
       socket.emit("join", { private_id: +dmId, username: user.username });
-      socket.on("chat", (chat) => setMsg(chat));
+      socket.on("chat", async (chat) => dispatch(createDMMessageThunk(chat))); // io.emit?
     }
     // when component unmounts, disconnect
     return () => socket.disconnect();
@@ -49,24 +49,23 @@ export default function DirectMessage() {
   if (!allDMs) return null;
 
   const handleSubmit = async (e) => {
-    // e is undefined if message sent with Enter key, check if it exists (message sent by clicking Send button) before running e.preventDefault()
     if (e) e.preventDefault();
 
     let message = {
       userId: user?.id,
-      private_id: dmId,
+      privateId: dmId,
       content: content,
       timestamp: new Date(),
     };
-    let createdMsg = await dispatch(createMessage(message));
+    console.log("message within handlesubmit for direct message", message);
 
-    if (socket) socket.emit("chat", createdMsg);
+    if (socket) socket.emit("chat", message);
     setContent("");
   };
 
   const enterKey = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault();
+      //   e.preventDefault();
       handleSubmit();
     }
   };
@@ -122,18 +121,19 @@ export default function DirectMessage() {
             </>
           )}
         </div>
-        <div>
+
+        <div className="dm-msg-item-overall" id="scroller">
           {messagesArr.map((msg) => {
             return (
-              <div key={`msg-${msg.id}`} className="dm-msg-container">
+              <div key={`msg-${msg?.id}`} className="dm-msg-container">
                 <div className="dm-msg-left">
-                  <img src={msg.user.prof_pic} className="dm-msg-profpic" />
+                  <img src={msg?.user?.prof_pic} className="dm-msg-profpic" />
                 </div>
                 <div className="dm-msg-center">
                   <div className="dm-msg-user">
                     <div className="dm-msg-username">
                       {" "}
-                      {msg.user.username.split("#")[0]}{" "}
+                      {msg.user?.username.split("#")[0]}{" "}
                     </div>
                     <div className="dm-msg-timestamp"> {msg.timestamp} </div>
                   </div>
@@ -150,43 +150,50 @@ export default function DirectMessage() {
               </div>
             );
           })}
+          <div id="anchor"></div>
         </div>
-        <div className="dm-msg-form-container">
-          <form onSubmit={handleSubmit}>
-            <textarea
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder={`Message <<FRIEND>>`}
-              onKeyPress={enterKey}
-              required
-            />
-
-            <div className="dm-msg-form-right">
-              <div
-                className={
-                  content.length >= 1800
-                    ? content.length > 2000
-                      ? "character-count-error"
-                      : "character-count-warning"
-                    : "message-hidden"
+        <div className="dm-msg-form-background">
+          <div className="dm-msg-form-container">
+            <form onSubmit={handleSubmit} className="dm-msg-form">
+              <textarea
+                className="dm-msg-form-input"
+                type="text"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder={
+                  currentDM[0]?.user.id === user?.id
+                    ? `Message ${currentDM[0]?.userTwo.username.split("#")[0]}`
+                    : `Message ${currentDM[0]?.user.username.split("#")[0]}`
                 }
-              >
-                {2000 - content.length}
+                onKeyPress={enterKey}
+                required
+              />
+              <div className="dm-msg-form-right">
+                <div
+                  className={
+                    content.length >= 1800
+                      ? content.length > 2000
+                        ? "dm-character-count-error"
+                        : "dm-character-count-warning"
+                      : "dm-msg-hidden"
+                  }
+                >
+                  {2000 - content.length}
+                </div>
+                <button
+                  className={
+                    content.length > 2000
+                      ? "dm-msg-form-button dm-msg-form-text dm-msg-form-disabled"
+                      : "message-form-button message-form-text"
+                  }
+                  type="submit"
+                  disabled={content.length > 2000}
+                >
+                  Send
+                </button>
               </div>
-              <button
-                className={
-                  content.length > 2000
-                    ? "message-form-button message-form-text message-form-disabled"
-                    : "message-form-button message-form-text"
-                }
-                type="submit"
-                disabled={content.length > 2000}
-              >
-                Send
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </>

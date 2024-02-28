@@ -29,9 +29,10 @@
   left: 298px;
   right: 0px;
   bottom: 49px;
+  overflow-y: scroll;
   background-color: rgb(49, 51, 56);
   color: rgb(179, 184, 191);
-  font-family: "PixelPal";
+  font-family: "ByteBud";
 }
 
 .dm-chat-history-container {
@@ -76,6 +77,11 @@
   margin-left: 20px;
 }
 
+.dm-msg-left {
+  display: flex;
+  align-items: flex-start;
+}
+
 .dm-msg-profpic {
   height: 40px;
   width: 40px;
@@ -85,12 +91,21 @@
   margin-left: 10px;
 }
 
+.dm-msg-left-and-center {
+  display: flex;
+  width: 80%;
+}
+
 .dm-msg-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 15px;
   margin-bottom: 10px;
   margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow-y: scroll;
 }
 
 .dm-msg-user {
