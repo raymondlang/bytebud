@@ -86,9 +86,10 @@ function SplashPage() {
             <p className="imagine-text">IMAGINE A PLACE...</p>
             <p className="where-you-can-text">
               ...where you can belong to a school club, a gaming group, or a
-              worldwide art community. Where just you and a handful of friends
-              can spend time together. A place that makes it easy to talk every
-              day and hang out more often.
+              worldwide art community. where just you and a handful of friends
+              can spend time together. a place that makes it easy to talk every
+              day and hang out more often.somewhere you can go with just a click
+              of a button.
             </p>
             <button className="splash-open-button" onClick={handleLoginClick}>
               Launch ByteBud 👾
@@ -96,7 +97,7 @@ function SplashPage() {
           </div>
         </div>
         <div className="splash-middle">
-          <p className="meet-developers-text">Meet the Developer</p>
+          <p className="meet-developers-text">meet the developer</p>
           <div className="devs-container">
             <button
               className="portfolio-button raymond-button"
@@ -127,7 +128,7 @@ function SplashPage() {
         </div>
         <div className="splash-bottom">
           <div className="tech-stack-container">
-            <p className="tech-stack-text">IMAGINE A TECH STACK</p>
+            <p className="tech-stack-text">THE TECH STACK</p>
             <div className="technologies">
               <ul className="tech-list">
                 <li className="tech-type">Frontend</li>

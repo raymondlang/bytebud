@@ -198,6 +198,18 @@
   width: 70%;
 }
 
+@media (max-width: 1519px) {
+  .devs-container {
+    width: 1000px;
+  }
+}
+
+@media (max-width: 780px) {
+  .devs-container {
+    width: 500px;
+  }
+}
+
 .portfolio-button {
   padding: 0;
   margin: 15px 30px 15px;
