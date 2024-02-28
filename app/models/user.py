@@ -39,3 +39,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             # 'servers': [server.to_dict() for server in self.servers]
         }
+
+    def to_username(self):
+        return self.username
