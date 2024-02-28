@@ -6,6 +6,7 @@ import {
   getChannelDetails,
   createChannel,
 } from "../../store/channels";
+import { useHistory } from "react-router-dom";
 import "./creat-channel.css";
 
 function NewChannel({ serverId }) {
@@ -15,18 +16,17 @@ function NewChannel({ serverId }) {
   const [channelType, setChannelType] = useState("text");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(createChannel(name, description, serverId));
-    if (data) {
-      setErrors(data);
-    } else {
-      closeModal();
+    const data = await dispatch(createChannel(name, serverId)).then((res) => {
       dispatch(getServerChannels(serverId));
-    }
+      history.push(`/channels/${res.serverId}/${res.id}`);
+      closeModal();
+    });
   };
 
   return (
