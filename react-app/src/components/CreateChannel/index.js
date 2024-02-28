@@ -22,7 +22,7 @@ function NewChannel({ serverId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(createChannel(name, serverId)).then((res) => {
+    await dispatch(createChannel(name, serverId)).then((res) => {
       dispatch(getServerChannels(serverId));
       history.push(`/channels/${res.serverId}/${res.id}`);
       closeModal();
