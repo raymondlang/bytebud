@@ -41,10 +41,9 @@ export default function DirectMessage() {
       socket.emit("join_dm", { private_id: +dmId, username: user.username });
 
       // receive a message from the server
-      socket.on("dm_chat", async (chat) => {
-        messages[chat.id] = chat;
-        dispatch(loadDMMessagesThunk(+dmId));
-      }); // io.emit?
+      socket.on("dm_chat", async (chat) =>
+        dispatch(createDMMessageThunk(chat))
+      );
     }
     // when component unmounts, disconnect
     return () => socket.disconnect();
@@ -59,9 +58,9 @@ export default function DirectMessage() {
       timestamp: new Date(),
       channelId: "",
     };
-    const createdMsg = dispatch(createDMMessageThunk(message));
+
     // send a message to the server
-    if (socket) socket.emit("dm_chat", createdMsg);
+    if (socket) socket.emit("dm_chat", message);
     setContent("");
   };
 
