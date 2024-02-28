@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom/";
-import { loadDMMessagesThunk, clearDMMessages } from "../../store/private";
+import {
+  loadDMMessagesThunk,
+  clearDMMessages,
+  createDMMessageThunk,
+} from "../../store/private";
 import EmojisModal from "../EmojisModal/AllEmojisModal";
 import { io } from "socket.io-client";
 import "./DirectMessages.css";
@@ -54,10 +58,10 @@ export default function DirectMessage() {
       content: content,
       timestamp: new Date(),
     };
-    // let createdMsg = await dispatch(createMessage(message));
+    let createdMsg = await dispatch(createMessage(message));
 
-    // if (socket) socket.emit("chat", createdMsg);
-    // setContent("");
+    if (socket) socket.emit("chat", createdMsg);
+    setContent("");
   };
 
   const enterKey = (e) => {
