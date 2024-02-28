@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OpenModalMenuItem from "../EmojisModal/OpenModalMenuItem";
 import { getAllFriendsThunk } from "../../store/friends";
 import EmojisModal from "../EmojisModal/AllEmojisModal";
+import { loadAllDmsThunk } from "../../store/private";
 import "./FriendsList.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 

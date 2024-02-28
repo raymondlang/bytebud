@@ -26,6 +26,9 @@ export default function privateReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_DMS:
       newState = { ...state, allDMs: {} };
+      action.directMessages.forEach((dm) => {
+        newState.allDMs[dm.id] = dm;
+      });
       return newState;
     default:
       return state;
