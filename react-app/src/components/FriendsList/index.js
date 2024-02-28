@@ -60,11 +60,22 @@ export default function FriendsList() {
           {dmsArr.map((dm) => {
             return (
               <>
-                <div>
-                  {" "}
-                  {dm.user.id == currentUserId
-                    ? dm.userTwo.username
-                    : dm.user.username}
+                <div className="friendslist-dm-user-container">
+                  <img
+                    alt=""
+                    src={
+                      dm.user.id === currentUserId
+                        ? dm.userTwo.prof_pic
+                        : dm.user.prof_pic
+                    }
+                    className="friendslist-profpic"
+                  />
+                  <div className="friendslist-dm-username">
+                    {" "}
+                    {dm.user.id === currentUserId
+                      ? dm.userTwo.username.split("#")[0]
+                      : dm.user.username.split("#")[0]}
+                  </div>
                 </div>
               </>
             );
