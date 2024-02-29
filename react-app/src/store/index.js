@@ -5,13 +5,21 @@ import serverReducer from "./server";
 import userReducer from "./user";
 import emojisReducer from "./emojis";
 import messageReducer from "./message";
+import friendRequestReducer from "./request";
+import friendsReducer from "./friends";
+import channelReducer from "./channels";
+import privateReducer from "./private";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   server: serverReducer,
-  user: userReducer,
+  // user: userReducer,
+  messages: messageReducer,
   emoji: emojisReducer,
-  message: messageReducer,
+  friends: friendsReducer,
+  channels: channelReducer,
+  private: privateReducer,
+  requests: friendRequestReducer,
 });
 
 let enhancer;

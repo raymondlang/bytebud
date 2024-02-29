@@ -72,10 +72,12 @@
 .friendslist-user-container-1 {
   border-bottom: thin rgb(57, 59, 65) solid;
   margin-left: 20px;
-  padding-top: 10px;
+  padding-top: 13px;
   height: 30px;
   color: rgb(179, 184, 191);
-  font-family: "ByteBud";
+  font-family: "PixelPal";
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .friendslist-friends,
@@ -362,4 +364,35 @@
 .friendslist-dm-link.active {
   background-color: rgb(57, 59, 65);
   border-radius: 10px;
+}
+
+.friendslist-all-link:hover {
+  border-radius: 8px;
+  background-color: rgb(66, 68, 74);
+  cursor: pointer;
+}
+
+.friendslist-all-link {
+  font-family: "PixelPal";
+  font-size: 16px;
+  font-weight: bolder;
+  color: rgb(238, 239, 242);
+  text-decoration: none;
+  text-align: center;
+
+  padding: 3px 10px 3px;
+  margin-left: 25px;
+  margin-top: 4px;
+  border-radius: 8px;
+  width: auto;
+}
+
+.friendslist-all-link.active {
+  background-color: rgb(57, 59, 65);
+  border-radius: 5px;
+}
+
+.friendslist-all-link.active:hover {
+  background-color: rgb(45, 47, 51);
+  border-radius: 5px;
 }
