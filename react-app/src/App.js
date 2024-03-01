@@ -16,6 +16,7 @@ import NotFound from "./components/NotFound";
 import DirectMessage from "./components/DirectMessages";
 import FriendsListSideBar from "./componets/Friendsliset/FriendsListSideBar";
 import PendingRequests from "./components/PendingRequests";
+import AddFriend from "./components/AddFriend";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,12 @@ function App() {
                 </Route>
                 <Route exact path="/channels/@me/pending">
                   <PendingRequests />
+                  <FriendsListSideBar />
+                  <UserMenu />
+                  <ServersSidebar />
+                </Route>
+                <Route exact path="/channels/@me/add">
+                  <AddFriend />
                   <FriendsListSideBar />
                   <UserMenu />
                   <ServersSidebar />

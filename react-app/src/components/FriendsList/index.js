@@ -43,7 +43,7 @@ export default function FriendsList() {
 
   return (
     <div>
-      {/* <div className="friendslist-channel-container"> */}
+      <div className="friendslist-channel-container">
         <div className="friendslist-search-div">
           <input
             placeholder="Find or start a conversation"
@@ -92,10 +92,20 @@ export default function FriendsList() {
             {" "}
             All{" "}
           </div>
-          <div className="friendslist-all" onClick={handleFriendOptions}>
-            {" "}
-            Pending{" "}
-          </div>
+          <NavLink
+            exact
+            to={`/channels/@me/pending`}
+            className="friendslist-all-link"
+          >
+            <div className="friendslist-all"> Pending </div>
+          </NavLink>
+          <NavLink
+            exact
+            to={`/channels/@me/add`}
+            className="friendslist-add-link"
+          >
+            <div className="friendslist-all"> Add Friend </div>
+          </NavLink>
           <div className="friendslist-all" onClick={handleFriendOptions}>
             {" "}
             Blocked{" "}

@@ -3,29 +3,39 @@ import { useEffect } from "react";
 import {
   getReceivedRequests,
   getSentRequests,
-  createSentRequest,
   deleteReceivedRequest,
   deleteSentRequest,
 } from "../../store/request";
+import { createFriend } from "../../store/friends";
 import { NavLink } from "react-router-dom";
+import wumpus from "../../static/Requests/wumpus-discord.svg";
 import "./PendingRequests.css";
 
 export default function PendingRequests() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getReceivedRequests());
     dispatch(getSentRequests());
   }, [dispatch]);
-
   const receivedRequestsObj = useSelector((state) => state.requests.received);
   const sentRequestsObj = useSelector((state) => state.requests.sent);
-
   if (!receivedRequestsObj) return null;
   if (!sentRequestsObj) return null;
-
   const receivedRequestsArr = Object.values(receivedRequestsObj);
   const sentRequestsArr = Object.values(sentRequestsObj);
+
+  const handleAccept = async (requestId) => {
+    await dispatch(createFriend(requestId));
+    await dispatch(deleteReceivedRequest(requestId));
+  };
+
+  const handleDecline = async (requestId) => {
+    await dispatch(deleteReceivedRequest(requestId));
+  };
+
+  const handleDeleteSent = async (requestId) => {
+    await dispatch(deleteSentRequest(requestId));
+  };
 
   return (
     <div>
@@ -43,12 +53,41 @@ export default function PendingRequests() {
           >
             <div className="friendslist-all"> Pending </div>
           </NavLink>
+          <NavLink
+            exact
+            to={`/channels/@me/add`}
+            className="friendslist-add-link"
+          >
+            <div className="friendslist-all"> Add Friend </div>
+          </NavLink>
         </div>
-
-        <div className="friendslist-received-container">
+        <div
+          className={
+            receivedRequestsArr.length === 0 && sentRequestsArr.length === 0
+              ? "wumpus-container"
+              : "hidden"
+          }
+        >
+          <img
+            className="no-pending-wumpus"
+            src={wumpus}
+            alt="no pending friends wumpus"
+          />
+          <p className="wumpus-text">
+            You have no pending friend requests. Here's Wumpus for now.
+          </p>
+        </div>
+        <div
+          className={
+            receivedRequestsArr.length !== 0
+              ? "friendslist-received-container"
+              : "hidden"
+          }
+        >
           {" "}
           RECEIVED REQUESTS - {receivedRequestsArr.length}{" "}
         </div>
+
         <div>
           {receivedRequestsArr.map((receivedRequest) => {
             return (
@@ -76,16 +115,34 @@ export default function PendingRequests() {
                 </div>
 
                 <div className="friendslist-chat-icon">
-                  <div className="icon-hover">
+                  <div
+                    className="request-icon accept-icon"
+                    onClick={() => handleAccept(receivedRequest.id)}
+                  >
                     {" "}
                     <i className="fa-solid fa-check"></i>{" "}
+                  </div>
+                  <div
+                    className="request-icon decline-icon"
+                    onClick={() => handleDecline(receivedRequest.id)}
+                  >
+                    {" "}
+                    <i className="fa-solid fa-x"></i>{" "}
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="friendslist-sent-container">
+        <div
+          className={
+            sentRequestsArr.length === 0
+              ? "hidden"
+              : receivedRequestsArr.length === 0
+              ? "friendslist-sent-only-container"
+              : "friendslist-sent-container"
+          }
+        >
           {" "}
           SENT REQUESTS - {sentRequestsArr.length}{" "}
         </div>
@@ -93,7 +150,11 @@ export default function PendingRequests() {
           {sentRequestsArr.map((sentRequest) => {
             return (
               <div
-                className="friendslist-request-user-container sent-request-container"
+                className={
+                  receivedRequestsArr.length === 0
+                    ? "friendslist-request-user-container only-sent-request-container"
+                    : "friendslist-request-user-container sent-request-container"
+                }
                 key={`friend${sentRequest.receiverUser.id}`}
               >
                 <div className="friendslist-pic-username">
@@ -116,9 +177,12 @@ export default function PendingRequests() {
                 </div>
 
                 <div className="friendslist-chat-icon">
-                  <div className="icon-hover">
+                  <div
+                    className="request-icon decline-icon"
+                    onClick={() => handleDeleteSent(sentRequest.id)}
+                  >
                     {" "}
-                    <i className="fa-solid fa-message" />{" "}
+                    <i className="fa-solid fa-x" />{" "}
                   </div>
                 </div>
               </div>
