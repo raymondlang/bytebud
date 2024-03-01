@@ -11,20 +11,20 @@ function ChannelTopBar() {
 
   if (!currChannel) return null;
 
-  const handleThreads = (e) => {
-    e.preventDefault();
-    window.alert("Threads Feature Coming Soon...");
-  };
+  // const handleThreads = (e) => {
+  //   e.preventDefault();
+  //   window.alert("Threads Feature Coming Soon...");
+  // };
 
-  const handleNotifications = (e) => {
-    e.preventDefault();
-    window.alert("Notifications Feature Coming Soon...");
-  };
+  // const handleNotifications = (e) => {
+  //   e.preventDefault();
+  //   window.alert("Notifications Feature Coming Soon...");
+  // };
 
-  const handlePinned = (e) => {
-    e.preventDefault();
-    window.alert("Pinned Messages Feature Coming Soon...");
-  };
+  // const handlePinned = (e) => {
+  //   e.preventDefault();
+  //   window.alert("Pinned Messages Feature Coming Soon...");
+  // };
 
   //opens the server members sidebar component
   const openServerMemberSideBar = () => {
@@ -41,7 +41,7 @@ function ChannelTopBar() {
           </div>
         </div>
         <div className="channel-topbar-right-side">
-          <button className="threads-button" onClick={handleThreads}>
+          {/* <button className="threads-button" onClick={handleThreads}>
             <i className="fa-solid fa-hashtag"></i>
           </button>
           <button className="threads-button" onClick={handleNotifications}>
@@ -49,7 +49,7 @@ function ChannelTopBar() {
           </button>
           <button className="threads-button" onClick={handlePinned}>
             <i className="fa-solid fa-thumbtack"></i>
-          </button>
+          </button> */}
           <button
             className="threads-button"
             id="toggle-sidebar-button"

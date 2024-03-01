@@ -134,3 +134,17 @@
   font-size: 16px;
   color: white;
 }
+
+.dm-msg-center {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  flex-direction: column;
+  word-break: break-all;
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+
+.dm-msg-right {
+  margin-top: -30px;
+}

@@ -32,7 +32,6 @@ def create_channel():
 
     if form.validate_on_submit():
         # create a new channel object
-
         channel = Channel(name=data["name"], server_id=data["server_id"])
 
         # add the channel to the database

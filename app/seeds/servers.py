@@ -14,7 +14,7 @@ def seed_servers():
         Server(
             owner_id=2,
             name="Byte Buds Rock",
-            description="Server for the cool cats that call themselves Pixel Pals",
+            description="Server for the cool cats that call themselves Byte Buds",
             server_picture='image.url'
         )
     ]

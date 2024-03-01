@@ -5,4 +5,5 @@ from .channel import Channel
 from .message import Message
 from .reaction import Reaction
 from .server import Server
-from .privateMessage import PrivateMessage
+from .privateMessage import PrivateChannel
+from .request import Request

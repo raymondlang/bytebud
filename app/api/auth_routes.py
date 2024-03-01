@@ -7,6 +7,7 @@ import random
 
 auth_routes = Blueprint('auth', __name__)
 
+
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -64,9 +65,9 @@ def sign_up():
     if form.validate_on_submit():
         random_tag = random.randint(1000, 9999)
         username_hashtag = f"{form.data['username']}#{random_tag}"
+
         user = User(
             username=username_hashtag,
-            username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
             prof_pic = "https://bst.icons8.com/wp-content/uploads/2021/08/22.png"
