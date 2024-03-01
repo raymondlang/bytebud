@@ -22,14 +22,6 @@ function SplashPage() {
     history.push(`/register`);
   };
 
-  const handleDemoLogin1 = async (e) => {
-    e.preventDefault();
-    await dispatch(login("demo@aa.io", "password")).catch(async (res) => {
-      const errData = await res.json();
-      console.log(errData);
-    });
-  };
-
   function handleRayLinkedIn() {
     window.open("https://www.linkedin.com/in/raymondlang/", "_blank");
   }
@@ -88,8 +80,8 @@ function SplashPage() {
               ...where you can belong to a school club, a gaming group, or a
               worldwide art community. where just you and a handful of friends
               can spend time together. a place that makes it easy to talk every
-              day and hang out more often.somewhere you can go with just a click
-              of a button.
+              day and hang out more often. somewhere you can go with just a
+              click of a button.
             </p>
             <button className="splash-open-button" onClick={handleLoginClick}>
               Launch ByteBud 👾
