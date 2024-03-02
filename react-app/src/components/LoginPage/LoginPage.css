@@ -1,21 +1,24 @@
 @font-face {
-  font-family: "Bytebud";
+  font-family: "ByteBud";
   src: url("../../static/ggsans-Normal.ttf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Thin";
   src: url("../../static/Uni\ Sans\ Thin.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Bold";
   src: url("../../static/Uni\ Sans\ Heavy.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 .wallpaper {
   position: fixed;
   top: 0;
