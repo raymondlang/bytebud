@@ -1,8 +1,6 @@
 // Constants
 const LOAD_EMOJIS = "emojis/LOAD_EMOJIS";
 const LOAD_ONE_EMOJI = "emojis/LOAD_ONE_EMOJI";
-const CREATE_REACTION = "emojis/CREATE_REACTIONS";
-const DELETE_REACTION = "emojis/DELETE_REACTION";
 
 // Action Creators
 const loadEmojis = (emojis) => ({
@@ -13,10 +11,6 @@ const loadEmojis = (emojis) => ({
 const loadOneEmoji = (emoji) => ({
   type: LOAD_ONE_EMOJI,
   emoji,
-});
-
-const deleteReaction = () => ({
-  type: DELETE_REACTION,
 });
 
 // Thunks
@@ -40,21 +34,10 @@ export const loadOneEmojiThunk = (id) => async (dispatch) => {
   }
 };
 
-export const deleteReactionThunk = (reactionId) => async (dispatch) => {
-  const response = await fetch(`/api/emojis/${reactionId}`);
-
-  if (response.ok) {
-    // let del_reaction = await response.json()
-    dispatch(deleteReaction());
-    return "successfully deleted!";
-  }
-};
-
 // reducer
 
 let initialState = {
   allEmojis: {},
-  emoji: {},
 };
 
 export default function emojisReducer(state = initialState, action) {

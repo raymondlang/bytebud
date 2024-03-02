@@ -1,23 +1,27 @@
 // constants
 const GET_ALL_FRIENDS = "friends/GET_ALL_FRIENDS";
 const ADD_FRIEND = "friends/ADD_FRIEND";
-// const DELETE_FRIEND = "friends/DELETE_FRIEND";
+// const DELETE_FRIEND = 'friends/DELETE_FRIEND'
+
 // Action Creators
 const getAllFriends = (friends) => ({
   type: GET_ALL_FRIENDS,
   friends,
 });
-const addFriend = (friend) => ({
+
+export const addFriend = (friend) => ({
   type: ADD_FRIEND,
   friend,
 });
+
 // const deleteFriend = () => ({
-//   type: DELETE_FRIEND,
-// });
+//   type: DELETE_FRIEND
+// })
+
 // Thunks
 
 export const getAllFriendsThunk = (userId) => async (dispatch) => {
-  const response = await fetch("api/friends");
+  const response = await fetch(`/api/friends/${userId}`);
 
   if (response.ok) {
     let friends = await response.json();
@@ -41,6 +45,7 @@ export const createFriend = (requestId) => async (dispatch) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
   });
+
   if (response.ok) {
     const friendsArr = await response.json();
     const friendObj = friendsArr[1]; // the new friend is friendUser in the 1 index of friendsArr
@@ -51,7 +56,9 @@ export const createFriend = (requestId) => async (dispatch) => {
 };
 
 // reducer
+
 let initialState = {};
+
 export default function friendsReducer(state = initialState, action) {
   let newState = {};
   switch (action.type) {
