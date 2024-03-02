@@ -4,18 +4,21 @@
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Thin";
   src: url("../../static/Uni\ Sans\ Thin.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Bold";
   src: url("../../static/Uni\ Sans\ Heavy.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 .channel-sidebar {
   background-color: #2b2d31;
   position: fixed;
@@ -25,6 +28,7 @@
   width: 230px;
   overflow-y: auto;
 }
+
 .channel-sidebar::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -50,10 +54,10 @@
   height: 50px;
   width: 200px;
 }
+
 .server-name-text {
   font-family: "ByteBud";
   font-weight: bolder;
-  margin-left: 15px;
   font-size: 18px;
   color: #dedfe1;
 }
@@ -62,8 +66,7 @@
   display: flex;
   align-items: center;
   margin-top: 20px;
-  align-items: center;
-  border: 2px green solid;
+  justify-content: space-between;
 }
 
 .modal-new-channel button {
@@ -75,9 +78,11 @@
   background: transparent;
   border: none;
 }
+
 .modal-new-channel button:hover {
   color: whitesmoke;
 }
+
 .text-channels {
   color: #949ba4;
   font-family: "Discord Bold";
@@ -106,6 +111,7 @@
   width: 200px;
   border-radius: 3px;
 }
+
 .hashtag {
   color: #60636b;
   font-size: 25px;
@@ -116,6 +122,7 @@
 .channel-text-name {
   font-size: 16px;
   color: #949ba4;
+  margin-right: 5px;
 }
 
 .channel-divs.selected {
@@ -172,7 +179,7 @@
 }
 
 .server-dropdown-content {
-  /* display: none; */
+  /* display: block; */
   position: absolute;
   background-color: #131416;
   min-width: 140px;

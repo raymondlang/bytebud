@@ -4,18 +4,21 @@
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Thin";
   src: url("../../static/Uni\ Sans\ Thin.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Discord Bold";
   src: url("../../static/Uni\ Sans\ Heavy.otf");
   font-weight: normal;
   font-style: normal;
 }
+
 .channel-messages-top {
   display: flex;
   flex-direction: column;
@@ -23,6 +26,7 @@
   border-bottom: solid 1px #a9bac181;
   margin-bottom: 15px;
 }
+
 .channel-icon-container {
   display: flex;
   justify-content: center;
@@ -33,6 +37,7 @@
   margin-top: 15px;
   background-color: #41434a;
 }
+
 .channel-icon {
   font-family: "ByteBud";
   font-size: 48px;
@@ -42,12 +47,14 @@
   color: white;
   margin: 0;
 }
+
 .channel-messages-welcome {
   font-family: "ByteBud";
   font-size: 36px;
   color: white;
   margin: 10px 0px 10px;
 }
+
 .channel-messages-start {
   font-family: "ByteBud";
   color: #a9bac1;
@@ -59,11 +66,10 @@
   position: fixed;
   top: 51px;
   left: 298px;
-  right: 232px;
+  right: 0px;
   bottom: 49px;
   padding: 15px;
   margin: 0;
-  height: 95vh;
   box-sizing: border-box;
   overflow-y: scroll;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -76,13 +82,4 @@
 
 .message-item-container {
   padding-bottom: 15px;
-}
-
-#scroller * {
-  overflow-anchor: none;
-}
-
-#anchor {
-  overflow-anchor: auto;
-  height: 1px;
 }

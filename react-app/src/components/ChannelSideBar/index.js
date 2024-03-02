@@ -1,19 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import "./channels.css";
-import {
-  getServerChannels,
-  getChannelDetails,
-  createChannel,
-} from "../../store/channels";
+import { getServerChannels, getChannelDetails } from "../../store/channels";
 import { getServer } from "../../store/server";
+import ServerEditModal from "../ServerEditModal";
+import ServerDeleteModal from "../ServerDeleteModal";
 import OpenModalButton from "../OpenModalButton";
 import NewChannel from "../CreateChannel";
 import UpdateChannel from "../EditChannel";
 import "./channels.css";
-import ServerEditModal from "../ServerEditModal";
-import ServerDeleteModal from "../ServerDeleteModal";
 
 function ChannelSideBar() {
   const serverSetting = useRef();
@@ -27,8 +22,6 @@ function ChannelSideBar() {
   let currServer = useSelector((state) => state.server.currentServer);
 
   let isServerOwner;
-
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(getServerChannels(serverId));
@@ -49,40 +42,18 @@ function ChannelSideBar() {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
-  if (!allChannels) allChannels = [];
-  else allChannels = Object.values(allChannels);
-  if (!currServer) currServer = {};
-  else {
-    currServer = Object.values(currServer);
-    currServer = currServer[0];
-  }
 
   if (!allChannels) allChannels = [];
   else allChannels = Object.values(allChannels);
 
+  if (!user) return null;
   if (!currChannel) return null;
-  if (!currServer) {
-    return null;
-  } else {
-    isServerOwner = user.id === currServer.owner_id;
-  }
+  if (!currServer) return null;
+  else isServerOwner = user.id === currServer.owner_id;
 
   let serverSettingClassName;
-  if (showMenu) {
-    serverSettingClassName = "server-dropdown-content";
-  } else {
-    serverSettingClassName = "hidden";
-  }
-
-  window.onclick = function (event) {
-    if (!event.target.matches(".server-btn")) {
-      var dropdown = document.getElementById("server-dropdown");
-
-      if (dropdown.classList.contains("visible")) {
-        dropdown.classList.remove("visible");
-      }
-    }
-  };
+  if (showMenu) serverSettingClassName = "server-dropdown-content";
+  else serverSettingClassName = "hidden";
 
   return (
     <div className="channel-sidebar">
@@ -173,4 +144,5 @@ function ChannelSideBar() {
     </div>
   );
 }
+
 export default ChannelSideBar;
