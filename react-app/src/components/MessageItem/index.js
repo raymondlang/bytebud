@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import "./MessageItem.css";
-import "./Reaction.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   createReactionThunk,
   deleteReactionThunk,
   getChannelMessages,
 } from "../../store/message";
-import EmojisModal from "../EmojisModal/AllEmojisModal";
 import { useParams } from "react-router-dom";
+import "./MessageItem.css";
+import "./Reaction.css";
+import EmojisModal from "../EmojisModal/AllEmojisModal";
 
 function MessageItem({ message }) {
   const dispatch = useDispatch();
@@ -17,6 +17,14 @@ function MessageItem({ message }) {
   const allServers = useSelector((state) => state.server.allUserServers);
   const sessionUser = useSelector((state) => state.session.user);
   const { serverId } = useParams();
+
+  /*
+    useMemo is a hook provided by React that helps to optimize the performance
+    of functional components by memoizing the result of a computation.
+    In general, useMemo accepts two arguments: a function that performs the computation,
+    and an array of dependencies. The hook returns the result of the computation,
+    which will be memoized and only re-computed when any of the dependencies change.
+    */
 
   // memoize the server members array to prevent unnecessary recomputations
   const serverMembersArr = useMemo(() => {
@@ -51,47 +59,24 @@ function MessageItem({ message }) {
     return `${date.toDateString()} ${date.toLocaleTimeString()}`;
   }, [message.timestamp]);
 
-  // memoize the reactions array to prevent unnecessary recomputations
   const reactionsArr = Object.values(message.reactions);
-  let reactionsObj = {};
-  reactionsArr.forEach((emoji) => {
-    if (reactionsObj[emoji.emoji.name]) {
-      reactionsObj[emoji.emoji.name] += 1;
-    } else {
-      reactionsObj[emoji.emoji.name] = 1;
-    }
-  });
-  // memoize the session user ID to prevent unnecessary recomputations
+
   const sessionUserId = sessionUser?.id;
 
   let messageId = message.id;
   let props = { messageId, sessionUserId };
 
-  // memoize the addReaction and deleteReaction functions to prevent unnecessary re-renders of child components
   const addReaction = async (sessionUserId, messageId, emojiId) => {
     dispatch(createReactionThunk(sessionUserId, messageId, emojiId));
   };
 
   const deleteReaction = async (reactionId, messageId) => {
     dispatch(deleteReactionThunk(reactionId, messageId));
-    dispatch(getChannelMessages(message.channelId));
+    dispatch(getChannelMessages(message.channelId)); // need to get rid of this
   };
 
-  // if the reaction with that emoji already exists, and it's not yours, only increase the count and highlight
-  let emojisCount = {};
+  if (!user) return null;
 
-  reactionsArr.map((reaction) => {
-    if (emojisCount[reaction.emojiURL] === undefined) {
-      emojisCount[reaction.emojiURL] = 1;
-    } else {
-      emojisCount[reaction.emojiURL] += 1;
-      // emojisCount[reaction.emojiURL]['users'].push(reaction.userId)
-    }
-  });
-
-  // console.log('emojiscount arr', Object.values(emojisCount)
-
-  // reactionsArr.map((reaction) => console.log(userId === reaction.userId))
   return (
     <div className="message-item">
       <div className="message-left-and-center">
@@ -115,7 +100,7 @@ function MessageItem({ message }) {
               <>
                 {reactionsArr.map((reaction) => {
                   return (
-                    <div>
+                    <>
                       <div
                         className={
                           +reaction.userId === +sessionUserId
@@ -143,7 +128,7 @@ function MessageItem({ message }) {
                         </p>
                         <p className="emojis-count"> 1 </p>
                       </div>
-                    </div>
+                    </>
                   );
                 })}
               </>
@@ -157,4 +142,5 @@ function MessageItem({ message }) {
     </div>
   );
 }
+
 export default MessageItem;
