@@ -21,13 +21,14 @@
 
 .create-channel-modal {
   background-color: #313338;
-  height: 400px;
+  height: 430px;
   display: flex;
   flex-direction: column;
   border: rgb(0, 0, 0) 1px solid;
   border-radius: 20px;
   outline: none;
 }
+
 .create-channel-form {
   display: flex;
   flex-direction: column;
@@ -202,4 +203,8 @@ input[type="radio"] {
 .modal-submit:disabled {
   cursor: not-allowed;
   background-color: #5b65cfa0;
+}
+
+.channel-update-form-submit.cursor-not-allowed {
+  cursor: not-allowed;
 }
