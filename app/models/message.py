@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
+
 class Message(db.Model):
     __tablename__ = 'messages'
 
@@ -14,7 +15,7 @@ class Message(db.Model):
     channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')))
     private_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('private_channels.id')))
 
-    # # relationship attributes
+    #Relationship Attribute
     reactions = db.relationship('Reaction', back_populates='message', lazy=True, cascade="all, delete")
     private_channels = db.relationship("PrivateChannel", back_populates='messages', lazy=True)
     user = db.relationship("User", back_populates='message', lazy=True)
@@ -23,9 +24,10 @@ class Message(db.Model):
         return {
             "id": self.id,
             "content": self.content,
-            "timestamp": self.timestamp,
+            "timestamp": self.timestamp.strftime("%m/%d/%Y, %H:%M:%S"),
             "userId": self.user_id,
             "channelId": self.channel_id,
+            "private_id": self.private_id,
             'user': self.user.to_dict(),
             "reactions": [reaction.to_dict() for reaction in self.reactions]
         }
@@ -34,7 +36,7 @@ class Message(db.Model):
         return {
             "id": self.id,
             "content": self.content,
-            "timestamp": self.timestamp,
+            "timestamp": self.timestamp.strftime("%m/%d/%Y, %H:%M:%S"),
             "userId": self.user_id,
             "private_id": self.private_id,
             'user': self.user.to_dict(),

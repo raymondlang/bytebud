@@ -15,11 +15,12 @@ class Reaction(db.Model):
     emoji = db.relationship("Emoji", back_populates='reactions', lazy=True)
     message = db.relationship("Message", back_populates='reactions', lazy=True)
 
+
     def to_dict(self):
         return {
             'id': self.id,
             'userId': self.userId,
-            'emojiId': self.emojiId,
             'messageId': self.messageId,
+            'emojiId': self.emojiId,
             'emoji': self.emoji.to_dict()
         }

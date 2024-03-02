@@ -1,9 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+# from app.models import PrivateChannel
 
-from .server import server_members
-from .server import Server
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -14,11 +13,16 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    prof_pic = db.Column(db.String(500), nullable=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    #Relationship Attributes
-    servers = db.relationship("Server", secondary="server_members", back_populates="members")
+    # Relationship Attributes
+    servers = db.relationship("Server", secondary="server_members", back_populates="members", cascade="all, delete")
     message = db.relationship("Message", back_populates='user', lazy=True)
+
+    dm = db.relationship("PrivateChannel", backref='sender', foreign_keys='PrivateChannel.user_id', lazy=True)
+    dm_received = db.relationship("PrivateChannel", backref='receiver', foreign_keys='PrivateChannel.user_two_id', lazy=True)
+
 
     @property
     def password(self):
@@ -37,7 +41,6 @@ class User(db.Model, UserMixin):
             'prof_pic': self.prof_pic,
             'username': self.username,
             'email': self.email,
-            # 'servers': [server.to_dict() for server in self.servers]
         }
 
     def to_username(self):
