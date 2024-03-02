@@ -10,8 +10,8 @@ friend_routes = Blueprint('friends', __name__)
 @login_required
 def get_all_friends(id):
     friends = Friend.query.filter(Friend.userId == id).all()
-    return jsonify({'friends': [friend.to_dict() for friend in friends]})
 
+    return jsonify({'friends': [friend.to_dict() for friend in friends]})
 
 # @friend_routes.route("/requests", methods=["GET"])
 # @login_required

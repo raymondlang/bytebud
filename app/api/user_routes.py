@@ -1,17 +1,18 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
 from random import random
 import string
 
+
+
 user_routes = Blueprint('users', __name__)
 
+#GET all /users
 @user_routes.route('')
 @login_required
 def users():
-    """
-    Query for all users and returns them in a list of user dictionaries
-    """
+    ''' Query for all users and returns them in a list of user dictionaries '''
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
@@ -26,11 +27,6 @@ def user(id):
         return jsonify({'error': 'User not found'}), 404
     return user.to_dict()
 
-# GET /users - get all users
-@user_routes.route('', methods=['GET'])
-def get_all_users():
-    users = User.query.all()
-    return jsonify([user.to_dict() for user in users])
 
 # POST /users - create a new user
 @user_routes.route('', methods=['POST'])
@@ -53,6 +49,7 @@ def create_user():
     db.session.commit()
     return jsonify(user.to_dict())
 
+
 #PUT /users/:id - update user by userID
 @user_routes.route('/<int:user_id>', methods=['PUT'])
 @login_required
@@ -71,3 +68,17 @@ def update_user(user_id):
     db.session.commit()
 
     return jsonify(user.to_dict())
+
+# DELETE /users/:id - delete a specific user by ID
+@user_routes.route('/<int:user_id>', methods=['DELETE'])
+@login_required
+def delete_user(user_id):
+    ''' Delete a user if found in the database'''
+    user = User.query.get(user_id)
+
+    if user is None:
+        return jsonify({'error': 'User not found'}), 404
+
+    db.session.delete(user)
+    db.session.commit()
+    return '', 200

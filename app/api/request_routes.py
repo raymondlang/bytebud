@@ -40,28 +40,34 @@ def create_request():
     sent_requests_list = [request.to_receiver_username() for request in sent_requests]
     received_requests = Request.query.filter(Request.receiver_id == current_user.id).all()
     received_requests_list = [request.to_sender_username() for request in received_requests]
+
     res = request.get_json()
+
     form = RequestForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+
     errors = {}
+
     # check if entered username is already a friend, has already sent or receive a request, is the current user, and is an existing user
     if res["username"] in all_friends_list:
-        errors["username"] = "You are already friends with this user"
+        errors["username"] = "You are already friends with this user. Try again!"
         return jsonify({"errors": errors}), 400
     if res["username"] in sent_requests_list:
-        errors["username"] = "You already sent a friend request to this user"
+        errors["username"] = "You already sent a friend request to this user. Try again!"
         return jsonify({"errors": errors}), 400
     if res["username"] in received_requests_list:
-        errors["username"] = "You already have a friend request from this user"
+        errors["username"] = "You already have a friend request from this user. Try again!"
         return jsonify({"errors": errors}), 400
     if res["username"] == current_user.username:
-        errors["username"] = "You cannot send a friend request to yourself"
+        errors["username"] = "You cannot send a friend request to yourself. Try again!"
         return jsonify({"errors": errors}), 400
     if res["username"] not in all_users_list:
-        errors["username"] = "User with username does not exist"
+        errors["username"] = "User with this username does not exist. Try again!"
         return jsonify({"errors": errors}), 400
+
     #a valid user has been entered, query for them to get their user id
     receiver = User.query.filter(User.username == res["username"]).one()
+
     if form.validate_on_submit():
         new_request = Request(
             sender_id = current_user.id,
@@ -70,6 +76,7 @@ def create_request():
         db.session.add(new_request)
         db.session.commit()
         return new_request.to_dict()
+
     return jsonify({"errors": form.errors}), 400
 
 
