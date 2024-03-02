@@ -18,9 +18,7 @@ export default function AddFriend() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("username: ", username);
     const data = await dispatch(createSentRequest(username));
-    console.log("data: ", data);
     if (data.success) {
       setMessage(`Success! Your friend request to ${data.success} was sent.`);
       setRedOrGreen("green");
@@ -69,7 +67,7 @@ export default function AddFriend() {
         <div className="add-friend-container">
           <p className="add-friend-text">ADD FRIEND</p>
           <p className="case-sensitive-text">
-            You can add a friend with their ByteBud Username. It's cAsE
+            You can add a friend with their PixelPal Username. It's cAsE
             sEnSiTiVe!
           </p>
           <form
