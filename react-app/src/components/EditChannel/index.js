@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
+import { useModal } from "../../context/Modal";
 import {
   getUpdatedChannel,
   updateChannel,
@@ -14,8 +14,10 @@ function UpdateChannel({ channelId, serverId }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [errors, setErrors] = useState("");
+  const history = useHistory();
 
   const { closeModal } = useModal();
+
   const updatedChannel = useSelector((state) => state.channels.updatedChannel);
   const serverChannels = useSelector(
     (state) => state.channels.currServerChannels
@@ -42,10 +44,12 @@ function UpdateChannel({ channelId, serverId }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
+
     if (channelArr.length === 1) {
       setErrors("There must be at least one channel in a server.");
       return;
     }
+
     await dispatch(removeChannel(channelId)).then(() => {
       dispatch(getServerChannels(serverId));
     });
@@ -66,7 +70,7 @@ function UpdateChannel({ channelId, serverId }) {
   return (
     <div className="channel-update-form-container">
       <form className="channel-update-form">
-        <h2 className="channel-update-form-title">Update Channel</h2>
+        <span className="channel-update-form-title">Update Channel</span>
         {errors && (
           <div className="update-ch-err-div">
             <span className="err-msg">{errors}</span>
@@ -76,7 +80,7 @@ function UpdateChannel({ channelId, serverId }) {
           <span className="channel-update-form-label">Name</span>
           <input
             type="text"
-            id="name"
+            id="ch-name-input"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required

@@ -22,7 +22,6 @@
 .channel-update-form-container {
   background-color: #25262b;
   min-height: 230px;
-  height: 230px;
   width: 400px;
   border-radius: 10px;
   border: 1px black solid;
@@ -118,10 +117,6 @@
   padding-left: 10px;
   padding-right: 10px;
   cursor: pointer;
-}
-
-.channel-update-form-submit.cursor-not-allowed {
-  cursor: not-allowed;
 }
 
 .err-msg {

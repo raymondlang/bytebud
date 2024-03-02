@@ -22,21 +22,20 @@
 .emoji-modal-container {
   width: 150px;
   height: auto;
-  /* padding: 10px; */
+  padding: 10px;
   background-color: rgb(43, 45, 49); /* change to discord gray */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border-radius: 9px; /* why is the rounded corners white? */
-  right: 100px;
-  position: fixed;
+  position: relative;
   right: 100px;
   /* transform: translateX(40%); */
   transform: translateY(-55%);
 }
 
 .emoji-modal-emoji {
-  /* padding: 2px; */
+  padding: 2px;
   height: 26px;
   width: 26px;
   margin: auto;
@@ -65,7 +64,7 @@
 
 .tooltip-wrap .tooltip-content {
   display: none;
-  position: relative;
+  position: absolute;
   height: auto;
   bottom: 30px;
   right: 25px;
@@ -88,12 +87,13 @@
   text-align: center;
   position: relative;
   height: auto;
-  bottom: 50px;
+  bottom: 60px;
 }
 
 .hidden {
   display: none;
 }
+
 .emojismodal-menu-allemojis {
   display: absolute;
 }
@@ -116,35 +116,21 @@
   font-size: 10px;
 }
 
-.addreaction-container {
-  cursor: pointer;
-  right: 50px;
-  position: absolute;
-  width: 50px;
-}
-
-.addreaction-container:hover,
-.addreaction-container:active,
-.addreaction-container:focus,
-.addreaction-container:visited {
+.addreaction-container:hover {
   background-color: rgb(43, 45, 49);
-  right: 50px;
-  position: absolute;
-  /* margin-top: 10px;
-  padding-left: 5px;
-  padding-top: 5px;
-  width: 50px; */
-  margin-top: 15px;
-  border-radius: 10px;
-  /* margin-bottom: 10px; */
-  /* padding-left: 5px;
-  padding-top: 5px; */
 }
 
 .emojis-modal-container-container {
   display: block;
-  position: static;
-  right: 0px;
-  top: 20px;
-  /* top: 200px; */
+  position: absolute;
+  right: -50px;
+}
+
+.emojis-modal-container {
+  position: absolute;
+  right: 50px;
+  border-radius: 10px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
 }
