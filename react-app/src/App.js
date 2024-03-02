@@ -7,14 +7,13 @@ import LoginPage from "./components/LoginPage";
 import ServersSidebar from "./components/Servers/ServersSidebar";
 import ChannelSideBar from "./components/ChannelSideBar";
 import SplashPage from "./components/SplashPage";
-// import Home from "./components/Home/"
 import FriendsList from "./components/FriendsList";
 import MessageForm from "./components/MessageForm";
 import ChannelTopBar from "./components/ChannelTopBar";
 import UserMenu from "./components/UserMenu";
 import NotFound from "./components/NotFound";
-import DirectMessage from "./components/DirectMessages";
-import FriendsListSideBar from "./componets/Friendsliset/FriendsListSideBar";
+import DirectMessageForm from "./components/DirectMessages/DirectMessageForm";
+import FriendsListSideBar from "./components/FriendsList/FriendsListSideBar";
 import PendingRequests from "./components/PendingRequests";
 import AddFriend from "./components/AddFriend";
 
@@ -26,6 +25,7 @@ function App() {
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
   return (
     <>
       {isLoaded && (
@@ -53,7 +53,8 @@ function App() {
                 <Route exact path="/channels/@me/:dmId">
                   <ServersSidebar />
                   <FriendsListSideBar />
-                  <DirectMessage />
+                  <DirectMessageForm />
+                  <UserMenu />
                 </Route>
                 <Route exact path="/channels/@me">
                   <FriendsList />
@@ -95,4 +96,5 @@ function App() {
     </>
   );
 }
+
 export default App;

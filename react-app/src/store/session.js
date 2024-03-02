@@ -1,7 +1,9 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
+const UPDATE_USER = "session/UPDATE_USER";
 
+// Action Creators
 const setUser = (user) => ({
   type: SET_USER,
   payload: user,
@@ -10,6 +12,15 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 });
+
+const updateUser = (user) => ({
+  type: UPDATE_USER,
+  user,
+});
+
+// Selectors
+
+// Thunks
 
 const initialState = { user: null };
 
@@ -48,7 +59,7 @@ export const login = (email, password) => async (dispatch) => {
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      return data.errors;
+      throw new Error("Invalid credentials");
     }
   } else {
     return ["An error occurred. Please try again."];
@@ -94,12 +105,30 @@ export const signUp = (username, email, password) => async (dispatch) => {
   }
 };
 
-export default function reducer(state = initialState, action) {
+export const updateUserThunk = (userData) => async (dispatch) => {
+  const response = await fetch(`/api/users/${+userData.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData),
+  });
+
+  if (response.ok) {
+    const updatedUser = await response.json();
+    dispatch(updateUser(updatedUser));
+    return updatedUser;
+  }
+};
+
+// Reducer
+
+export default function sessionReducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    case UPDATE_USER:
+      return { user: action.user };
     default:
       return state;
   }

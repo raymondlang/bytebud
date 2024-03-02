@@ -2,13 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import serverReducer from "./server";
-import userReducer from "./user";
-import emojisReducer from "./emojis";
+// import userReducer from './user';
 import messageReducer from "./message";
-import friendRequestReducer from "./request";
+import emojisReducer from "./emojis";
 import friendsReducer from "./friends";
 import channelReducer from "./channels";
 import privateReducer from "./private";
+import friendRequestReducer from "./request";
 
 const rootReducer = combineReducers({
   session: sessionReducer,

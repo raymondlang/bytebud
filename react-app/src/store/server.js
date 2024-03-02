@@ -1,13 +1,13 @@
-// Constants
-const LOAD_SERVERS = "servers/load";
-const LOAD_SERVER = "servers/server";
+// ----------------------------------- constants ----------------------------------------
+const LOAD_SERVERS = "servers/load_all";
+const LOAD_SERVER = "servers/load_one";
 const ADD_SERVER = "servers/create";
 const EDIT_SERVER = "servers/edit";
 const DELETE_SERVER = "servers/delete";
 const ADD_SERVER_MEMBER = "servers/members/add";
 const DELETE_SERVER_MEMBER = "servers/members/add";
 
-// Action Creators
+// ----------------------------------- action creators ----------------------------------------
 const loadServers = (list, user) => ({
   type: LOAD_SERVERS,
   list: list,
@@ -24,6 +24,11 @@ const createServer = (server) => ({
   server,
 });
 
+const updateServer = (server) => ({
+  type: EDIT_SERVER,
+  server,
+});
+
 const removeServer = (id) => ({
   type: DELETE_SERVER,
   serverId: id,
@@ -37,14 +42,9 @@ const removeServerMember = () => ({
   type: DELETE_SERVER_MEMBER,
 });
 
-// Selectors
+// ----------------------------------- thunk action creators ----------------------------------------
 
-const updateServer = (server) => ({
-  type: EDIT_SERVER,
-  server,
-});
-
-// Thunks
+// GET ALL SERVERS //
 export const getServers = (user) => async (dispatch) => {
   const response = await fetch("/api/servers");
 
@@ -54,6 +54,7 @@ export const getServers = (user) => async (dispatch) => {
   }
 };
 
+// GET SINGLE SERVER BY ID //
 export const getServer = (id) => async (dispatch) => {
   const response = await fetch(`/api/servers/${id}`);
 
@@ -65,14 +66,17 @@ export const getServer = (id) => async (dispatch) => {
   }
 };
 
+// ADD A NEW SERVER //
 export const addServer = (server, username) => async (dispatch) => {
   const response = await fetch("/api/servers", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(server),
   });
+
   if (response.ok) {
     const data = await response.json();
+
     const responseChannels = await fetch("/api/channels", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -82,8 +86,10 @@ export const addServer = (server, username) => async (dispatch) => {
         server_id: data.id,
       }),
     });
+
     if (responseChannels.ok) {
       const data = await responseChannels.json();
+
       const responseMembers = await fetch(
         `/api/servers/${data.serverId}/members`,
         {
@@ -119,7 +125,8 @@ export const editServer = (serverId, server) => async (dispatch) => {
   }
 };
 
-//DELETE A SERVER//
+// DELETE A SERVER //
+
 export const deleteServer = (serverId) => async (dispatch) => {
   const response = await fetch(`/api/servers/${serverId}`, {
     method: "DELETE",
@@ -184,6 +191,7 @@ export const deleteServerMember = (serverId, user) => async (dispatch) => {
 };
 
 // ----------------------------------- reducer ----------------------------------------
+
 let initialState = {};
 
 export default function serverReducer(state = initialState, action) {
@@ -207,6 +215,7 @@ export default function serverReducer(state = initialState, action) {
       myServers.forEach((server) => {
         allUserServers[server.id] = server;
       });
+
       const orderedList = Object.values(allUserServers).reverse();
 
       return {
@@ -230,6 +239,7 @@ export default function serverReducer(state = initialState, action) {
       orderedList.unshift(action.server);
       return { ...newState, allUserServers, orderedList };
     }
+
     case EDIT_SERVER: {
       return {
         ...state,
@@ -239,6 +249,7 @@ export default function serverReducer(state = initialState, action) {
         },
       };
     }
+
     case DELETE_SERVER: {
       const newState = { ...state };
       return newState;
@@ -251,6 +262,7 @@ export default function serverReducer(state = initialState, action) {
     case DELETE_SERVER_MEMBER: {
       return { ...state };
     }
+
     default:
       return state;
   }

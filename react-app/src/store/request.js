@@ -68,7 +68,6 @@ export const createSentRequest = (username) => async (dispatch) => {
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log("data.errors: ", data.errors);
       return data.errors;
     }
   } else {
@@ -80,22 +79,27 @@ export const deleteReceivedRequest = (id) => async (dispatch) => {
   const res = await fetch(`/api/requests/${id}`, {
     method: "DELETE",
   });
+
   if (res.ok) {
     //don't need DELETE res, it is just a success message
     dispatch(removeReceivedRequest(id));
   }
 };
+
 export const deleteSentRequest = (id) => async (dispatch) => {
   const res = await fetch(`/api/requests/${id}`, {
     method: "DELETE",
   });
+
   if (res.ok) {
     //don't need DELETE res, it is just a success message
     dispatch(removeSentRequest(id));
   }
 };
+
 // reducer
 let initialState = { received: null, sent: null };
+
 export default function friendRequestReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_RECEIVED_REQUESTS:

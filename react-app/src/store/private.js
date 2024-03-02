@@ -1,10 +1,11 @@
-// Constants
+// ----------------------------------- constants  ----------------------------------------
 const LOAD_DMS = "private/LOAD_DMS";
 const LOAD_DM_MESSAGES = "private/LOAD_DM_MESSAGES";
 const CLEAR_DM_MESSAGES = "private/CLEAR_DM_MESSAGES";
-const CREATE_DM_MESSAGE = "private/CREATE_DM_MESSAGE";
+const CREATE_DM_REACTION = "private/CREATE_DM_REACTION";
+const DELETE_DM_REACTION = "private/DELETE_DM_REACTION";
 
-// Action Creators
+// ----------------------------------- action creators   ---------------------------------
 const loadAllDMs = (directMessages) => ({
   type: LOAD_DMS,
   directMessages,
@@ -19,14 +20,22 @@ export const clearDMMessages = () => ({
   type: CLEAR_DM_MESSAGES,
 });
 
-const createDMMessage = (message) => ({
-  type: CREATE_DM_MESSAGE,
-  message,
+const createDMReaction = (reaction) => ({
+  type: CREATE_DM_REACTION,
+  reaction,
 });
 
-// Thunks
+const deleteDMReaction = (reactionId, messageId) => ({
+  type: DELETE_DM_REACTION,
+  reactionId,
+  messageId,
+});
+
+// ----------------------------------- thunks  ----------------------------------------
+
 export const loadAllDmsThunk = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/dms/user/${userId}`);
+  const res = await fetch(`/api/private/dms/${userId}`);
+
   if (res.ok) {
     let data = await res.json();
     dispatch(loadAllDMs(data));
@@ -44,25 +53,44 @@ export const loadDMMessagesThunk = (dmId) => async (dispatch) => {
   }
 };
 
-export const createDMMessageThunk = (message) => async (dispatch) => {
-  const res = await fetch(`/api/messages`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(message),
-  });
+export const createDMReactionThunk =
+  (emoji, messageId, userId) => async (dispatch) => {
+    const res = await fetch("/api/emojis", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        emojiId: emoji,
+        messageId: messageId,
+        userId: userId,
+      }),
+    });
 
-  if (res.ok) {
-    const message = await res.json();
-    dispatch(createDMMessage(message));
-    return message;
-  }
-};
+    if (res.ok) {
+      const newDMReaction = await res.json();
+      dispatch(createDMReaction(newDMReaction));
+      return newDMReaction;
+    }
+  };
 
-// reducer
+export const deleteDMReactionThunk =
+  (reactionId, messageId) => async (dispatch) => {
+    const res = await fetch(`/api/emojis/${reactionId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (res.ok) {
+      dispatch(deleteDMReaction(reactionId, messageId));
+      return "Successfully deleted!";
+    }
+  };
+
+// ----------------------------------- reducer  ----------------------------------------
 let initialState = {
   allDMs: {},
   currentDM: {},
 };
+
 export default function privateReducer(state = initialState, action) {
   let newState = {};
   switch (action.type) {
@@ -84,9 +112,18 @@ export default function privateReducer(state = initialState, action) {
       newState = { ...state, currentDM: {} };
       return newState;
 
-    case CREATE_DM_MESSAGE:
+    case CREATE_DM_REACTION:
       newState = { ...state, currentDM: { ...state.currentDM } };
-      newState.currentDM[action.message.id] = action.message;
+      newState.currentDM[action.reaction.messageId].reactions.push(
+        action.reaction
+      );
+      return newState;
+
+    case DELETE_DM_REACTION:
+      newState = { ...state, currentDM: { ...state.currentDM } };
+      newState.currentDM[action.messageId].reactions.filter(
+        (reaction) => reaction.id === action.reactionId
+      );
       return newState;
 
     default:
