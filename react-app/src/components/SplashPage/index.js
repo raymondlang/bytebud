@@ -3,7 +3,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./SplashPage.css";
 import backgroundTop from "../../static/SplashPage/splash-top-background.jpg";
-import byteBudLogoWhite from "../../static/SplashPage/bytebud-logo-white.png";
+import byteBudLogoWhite from "../../static/SplashPage/byte-bud-logo-white.png";
 import { login } from "../../store/session";
 
 function SplashPage() {
@@ -23,7 +23,7 @@ function SplashPage() {
   };
 
   function handleRayLinkedIn() {
-    window.open("https://www.linkedin.com/in/raymondlang/", "_blank");
+    window.open("https://www.linkedin.com/in/raymond-lang/", "_blank");
   }
 
   function handleRayGithub() {
@@ -48,17 +48,13 @@ function SplashPage() {
           <div className="splash-top-nav">
             <div className="splash-top-nav-left">
               <img
-                className="bytebud-logo-white"
+                className="byte-bud-logo-white"
                 src={byteBudLogoWhite}
-                alt="bytebud white logo"
+                alt="byte bud white logo"
               />
-              <h3 className="bytebud-logo-text">ByteBud</h3>
+              <h3 className="byte-bud-logo-text">ByteBud</h3>
             </div>
-            <div className="splash-top-nav-center">
-              <button className="demo-login-button" onClick={handleDemoLogin1}>
-                Demo User 1 Log In
-              </button>
-            </div>
+
             <div className="splash-top-nav-right">
               <button
                 className="splash-login-button signup"
@@ -75,7 +71,7 @@ function SplashPage() {
             </div>
           </div>
           <div className="splash-top-center">
-            <p className="imagine-text">IMAGINE A PLACE...</p>
+            <p className="imagine-text">imagine a place...</p>
             <p className="where-you-can-text">
               ...where you can belong to a school club, a gaming group, or a
               worldwide art community. where just you and a handful of friends
@@ -89,29 +85,23 @@ function SplashPage() {
           </div>
         </div>
         <div className="splash-middle">
-          <p className="meet-developers-text">meet the developer</p>
+          <p className="meet-developers-text">meet the developer.</p>
           <div className="devs-container">
             <button
-              className="portfolio-button raymond-button"
-              onClick={() => window.open("https://raymondlang.com/", "_blank")}
+              className="portfolio-button ray-button"
+              onClick={handleRayPortfolio}
             >
-              <div className="dev-container raymond-container">
-                <p className="dev-name-text raymond-text">Raymond Lang</p>
+              <div className="dev-container ray-container">
+                <p className="dev-name-text ray-text">Ray Lang</p>
                 <div className="dev-social-media-container">
                   <button
-                    className="portfolio-button raymond-button"
-                    onClick={handleRayPortfolio}
+                    className="linkedin-button"
+                    onClick={handleRayLinkedIn}
                   >
-                    <i
-                      className="fa-brands fa-linkedin raymond-text"
-                      onClick={handleRayLinkedIn}
-                    ></i>
+                    <i className="fa-brands fa-linkedin ray-text"></i>
                   </button>
-                  <button
-                    className="github-button raymond-button"
-                    onClick={handleRayGithub}
-                  >
-                    <i className="fa-brands fa-github raymond-text"></i>
+                  <button className="github-button" onClick={handleRayGithub}>
+                    <i className="fa-brands fa-github ray-text"></i>
                   </button>
                 </div>
               </div>
