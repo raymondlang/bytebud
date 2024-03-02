@@ -24,15 +24,6 @@
 }
 
 .friendslist-container {
-  display: flex;
-  flex-direction: column;
-  height: 800px;
-  /* margin-top: auto;
-  margin-bottom:auto; */
-  margin-left: auto;
-  width: 1500px;
-  /* width: 100%;
-  height: 100%; */
   background-color: rgb(49, 51, 56);
   left: 20px;
   position: fixed;
@@ -61,7 +52,7 @@
   display: flex;
   align-items: center;
   border-bottom: thin rgb(57, 59, 65) solid;
-  cursor: pointer;
+  justify-content: space-between;
 }
 
 .friendslist-user-container:hover {
@@ -75,16 +66,16 @@
   padding-top: 13px;
   height: 30px;
   color: rgb(179, 184, 191);
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   font-weight: bold;
   font-size: 12px;
 }
 
 .friendslist-friends,
-.friendslist-all,
-.friendslist-username .friendslist-online,
+.friendslist-username,
+.friendslist-online,
 .friendslist-tag {
-  margin-left: 20px;
+  margin-left: 15px;
   font-family: "ByteBud";
   color: rgb(238, 239, 242);
 }
@@ -110,47 +101,18 @@
   background-color: rgb(66, 68, 74);
 }
 
-.friendslist-all {
-  margin-left: 25px;
-  margin-top: 4px;
-  font-size: 16px;
-  font-weight: bolder;
-  text-align: center;
-  border-radius: 8px;
-  width: 45px;
-  background-color: rgb(66, 68, 74);
-}
-.friendslist-all:hover {
-  border-radius: 8px;
-  background-color: rgb(66, 68, 74);
-  cursor: pointer;
-}
-
 .friendslist-profile-image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
   margin-left: 20px;
-  /* margin-bottom: 1em; */
-
-  transition: color 0.15s ease-out, background-color 0.15s ease-out,
-    border-radius 0.15s ease-out;
-  transition-property: color, background-color, border-radius;
-  transition-duration: 0.15s, 0.15s, 0.15s;
-  transition-timing-function: ease-out, ease-out, ease-out;
-  transition-delay: 0s, 0s, 0s;
 }
 
-/*
-.friendslist-profile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-
-.friendslist-username {
-  margin-left: 10px;
+.friendslist-pic-username {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .friendslist-header-container i {
@@ -169,7 +131,6 @@
 .friendslist-user-container {
   display: flex;
   flex-direction: row;
-  /* margin-right: 10px; */
 }
 
 .friendslist-chat-icon {
@@ -192,35 +153,6 @@
   cursor: pointer;
 }
 
-.fa-solid:hover {
-  color: rgb(238, 239, 242);
-}
-
-.fa-face-smile-beam,
-.fa-plus {
-  color: rgb(238, 239, 242);
-}
-
-.fa-face-smile-beam {
-  font-size: 20px;
-}
-
-.friendslist-channel-dm-container > .fa-plus {
-  color: rgb(181, 186, 193);
-  margin-right: 15px;
-}
-
-.addreaction-container {
-  cursor: pointer;
-}
-
-.addreaction-container:hover {
-  background-color: rgb(43, 45, 49);
-  width: 30px;
-  padding: 5px;
-  border-radius: 10px;
-}
-
 .friendslist-online:hover,
 .friendslist-friends:hover {
   cursor: default;
@@ -232,13 +164,13 @@
   left: 68px;
   width: 230px;
   height: 100%;
-  background-color: rgb(43, 45, 49);
+  background-color: #2b2d31;
 }
 
 .friendslist-channel-item {
   font-family: "ByteBud";
   color: rgb(242, 243, 245);
-  font-size: 15px;
+  font-size: 18px;
   margin-top: 3px;
 }
 
@@ -253,21 +185,22 @@
   padding-top: 10px;
   padding-left: 10px;
   height: 35px;
+
   border-radius: 5px;
   /* align-items: center; */
-}
-
-.friendslist-channel-friendscontainer > i {
-  color: rgb(242, 243, 245);
-  font-size: 17px;
-  margin-top: 3px;
-  margin-right: 10px;
-  margin-left: 5px;
 }
 
 .friendslist-channel-friendscontainer:hover {
   background-color: rgb(63, 66, 72);
   cursor: pointer;
+}
+
+.friendslist-channel-friendscontainer > i {
+  color: rgb(242, 243, 245);
+  font-size: 20px;
+  margin-top: 3px;
+  margin-right: 10px;
+  margin-left: 5px;
 }
 
 .friendslist-search-div {
@@ -302,13 +235,15 @@
 
 .friendslist-channel-dm-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
-.fa-plus {
-  color: rgb(181, 186, 193);
-  margin-right: 15px;
+.friendslist-dm-channel {
+  font-family: "ByteBud";
+  font-size: 15px;
+  color: rgb(238, 239, 242);
+  padding-left: 20px;
 }
 
 .friendslist-tag {
@@ -325,11 +260,6 @@
   color: rgb(212, 218, 227);
 }
 
-.friendslist-channel-dm-container > i:hover {
-  color: rgb(212, 218, 227);
-  cursor: pointer;
-}
-
 .friendslist-profpic {
   width: 30px;
   height: 30px;
@@ -342,7 +272,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   font-size: 15px;
   color: rgb(179, 184, 191);
   height: 30px;
@@ -359,7 +289,7 @@
   color: rgb(238, 239, 242);
 }
 
-.friendlist-dm-link {
+.friendslist-dm-link {
   text-decoration: none;
 }
 
@@ -375,7 +305,7 @@
 }
 
 .friendslist-all-link {
-  font-family: "PixelPal";
+  font-family: "ByteBud";
   font-size: 16px;
   font-weight: bolder;
   color: rgb(238, 239, 242);
