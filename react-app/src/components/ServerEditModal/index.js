@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { editServer, getServer, getServers } from "../../store/server";
-import "./ServerEdit.css";
+import "./EditServer.css";
 
 function ServerEditModal({ server, serverId }) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const user = useSelector((state) => state.session.user);
+
   const [newServer, setNewServer] = useState({ ...server });
   const [errors, setErrors] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const { closeModal } = useModal();
-
-  const allServers = useSelector((state) => state.session.allUserServers);
 
   const handleUpdate = async (e) => {
     setNewServer({ ...newServer, [e.target.name]: e.target.value });
@@ -43,12 +40,12 @@ function ServerEditModal({ server, serverId }) {
     }
 
     setFormErrors({ ...err });
-
     return Object.keys(err).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!validateForm(newServer)) {
       return;
     }
@@ -57,7 +54,6 @@ function ServerEditModal({ server, serverId }) {
       let edittedServer = await dispatch(editServer(server.id, newServer));
       if (edittedServer) {
         await dispatch(getServers(user));
-        // history.push(`/channels/${createdServer.id}/${createdServer.channels[0].id}`)
         await dispatch(getServer(serverId));
         closeModal();
       }
@@ -68,24 +64,24 @@ function ServerEditModal({ server, serverId }) {
   };
 
   return (
-    <div className="edit-server-page">
-      <div className="edit-server-modal">
-        <h1 className="edit-server-header">Edit A Server </h1>
-        <p className="edit-server-para">
-          Your server is where your and your pals hang out. Personalize it to
-          make it yours.{" "}
-        </p>
+    <div className="edit-server-modal">
+      <div className="edit-server-modal-content">
         <form className="edit-server-form" onSubmit={handleSubmit}>
+          <h1 className="edit-server-header">Edit A Server </h1>
+          <p className="edit-server-para">
+            Your server is where your and your pals hang out. Personalize it to
+            make it yours.{" "}
+          </p>
           <ul>
             {errors.map((error, idx) => (
               <li key={idx}>{error}</li>
             ))}
           </ul>
           <div className="edit-server-form-group">
-            <label className="edit-server-form-label">Server Name</label>
-            <br></br>
+            <span className="edit-server-form-label">Server Name</span>
             <input
-              className="edit-server-form-input"
+              style={{ height: "30px" }}
+              className="modal-input"
               type="text"
               id="name"
               name="name"
@@ -96,10 +92,11 @@ function ServerEditModal({ server, serverId }) {
           </div>
           <br></br>
           <div className="edit-server-form-group">
-            <label className="edit-server-form-label">Server Image</label>
+            <span className="edit-server-form-label">Server Image</span>
             <br></br>
             <input
-              className="edit-server-form-input"
+              style={{ height: "30px" }}
+              className="modal-input"
               type="text"
               id="server_picture"
               name="server_picture"
@@ -119,10 +116,14 @@ function ServerEditModal({ server, serverId }) {
             >
               Update Server
             </button>
+            <span onClick={closeModal} className="channel-update-form-cancel">
+              Cancel
+            </span>
           </div>
         </form>
       </div>
     </div>
   );
 }
+
 export default ServerEditModal;

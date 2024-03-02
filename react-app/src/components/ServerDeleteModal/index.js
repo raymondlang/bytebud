@@ -9,12 +9,8 @@ function ServerDeleteModal({ server }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const history = useHistory();
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [server_picture, setServerPicture] = useState("");
-  const [errors, setErrors] = useState([]);
-
   const { closeModal } = useModal();
+  const [errors, setErrors] = useState([]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -30,14 +26,15 @@ function ServerDeleteModal({ server }) {
     }
   };
 
-  const handleNo = () => {
-    closeModal();
-  };
-
   return (
     <div className="delete-server-modal">
       <div className="delete-server-modal-content">
         <form>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
           <h1 className="delete-server-header">Delete '{server.name}'</h1>
           <p className="delete-server-para">
             Are you sure you want to delete{" "}

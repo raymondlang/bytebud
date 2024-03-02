@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import Redirect from "react-router-dom";
+import { React } from "react";
 import "./ServerSidebar.css";
-import ContextMenu from "../ContextMenu";
 
 const ServersSidebarItem = ({ server }) => {
   let names = server.name.split(" ");
@@ -12,8 +10,8 @@ const ServersSidebarItem = ({ server }) => {
   serverName = serverName.join("");
   let className = "";
   let hasImage = false;
+
   if (server.server_picture === "image.url" || server.server_picture === "") {
-    // server.server_picture = 'https://i.redd.it/6jupfeilyhx71.jpg'
     className = "server-sidebar-no-img-icon";
   } else {
     className = "server-sidebar-icon";

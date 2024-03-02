@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
-import wallpaper from "../../static/bytebud-wallpaper.png";
+import wallpaper from "../../static/pixelpal-wallpaper.png";
 import "./SignupForm.css";
 
 function SignupPage() {
@@ -13,7 +13,6 @@ function SignupPage() {
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
   const [year, setYear] = useState("");
-  const [errors, setErrors] = useState([]);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -129,11 +128,12 @@ function SignupPage() {
           Already have an account?
         </Link>
         <span className="signup-tos">
-          By registering, you agree to ByteBud's Terms of Service and Privacy
+          By registering, you agree to PixelPal's Terms of Service and Privacy
           Policy.
         </span>
       </div>
     </div>
   );
 }
+
 export default SignupPage;

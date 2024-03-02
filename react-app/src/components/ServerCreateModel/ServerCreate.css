@@ -49,10 +49,10 @@
 
 .create-server-header {
   font-family: "ByteBud";
+  color: whitesmoke;
   font-size: 20px;
   font-weight: 900;
   text-align: center;
-  color: whitesmoke;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -67,12 +67,11 @@
 
 .create-server-form-group {
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
 }
 
 .create-server-form-input {
-  margin-bottom: 15px;
+  margin-bottom: 0;
   border-radius: 5px;
   padding-top: 0;
   padding-left: 0;
@@ -103,6 +102,7 @@
 .create-server-form-button:hover {
   background-color: #6772ed;
 }
+
 .disabled-btn {
   background-color: gray;
   height: 45px;

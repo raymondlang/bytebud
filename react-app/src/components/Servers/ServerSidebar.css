@@ -25,12 +25,15 @@
   left: 0;
   bottom: 0;
   max-width: 68px;
-  /* adjust as needed */
   display: flex;
   background-color: #1e1f22;
   overflow-y: auto;
   z-index: 1;
-  /* make sure the sidebar is on top of other content */
+  scrollbar-width: none;
+}
+
+.server-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .server-sidebar-ul {
@@ -103,6 +106,7 @@
   color: green;
   font-family: "ByteBud";
   border: 0px;
+  list-style: none;
   cursor: pointer;
 }
 
@@ -134,6 +138,19 @@
   display: block;
 }
 
-#server-sidebar-context-menu .item .server-sidebar-context-menu-item:hover {
+#server-sidebar-context-menu .server-sidebar-context-menu-item:hover {
   background: #5865f2;
+}
+
+.server-sidebar-context-menu-item > button {
+  background: none;
+  border: none;
+  font-family: "ByteBud";
+  font-size: 15px;
+  color: #b0b5bc;
+  cursor: pointer;
+  border-radius: inherit;
+  display: flex;
+  padding-left: 0px;
+  width: 100%;
 }
