@@ -17,7 +17,7 @@ from api.message_routes import message_routes
 from api.emoji_routes import emoji_routes
 from api.private_routes import private_routes
 from api.request_routes import request_routes
-from .socket import socketio
+from socket import socketio
 
 from .seeds import seed_commands
 from .config import Config
