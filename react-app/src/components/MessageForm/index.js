@@ -42,6 +42,7 @@ function MessageForm() {
       });
       socket.disconnect();
     };
+    // eslint-disable-next-line
   }, [channelId, user]);
 
   if (!channel) return null;

@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./SplashPage.css";
 import backgroundTop from "../../static/SplashPage/splash-top-background.jpg";
 import byteBudLogoWhite from "../../static/SplashPage/byte-bud-logo-white.png";
-import { login } from "../../store/session";
+// import { login } from "../../store/session";
 
 function SplashPage() {
   const sessionUser = useSelector((state) => state.session.user);
-
+  // eslint-disable-next-line
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -23,7 +23,7 @@ function SplashPage() {
   };
 
   function handleRayLinkedIn() {
-    window.open("https://www.linkedin.com/in/raymond-lang/", "_blank");
+    window.open("https://www.linkedin.com/in/raymondlang/", "_blank");
   }
 
   function handleRayGithub() {

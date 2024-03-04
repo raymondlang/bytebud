@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { editServer, getServer, getServers } from "../../store/server";
-import "./EditServer.css";
+import "./ServerEdit.css";
 
 function ServerEditModal({ server, serverId }) {
   const dispatch = useDispatch();

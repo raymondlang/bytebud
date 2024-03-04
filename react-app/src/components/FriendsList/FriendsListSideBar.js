@@ -46,6 +46,7 @@ export default function FriendsListSideBar() {
                 >
                   <div className="friendslist-dm-user-container">
                     <img
+                      alt="friendslist"
                       src={
                         dm.user.id === currentUserId
                           ? dm.userTwo.prof_pic

@@ -1,21 +1,16 @@
-import useState from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import {
-  getServerChannels,
-  getChannelDetails,
-  createChannel,
-} from "../../store/channels";
+import { getServerChannels, createChannel } from "../../store/channels";
 import { useHistory } from "react-router-dom";
-import "./creat-channel.css";
+import "./create-channel.css";
 
 function NewChannel({ serverId }) {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [channelType, setChannelType] = useState("text");
-  const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors] = useState([]);
   const history = useHistory();
 
   const { closeModal } = useModal();
@@ -48,7 +43,7 @@ function NewChannel({ serverId }) {
           <div className="radio-buttons-container">
             <div className="radio-button">
               <i className="fa-regular fa-hashtag"></i>
-              <div className="text-radio-option voice">
+              <div className="text-radio-option">
                 <span className="text-radio">Text</span>
                 <span className="text-radio-desc">
                   Send messages, images, GIFs, emojis, opinions, and puns
@@ -67,7 +62,7 @@ function NewChannel({ serverId }) {
           <div className="radio-buttons-container">
             <div className="radio-button-na">
               <i className="fa-solid fa-volume-high"></i>
-              <div className="text-radio-option">
+              <div className="text-radio-option voice">
                 <span className="text-radio">Voice</span>
                 <span className="text-radio-desc">
                   Hang out together with voice, video, and screenshare
@@ -105,4 +100,5 @@ function NewChannel({ serverId }) {
     </div>
   );
 }
+
 export default NewChannel;

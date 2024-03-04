@@ -42,6 +42,7 @@ def seed_emojis():
     ]
 
     db.session.add_all(emojis)
+    # db.session.execute(text("ALTER SEQUENCE emojis_id_seq RESTART WITH 1"))
     db.session.commit()
 
 

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getSentRequests } from "../../store/request";
 import { createSentRequest } from "../../store/request";
@@ -67,7 +67,7 @@ export default function AddFriend() {
         <div className="add-friend-container">
           <p className="add-friend-text">ADD FRIEND</p>
           <p className="case-sensitive-text">
-            You can add a friend with their PixelPal Username. It's cAsE
+            You can add a friend with their ByteBud Username. It's cAsE
             sEnSiTiVe!
           </p>
           <form

@@ -13,18 +13,23 @@ import "./PendingRequests.css";
 
 export default function PendingRequests() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getReceivedRequests());
     dispatch(getSentRequests());
   }, [dispatch]);
+
   const receivedRequestsObj = useSelector((state) => state.requests.received);
   const sentRequestsObj = useSelector((state) => state.requests.sent);
+
   if (!receivedRequestsObj) return null;
   if (!sentRequestsObj) return null;
+
   const receivedRequestsArr = Object.values(receivedRequestsObj);
   const sentRequestsArr = Object.values(sentRequestsObj);
 
   const handleAccept = async (requestId) => {
+    console.log("id: ", requestId);
     await dispatch(createFriend(requestId));
     await dispatch(deleteReceivedRequest(requestId));
   };

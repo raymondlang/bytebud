@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
-import wallpaper from "../../static/pixelpal-wallpaper.png";
+import wallpaper from "../../static/bytebud-wallpaper.png";
 import "./SignupForm.css";
 
 function SignupPage() {
@@ -128,7 +128,7 @@ function SignupPage() {
           Already have an account?
         </Link>
         <span className="signup-tos">
-          By registering, you agree to PixelPal's Terms of Service and Privacy
+          By registering, you agree to ByteBud's Terms of Service and Privacy
           Policy.
         </span>
       </div>

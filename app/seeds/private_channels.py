@@ -27,6 +27,7 @@ def undo_private_channels():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.private_channels RESTART IDENTITY CASCADE;")
     else:
+        db.session.execute(text("DELETE FROM private_channels WHERE user_id IN (SELECT id FROM users)"))
         db.session.execute(text("DELETE FROM private_channels"))
 
     db.session.commit()

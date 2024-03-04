@@ -19,10 +19,14 @@ def seed_users():
         username='zaddy#0206', email='zaddy@gmail.com', password='password2', prof_pic='https://i.redd.it/6jupfeilyhx71.jpg'),#5
     User(
         username='ryo#0001', email='ryanmester@gmail.com', password='password3', prof_pic='https://ih1.redbubble.net/image.1580724210.1236/st,small,507x507-pad,600x600,f8f8f8.jpg'), #6
+    User(
+        username='rtan#0001', email='rytan@gmail.com', password='password4', prof_pic='https://ih1.redbubble.net/image.1580724210.1236/st,small,507x507-pad,600x600,f8f8f8.jpg'), #7
     ]
 
     db.session.add_all(users)
+    # db.session.execute(text("ALTER SEQUENCE users_id_seq RESTART WITH 1"))
     db.session.commit()
+
     return users
 
 
@@ -36,6 +40,6 @@ def undo_users():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DROP TABLE if exists users cascade"))
 
     db.session.commit()

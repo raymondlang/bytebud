@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import "./NotFoundPageLoggedIn.css";
 import notFoundGif from "../../static/NotFoundPage/discord-404.gif";
-import pixelPalLogoBlack from "../../static/NotFoundPage/pixel-pal-logo-black.png";
+import byteBudLogoBlack from "../../static/NotFoundPage/byte-bud-logo-black.png";
 
 function NotFound({ sessionUser }) {
   const history = useHistory();
@@ -21,11 +21,11 @@ function NotFound({ sessionUser }) {
           <div className="not-found-top">
             <button className="not-found-home-button" onClick={returnHome}>
               <img
-                className="pixel-pal-logo-black"
-                src={pixelPalLogoBlack}
-                alt="pixel pal white logo"
+                className="byte-bud-logo-black"
+                src={byteBudLogoBlack}
+                alt="byte bud white logo"
               />
-              <h3 className="pixel-pal-logo-text-black">ByteBud</h3>
+              <h3 className="byte-bud-logo-text-black">ByteBud</h3>
             </button>
           </div>
           <img className="not-found-gif" src={notFoundGif} alt="not found" />
@@ -38,7 +38,7 @@ function NotFound({ sessionUser }) {
               These might help you:
             </p>
             <button className="return-button" onClick={returnHome}>
-              Return to PixelPal
+              Return to ByteBud
             </button>
           </div>
         </div>

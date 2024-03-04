@@ -33,11 +33,11 @@ importlib-metadata = "*"
 python-engineio = "*"
 python-socketio = "*"
 zipp = "*"
-werkzeug = "*"
 psycopg2 = "*"
 gevent = "*"
 "zope.event" = "*"
 "zope.interface" = "*"
+werkzeug = "*"
 
 [dev-packages]
 pylint = "*"

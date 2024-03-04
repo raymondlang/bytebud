@@ -46,7 +46,8 @@ export default function DirectMessageForm() {
       );
       socket.disconnect();
     };
-  }, [+dmId, user]);
+    // eslint-disable-next-line
+  }, [+dmId, user, dispatch]);
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();

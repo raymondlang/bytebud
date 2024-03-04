@@ -21,6 +21,7 @@ export default function DirectMessage() {
   useEffect(() => {
     dispatch(loadDMMessagesThunk(+dmId));
     return () => dispatch(clearDMMessages());
+    // eslint-disable-next-line
   }, [dispatch, +dmId]);
 
   if (!allDMs) return null;
@@ -48,6 +49,7 @@ export default function DirectMessage() {
           {currentDM?.user.id === user?.id ? (
             <>
               <img
+                alt="chat history"
                 src={currentDM?.userTwo.prof_pic}
                 className="dm-chat-history-pic"
               />
@@ -64,6 +66,7 @@ export default function DirectMessage() {
           ) : (
             <>
               <img
+                alt="chat history"
                 src={currentDM?.user.prof_pic}
                 className="dm-chat-history-pic"
               />
@@ -86,7 +89,11 @@ export default function DirectMessage() {
               return (
                 <div key={`msg-${msg?.id}`} className="dm-msg-container">
                   <div className="dm-msg-left">
-                    <img src={msg?.user?.prof_pic} className="dm-msg-profpic" />
+                    <img
+                      alt="chat history"
+                      src={msg?.user?.prof_pic}
+                      className="dm-msg-profpic"
+                    />
                   </div>
 
                   <div className="dm-msg-center">

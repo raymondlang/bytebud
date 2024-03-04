@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import ServersSidebarItem from "./ServerSidebarItem";
 import "./ServerSidebar.css";
 import OpenModalButton from "../OpenModalButton";
-import ServerCreateModal from "../ServerCreateModal";
+import ServerCreateModal from "../ServerCreateModel";
 
 const ServersSidebar = () => {
   const dispatch = useDispatch();
