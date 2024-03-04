@@ -1,5 +1,5 @@
-from models import db, environment, SCHEMA
-from models.channel import Channel
+from app.models import db, environment, SCHEMA
+from app.models.channel import Channel
 from sqlalchemy.sql import text
 
 

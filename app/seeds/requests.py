@@ -1,6 +1,6 @@
-from models import db, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-from models import Request
+from app.models import Request
 
 def seed_requests():
     requests = [

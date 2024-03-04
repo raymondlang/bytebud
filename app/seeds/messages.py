@@ -1,5 +1,5 @@
-from models import db, environment, SCHEMA
-from models.message import Message
+from app.models import db, environment, SCHEMA
+from app.models.message import Message
 from sqlalchemy.sql import text
 
 

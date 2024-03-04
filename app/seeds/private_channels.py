@@ -1,6 +1,6 @@
-from models import db, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-from models.privateMessage import PrivateChannel
+from app.models.privateMessage import PrivateChannel
 
 def seed_private_channels():
     private_channels = [

@@ -1,6 +1,6 @@
-from models import db, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-from models.friend import Friend
+from app.models.friend import Friend
 
 def seed_friends():
     friends = [
