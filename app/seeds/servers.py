@@ -1,6 +1,6 @@
-from app.models import db, User, Server, environment, SCHEMA
+from models import db, User, Server, environment, SCHEMA
 from sqlalchemy.sql import text
-from app.models import User
+
 
 
 # Adds a demo server, you can add other servers here if you want

@@ -1,4 +1,4 @@
-from app.models import db, environment, SCHEMA
+from models import db, environment, SCHEMA
 from sqlalchemy.sql import text
 from models import Request
 
