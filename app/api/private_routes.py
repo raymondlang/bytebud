@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required
 from sqlalchemy import and_, or_
-from models import db, PrivateChannel, Message
+from app.models import db, PrivateChannel, Message
 from datetime import datetime
 
 

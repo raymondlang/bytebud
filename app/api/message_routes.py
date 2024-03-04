@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_login import login_required
-from models import db, Message
-from forms import MessageForm
+from app.models import db, Message
+from app.forms import MessageForm
 from datetime import datetime
 
 
