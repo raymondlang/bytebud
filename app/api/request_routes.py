@@ -4,7 +4,7 @@ from app.models import db
 from app.models.friend import Friend
 from app.models.user import User
 from app.models.request import Request
-from forms import RequestForm
+from app.forms import RequestForm
 
 request_routes = Blueprint('requests', __name__)
 
