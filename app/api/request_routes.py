@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db
-from app.models.friend import Friend
-from app.models.user import User
-from app.models.request import Request
-from app.forms import RequestForm
+from models import db
+from models.friend import Friend
+from models.user import User
+from models.request import Request
+from forms import RequestForm
 
 request_routes = Blueprint('requests', __name__)
 

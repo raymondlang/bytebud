@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db
-from app.models.emoji import Emoji
-from app.models.reaction import Reaction
+from models import db
+from models.emoji import Emoji
+from models.reaction import Reaction
 
 emoji_routes = Blueprint('emojis', __name__)
 
