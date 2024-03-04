@@ -1,5 +1,5 @@
 from flask_socketio import SocketIO, emit, join_room, leave_room
-from models import db, Message, privateMessage
+from app.models import db, Message, privateMessage
 import os
 from flask import jsonify
 

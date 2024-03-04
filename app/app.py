@@ -19,8 +19,8 @@ from .api.private_routes import private_routes
 from .api.request_routes import request_routes
 from .socket_util import socketio
 
-from seeds import seed_commands
-from config import Config
+from .seeds import seed_commands
+from .config import Config
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
