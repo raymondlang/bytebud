@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from models import db, User
+from app.models import db, User
 from random import random
 import string
 
