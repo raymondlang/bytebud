@@ -8,7 +8,7 @@ from .reactions import seed_reactions, undo_reactions
 from .friends import seed_friends, undo_friends
 from .private_channels import seed_private_channels, undo_private_channels
 from .requests import seed_requests, undo_requests
-from models.db import db, environment, SCHEMA
+from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
