@@ -1,6 +1,6 @@
-from app.models import db, environment, SCHEMA
+from models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-from app.models.reaction import Reaction
+from models.reaction import Reaction
 
 def seed_reactions():
     reactions = [

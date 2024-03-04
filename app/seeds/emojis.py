@@ -1,6 +1,6 @@
-from app.models import db, environment, SCHEMA
+from models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-from app.models.emoji import Emoji
+from models.emoji import Emoji
 
 def seed_emojis():
     emojis = [
