@@ -1,13 +1,13 @@
 from flask.cli import AppGroup
-from users import seed_users, undo_users
-from messages import seed_messages, undo_messages
-from channels import seed_channels, undo_channels
-from servers import seed_servers, undo_servers
-from emojis import seed_emojis, undo_emojis
-from reactions import seed_reactions, undo_reactions
-from friends import seed_friends, undo_friends
-from private_channels import seed_private_channels, undo_private_channels
-from requests import seed_requests, undo_requests
+from .users import seed_users, undo_users
+from .messages import seed_messages, undo_messages
+from .channels import seed_channels, undo_channels
+from .servers import seed_servers, undo_servers
+from .emojis import seed_emojis, undo_emojis
+from .reactions import seed_reactions, undo_reactions
+from .friends import seed_friends, undo_friends
+from .private_channels import seed_private_channels, undo_private_channels
+from .requests import seed_requests, undo_requests
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
