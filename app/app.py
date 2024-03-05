@@ -48,7 +48,7 @@ app.register_blueprint(emoji_routes, url_prefix='/api/emojis')
 app.register_blueprint(private_routes, url_prefix='/api/private')
 app.register_blueprint(request_routes, url_prefix='/api/requests')
 
-# db.init_app(app)
+db.init_app(app)
 Migrate(app, db)
 # initialize the app with the socket instance
 socketio.init_app(app, async_mode='gevent') #async_mode='gevent'
@@ -111,14 +111,6 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
-
-# Close the existing database connection
-db.session.close_all()
-
-# Reinitialize the db object with the new database URL
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-        'DATABASE_URL')
-db.init_app(app)
 
 # Define a route to test the database connection
 @app.route('/test-db')
