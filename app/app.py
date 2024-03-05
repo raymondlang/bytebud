@@ -118,6 +118,8 @@ db.session.close_all()
 # Reinitialize the db object with the new database URL
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
         'DATABASE_URL')
+print(os.environ.get(
+        'DATABASE_URL'))
 db.init_app(app)
 
 # Define a route to test the database connection
