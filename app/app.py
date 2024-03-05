@@ -18,6 +18,7 @@ from .api.emoji_routes import emoji_routes
 from .api.private_routes import private_routes
 from .api.request_routes import request_routes
 from .socket_util import socketio
+from sqlalchemy import text
 
 from .seeds import seed_commands
 from .config import Config
@@ -110,6 +111,21 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
+# Define a route to test the database connection
+@app.route('/test-db')
+def test_db():
+    try:
+        # Query the database to get the database name
+        result = db.session.execute(text('SELECT current_database()'))
+        database_name = result.scalar()
+
+        # Return a success message with the database name
+        return f'Database connection successful! Connected to database: {database_name}'
+    except Exception as e:
+        # If there is an error, return the error message
+        return f'Error connecting to database: {str(e)}'
+
 
 # keep at the bottom of this file, use this to run the app
 if __name__ == '__main__':
