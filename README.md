@@ -45,7 +45,9 @@ Passwords must be matching when entered twice or the signup button will be disab
 Friendly reminders will display and signup will be blocked if fields are not properly filled out
 
 <center>
+  
   ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
+  
 </center>
 
 
@@ -59,7 +61,11 @@ Live Messaging Between ByteBud Clients:
 You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 You must be logged in to use the live messaging feature
 
-<center>![live-messaging](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)</center>
+<center>
+  
+  ![live-messaging](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)
+  
+</center>
 
 
 Create a Server
