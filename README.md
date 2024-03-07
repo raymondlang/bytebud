@@ -29,7 +29,8 @@ Backend:
 ![Socket.IO](https://camo.githubusercontent.com/5a42080048cfc58abad5fc9b016d30502cd5f603a5b6f7f72dba983c27778ea8/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536f636b65742e494f2d3031303130313f7374796c653d666f722d7468652d6261646765266c6f676f3d736f636b65742e696f266c6f676f436f6c6f723d7768697465)
 
 Deployment:
-Render
+
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
 
 Features:
 Demo User Implementation:
