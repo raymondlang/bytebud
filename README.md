@@ -46,16 +46,16 @@ You must be logged in to use the live messaging feature
 
 Create a Server
 Users are able to create a server and add their friends to a server
-create-server
+[create-server](https://media.giphy.com/media/oR2UhQwcwKOUZW26nD/giphy.gif)
 
 Create a Channel
 Create a channel for your friends by topic or interest
-create-channel
+[create-channel](https://media.giphy.com/media/ZxOzkg2hfgamWG39J5/giphy.gif)
 
 React to Messages with Emojis
 Users are able to react to messages with emojis
 Users can see each other's reactions
-reactions
+[reactions](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)
 
 Features Coming Soon:
 AWS for File Uploads
