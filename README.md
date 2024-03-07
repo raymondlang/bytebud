@@ -43,7 +43,11 @@ You will be able to sign up and automatically be redirected to the logged in pag
 There are validations for signing up such as username length requirements, valid email address, password length, etc
 Passwords must be matching when entered twice or the signup button will be disabled
 Friendly reminders will display and signup will be blocked if fields are not properly filled out
-![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
+
+<center>
+  ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
+</center>
+
 
 User Login and Authentication:
 You are able to login as long as your credentials are stored within the database (hashed)
@@ -54,7 +58,9 @@ login-demo
 Live Messaging Between ByteBud Clients:
 You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 You must be logged in to use the live messaging feature
-![live-messaging](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)
+
+<center>![live-messaging](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)</center>
+
 
 Create a Server
 Users are able to create a server and add their friends to a server
