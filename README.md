@@ -1,6 +1,6 @@
 ByteBud is a web application inspired by Discord that allows users to create servers where they can interact in real time with other users in their communities. This project aims to replicate Discord's ease of use and the ability to share content with other ByteBud clients running at the same time instantaneously through the use of WebSockets. ByteBud is built with a Python/Flask backend and a React/Redux frontend for responsiveness.
 
-[Click here to view PixelPal's Live Site](https://bytebud.onrender.com/)
+[Click here to view ByteBud's Live Site](https://bytebud.onrender.com/)
 
 landing
 
