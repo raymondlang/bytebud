@@ -44,6 +44,12 @@ There are validations for signing up such as username length requirements, valid
 Passwords must be matching when entered twice or the signup button will be disabled
 Friendly reminders will display and signup will be blocked if fields are not properly filled out
 
+<div style="text-align:center; width:100%;">
+  
+    ![Your Image Description](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
+    
+</div>
+
 <center>
   
   ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
