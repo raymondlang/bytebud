@@ -70,7 +70,6 @@ login-demo
 ## Create a Channel
 * Create a channel for your friends by topic or interest
 
-![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/810c2350-fbaf-4a4d-bd32-a6de72203ca8)
 
 
 ## React to Messages with Emojis
