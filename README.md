@@ -61,11 +61,7 @@ login-demo
 * You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 * You must be logged in to use the live messaging feature
 
-
-
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c" width="75%"/>
-  
-![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c)
+![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/9e47de2b-3dea-46d0-a977-4a4608202da3)
 
 
 ## Create a Server
