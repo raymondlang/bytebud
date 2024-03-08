@@ -35,6 +35,7 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 ## Demo User Implementation:
 * Feel free to test the site features through clicking the "Demo User" button which will directly log you in
 * There are exactly TWO different guest logins built for users looking to test the real-time messaging capabilities of ByteBud
+
 demo-user
 
 ## Sign up a User:
@@ -43,7 +44,7 @@ demo-user
 * Passwords must be matching when entered twice or the signup button will be disabled
 * Friendly reminders will display and signup will be blocked if fields are not properly filled out
   
-  ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
+![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
 
 ## User Login and Authentication:
 
@@ -58,30 +59,26 @@ login-demo
 * You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 * You must be logged in to use the live messaging feature
   
-  ![live-messaging](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)
-  
-
+![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c)
 
 
 ## Create a Server
 * Users are able to create a server and add their friends to a server
 
-![create-server](https://media.giphy.com/media/oR2UhQwcwKOUZW26nD/giphy.gif)
+![bytebud create server](https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c)
 
 ## Create a Channel
 * Create a channel for your friends by topic or interest
-* 
-![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea)
-![create channel](https://github.com/raymondlang/bytebud/assets/16345938/94cbb907-e9c5-438e-b801-f4024baf1d5d)
 
+![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea)
 
 
 ## React to Messages with Emojis
 
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
-
-![reactions](https://media.giphy.com/media/0VPXakwUdzgKOQ9bkR/giphy.gif)
+  
+![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb)
 
 ## Features Coming Soon:
 
