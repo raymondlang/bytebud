@@ -61,7 +61,7 @@ login-demo
 * You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 * You must be logged in to use the live messaging feature
 
-![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/6b68d9df-0a1b-4dcc-86f9-861a763b7a6d)
+
 
 <img src="https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c" width="75%"/>
   
@@ -70,11 +70,7 @@ login-demo
 
 ## Create a Server
 * Users are able to create a server and add their friends to a server
-
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c" width="75%"/>
-
-
-![bytebud create server](https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c)
+![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/6b68d9df-0a1b-4dcc-86f9-861a763b7a6d)
 
 ## Create a Channel
 * Create a channel for your friends by topic or interest
