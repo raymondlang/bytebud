@@ -62,7 +62,7 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 * You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 * You must be logged in to use the live messaging feature
 
-![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/9e47de2b-3dea-46d0-a977-4a4608202da3)
+![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/6fef27c3-423c-4d0e-9ad7-e3959ddaf8da)
 
 
 ## Create a Server
