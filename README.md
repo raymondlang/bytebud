@@ -2,6 +2,8 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 
 [Click here to view ByteBud's Live Site](https://bytebud.onrender.com/)
 
+![Screenshot 2024-03-07 at 9 37 08 PM](https://github.com/raymondlang/bytebud/assets/16345938/0bf36d9c-2c39-4ed2-86b4-697765874f91)
+
 
 ![Screenshot 2024-03-07 at 9 27 46 PM](https://github.com/raymondlang/bytebud/assets/16345938/b7a13d61-8603-42f4-ab2b-7d4896b506d5)
 
