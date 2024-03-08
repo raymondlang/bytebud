@@ -45,9 +45,8 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 * Passwords must be matching when entered twice or the signup button will be disabled
 * Friendly reminders will display and signup will be blocked if fields are not properly filled out
 
-<img src="https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif" width="75%"/>
+![bytebud signup](https://github.com/raymondlang/bytebud/assets/16345938/4d2b26fb-da6f-4ba3-9c42-5fe9a248a8a6)
 
-![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
 
 ## User Login and Authentication:
 
