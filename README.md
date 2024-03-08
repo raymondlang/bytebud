@@ -6,10 +6,10 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 
 
 ## Navigate to:
-[User Stories](https://github.com/raymondlang/bytebud/wiki/User-Stories)
-[Feature List](https://github.com/raymondlang/bytebud/wiki/ByteBud-Features-List)
-[Database Schema](https://github.com/raymondlang/bytebud/wiki/ByteBud-Database-Schema)
-[Backend Routes](https://github.com/raymondlang/bytebud/wiki/Backend-Routes)
+* [User Stories](https://github.com/raymondlang/bytebud/wiki/User-Stories)
+* [Feature List](https://github.com/raymondlang/bytebud/wiki/ByteBud-Features-List)
+* [Database Schema](https://github.com/raymondlang/bytebud/wiki/ByteBud-Database-Schema)
+* [Backend Routes](https://github.com/raymondlang/bytebud/wiki/Backend-Routes)
 
 ## Technologies/Frameworks Used:
 
