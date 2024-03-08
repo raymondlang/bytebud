@@ -2,6 +2,10 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 
 [Click here to view ByteBud's Live Site](https://bytebud.onrender.com/)
 
+
+
+
+
 landing
 
 ## Navigate to:
@@ -69,7 +73,8 @@ login-demo
 
 ## Create a Channel
 * Create a channel for your friends by topic or interest
-
+* 
+![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/ba7e7c9f-4231-48e2-a044-bbe31b700142)
 
 
 ## React to Messages with Emojis
