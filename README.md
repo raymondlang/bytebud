@@ -66,7 +66,8 @@ login-demo
 
 ## Create a Server
 * Users are able to create a server and add their friends to a server
-![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/6b68d9df-0a1b-4dcc-86f9-861a763b7a6d)
+
+![bytebud create server](https://github.com/raymondlang/bytebud/assets/16345938/299e854b-cf8e-4966-8319-733b215af633)
 
 ## Create a Channel
 * Create a channel for your friends by topic or interest
