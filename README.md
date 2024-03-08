@@ -72,6 +72,7 @@ login-demo
 * Create a channel for your friends by topic or interest
 * 
 ![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea)
+![create channel](https://github.com/raymondlang/bytebud/assets/16345938/94cbb907-e9c5-438e-b801-f4024baf1d5d)
 
 
 
