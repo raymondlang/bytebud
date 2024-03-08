@@ -54,7 +54,8 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 * If there are no matching credentials an error message is displayed
 * Login button is disabled if there are null fields or if the amount of characters entered is not within the acceptable range
 
-login-demo
+![bytebud login](https://github.com/raymondlang/bytebud/assets/16345938/5645b952-fcc2-4808-bc67-726226950728)
+
 
 ## Live Messaging Between ByteBud Clients:
 
@@ -82,7 +83,7 @@ login-demo
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
 
-![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/be4f90b1-81df-47c2-84ef-1b78d4543dcc)
+![bytebud emoji reactions](https://github.com/raymondlang/bytebud/assets/16345938/be4f90b1-81df-47c2-84ef-1b78d4543dcc)
 
 
 ## Features Coming Soon:
