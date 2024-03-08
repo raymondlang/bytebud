@@ -65,7 +65,7 @@ login-demo
 ## Create a Server
 * Users are able to create a server and add their friends to a server
 
-* <img src="https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c" width="250" height="250"/>
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c" width="250" height="250"/>
 
 
 ![bytebud create server](https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c)
