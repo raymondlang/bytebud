@@ -43,7 +43,9 @@ demo-user
 * There are validations for signing up such as username length requirements, valid email address, password length, etc
 * Passwords must be matching when entered twice or the signup button will be disabled
 * Friendly reminders will display and signup will be blocked if fields are not properly filled out
-  
+
+<img src="https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif" width="100%"/>
+
 ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
 
 ## User Login and Authentication:
@@ -58,6 +60,9 @@ login-demo
 
 * You are able to send messages to other ByteBud clients as long as they are within the same server and channel
 * You must be logged in to use the live messaging feature
+
+
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c" width="100%"/>
   
 ![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c)
 
@@ -73,6 +78,8 @@ login-demo
 ## Create a Channel
 * Create a channel for your friends by topic or interest
 
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea" width="100%"/>
+
 ![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea)
 
 
@@ -80,6 +87,8 @@ login-demo
 
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
+
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb" width="100%"/>
   
 ![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb)
 
