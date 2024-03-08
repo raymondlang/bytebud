@@ -1,4 +1,4 @@
-ByteBud is a web application inspired by Discord that allows users to create servers where they can interact in real time with other users in their communities. This project aims to replicate Discord's ease of use and the ability to share content with other ByteBud clients running at the same time instantaneously through the use of WebSockets. ByteBud is built with a Python/Flask backend and a React/Redux frontend for responsiveness.
+![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/9056fb83-945f-4222-9a99-2f482bd46a42)ByteBud is a web application inspired by Discord that allows users to create servers where they can interact in real time with other users in their communities. This project aims to replicate Discord's ease of use and the ability to share content with other ByteBud clients running at the same time instantaneously through the use of WebSockets. ByteBud is built with a Python/Flask backend and a React/Redux frontend for responsiveness.
 
 [Click here to view ByteBud's Live Site](https://bytebud.onrender.com/)
 
@@ -80,8 +80,7 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
 
-![bytebud emoji reactions](https://github.com/raymondlang/bytebud/assets/16345938/be4f90b1-81df-47c2-84ef-1b78d4543dcc)
-
+![bytebud emoji reactions](https://github.com/raymondlang/bytebud/assets/16345938/54dcf2f6-89e0-49f8-80dc-a514b1d984d3)
 
 ## Features Coming Soon:
 
