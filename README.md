@@ -62,7 +62,7 @@ login-demo
 * You must be logged in to use the live messaging feature
 
 
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c" width="100%"/>
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c" width="75%"/>
   
 ![bytebud messaging](https://github.com/raymondlang/bytebud/assets/16345938/8bbe427d-86a9-4943-87df-42714bd7a08c)
 
@@ -70,7 +70,7 @@ login-demo
 ## Create a Server
 * Users are able to create a server and add their friends to a server
 
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c" width="100%"/>
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c" width="75%"/>
 
 
 ![bytebud create server](https://github.com/raymondlang/bytebud/assets/16345938/3430c066-1229-48ff-9c9b-6b630191288c)
@@ -78,7 +78,7 @@ login-demo
 ## Create a Channel
 * Create a channel for your friends by topic or interest
 
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea" width="100%"/>
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea" width="75%"/>
 
 ![bytebud create channel](https://github.com/raymondlang/bytebud/assets/16345938/c4b32c86-483c-4ab8-812a-5255c477f7ea)
 
@@ -88,7 +88,7 @@ login-demo
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
 
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb" width="100%"/>
+<img src="https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb" width="75%"/>
   
 ![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb)
 
