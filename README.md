@@ -44,7 +44,7 @@ demo-user
 * Passwords must be matching when entered twice or the signup button will be disabled
 * Friendly reminders will display and signup will be blocked if fields are not properly filled out
 
-<img src="https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif" width="100%"/>
+<img src="https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif" width="75%"/>
 
 ![sign-up](https://media.giphy.com/media/Gnf2W0BBWrSZgtqANK/giphy.gif)
 
