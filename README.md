@@ -85,9 +85,8 @@ login-demo
 * Users are able to react to messages with emojis
 * Users can see each other's reactions
 
-<img src="https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb" width="75%"/>
-  
-![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/dd079798-2206-439c-b397-b1815aef77cb)
+![bytebud emojis](https://github.com/raymondlang/bytebud/assets/16345938/be4f90b1-81df-47c2-84ef-1b78d4543dcc)
+
 
 ## Features Coming Soon:
 
