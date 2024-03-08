@@ -36,7 +36,7 @@ ByteBud is a web application inspired by Discord that allows users to create ser
 * Feel free to test the site features through clicking the "Demo User" button which will directly log you in
 * There are exactly TWO different guest logins built for users looking to test the real-time messaging capabilities of ByteBud
 
-![bytebud demo user](https://github.com/raymondlang/bytebud/assets/16345938/e6ad5927-200c-47ca-aaa9-e18e83e60a94)
+![bytebud demo user](https://github.com/raymondlang/bytebud/assets/16345938/372c6090-9efe-459c-8126-eefdb971c27b)
 
 
 ## Sign up a User:
